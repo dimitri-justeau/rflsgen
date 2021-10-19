@@ -45,12 +45,12 @@ generate_landscape_structure <- function(targets_str, targets_file, nb_solutions
         stop("No more solutions satisfying user targets exist")
       }
     }
-    cat("Landscape structure", i, "found in", as.numeric(difftime(Sys.time(), start_sol_time, unit = "s")), "s", sep = " ")
+    cat("Landscape structure", i, "found in", as.numeric(difftime(Sys.time(), start_sol_time, unit = "s")), "s\n", sep = " ")
     sol <- .jcall(struct, "Ljava/lang/String;", "toJSON");
     structs_json <- append(structs_json, sol)
   }
   if (nb_solutions > 1) {
-    cat("All landscape structures found in", as.numeric(difftime(Sys.time(), start_time, unit = "s")), "s", sep = " ")
+    cat("All landscape structures found in", as.numeric(difftime(Sys.time(), start_time, unit = "s")), "s\n", sep = " ")
   }
   return(structs_json)
 }
