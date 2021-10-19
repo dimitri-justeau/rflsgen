@@ -28,6 +28,7 @@ generate_landscape_raster <- function(structure_str, structure_file, output=temp
   checkmate::assert_number(resolution)
   checkmate::assert_string(epsg)
   checkmate::assert_string(output)
+  checkmate::assert_string(structure_str)
 
   # Generate landscape raster using flsgen jar
   reader <- .jnew("java.io.StringReader", structure_str)
