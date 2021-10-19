@@ -4,7 +4,7 @@
 #'
 #'
 #'
-generate_landscape_structure <- function(targets_str, targets_file, nb_solutions=1, search_strategy="DEFAULT") {
+flsgen_structure <- function(targets_str, targets_file, nb_solutions=1, time_limit = 0, search_strategy="DEFAULT") {
   # Check arguments
   if (missing(targets_str)) {
     if (missing(targets_file)) {
@@ -17,6 +17,7 @@ generate_landscape_structure <- function(targets_str, targets_file, nb_solutions
     }
   }
   checkmate::assert_int(nb_solutions, lower=1)
+  checkmate::assert_int(time_limit, lower=0)
   checkmate::assert_choice(search_strategy, c("DEFAULT", "RANDOM", "DOM_OVER_W_DEG", "DOM_OVER_W_DEG_REF", "ACTIVITY_BASED", "CONFLICT_HISTORY", "MIN_DOM_LB", "MIN_DOM_UB"))
 
   # Generate landscape structure using flsgen jar
@@ -37,12 +38,20 @@ generate_landscape_structure <- function(targets_str, targets_file, nb_solutions
   start_time = Sys.time()
   for (i in 1:nb_solutions) {
     start_sol_time = Sys.time()
-    struct <- .jcall(solver, "Lsolver/LandscapeStructure;", "findSolution")
+    struct <- .jcall(solver, "Lsolver/LandscapeStructure;", "findSolution", as.integer(time_limit))
     if (is.null(struct)) {
       if (length(structs_json) == 0) {
-        stop("User targets cannot be satisfied")
+        if (time_limit > 0) {
+          stop("User targets could not be satisfied under the specified time limit")
+        } else {
+          stop("User targets cannot be satisfied")
+        }
       } else {
-        stop("No more solutions satisfying user targets exist")
+        if (time_limit > 0) {
+          stop("No more solutions satisfying user targets were found under the specified time limit")
+        } else {
+          stop("No more solutions satisfying user targets exist")
+        }
       }
     }
     cat("Landscape structure", i, "found in", as.numeric(difftime(Sys.time(), start_sol_time, unit = "s")), "s\n", sep = " ")

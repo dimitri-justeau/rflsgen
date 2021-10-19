@@ -4,9 +4,9 @@
 #'
 #'
 #'
-generate_landscape_raster <- function(structure_str, structure_file, output=tempfile(fileext=".tif"),
+flsgen_generate <- function(structure_str, structure_file, output=tempfile(fileext=".tif"),
                                       terrain_file=NULL, roughness=0.5, terrain_dependency=0.5, min_distance=2,
-                                      x=0, y=0, resolution=0.0001, epsg="EPSG:4326", max_try=10, max_try_patch=10) {
+                                      x=0, y=0, resolution=0.0001, epsg="EPSG:4326", max_try=2, max_try_patch=10) {
   # Check arguments
   if (missing(structure_str)) {
     if (missing(structure_file)) {

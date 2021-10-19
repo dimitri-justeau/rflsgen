@@ -3,7 +3,7 @@
 #' @description Fractal terrain generation with the Diamond-Square algorithm
 #'
 #'
-generate_fractal_terrain <- function(width, height, output=tempfile(fileext=".tif"), roughness=0.5, x=0, y=0, resolution=0.0001, epsg="EPSG:4326") {
+flsgen_terrain <- function(width, height, output=tempfile(fileext=".tif"), roughness=0.5, x=0, y=0, resolution=0.0001, epsg="EPSG:4326") {
   # Check arguments
   checkmate::assert_int(width, lower=1)
   checkmate::assert_int(height, lower=1)
