@@ -2,7 +2,24 @@
 #'
 #' @description Generate landscape raster from landscape structure
 #'
+#' @details The input landscape structure must be either specified as a JSON-formatted string
+#'  (structure_str parameter) or as a JSON file (structure_file parameter)
 #'
+#' @param structure_str JSON-formatted string describing the landscape structure to generate
+#' @param structure_file JSON file containing the landscape structure to generate
+#' @param output Path of output raster file (temporary file by default)
+#' @param terrain_file Path of input terrain raster file, if NULL a terrain is generated with the diamond-square algorithm
+#' @param roughness Roughness factor (or H), between 0 and 1 (only need when terrain_file is NULL)
+#' @param terrain_dependency Terrain dependency factor for landscape generation, between 0 and 1
+#' @param min_distance Minimum distance between patches of a same class
+#' @param x X position (geographical coordinates) of the top-left output raster pixel
+#' @param y Y position (geographical coordinates) of the top-left output raster pixel
+#' @param resolution Spatial resolution (geographical units) of the output raster (i.e. pixel dimension)
+#' @param epsg EPSG identifier of the output projection
+#' @param max_try Maximum number of trials for landscape generation
+#' @param max_try_patch Maximum number of trials for patch generation
+#'
+#' @return A raster object
 #'
 flsgen_generate <- function(structure_str, structure_file, output=tempfile(fileext=".tif"),
                                       terrain_file=NULL, roughness=0.5, terrain_dependency=0.5, min_distance=2,

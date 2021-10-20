@@ -2,7 +2,17 @@
 #'
 #' @description Generate landscape structures satisfying user targets
 #'
+#' @details The input user targets must be either specified as a JSON-formatted string
+#'  (targets_str parameter) or as a JSON file (target_file parameter)
 #'
+#' @param targets_str JSON-formatted string describing user targets
+#' @param target_file JSON file describing user targets
+#' @param nb_solutions Number of solutions to generate
+#' @param time_limit Time limit in seconds (if time_limit = 0, no time limit is set)
+#' @param search_strategy Choco solver search strategy (for more details refer to Choco solver documentation:
+#'  \url{https://choco-solver.org/docs/})
+#'
+#' @return A vector of JSON-formatted landscape structures satisfying user targets.
 #'
 flsgen_structure <- function(targets_str, targets_file, nb_solutions=1, time_limit = 0, search_strategy="DEFAULT") {
   # Check arguments

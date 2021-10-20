@@ -1,7 +1,17 @@
 #' Fractal terrain generator
 #'
-#' @description Fractal terrain generation with the Diamond-Square algorithm
+#' @description Fractal terrain generation with the diamond-square algorithm
 #'
+#' @param width Width (in pixels) of output raster
+#' @param height Height (in pixels) of output raster
+#' @param output Path of output raster file (temporary file by default)
+#' @param roughness Roughness factor (or H), between 0 and 1
+#' @param x X position (geographical coordinates) of the top-left output raster pixel
+#' @param y Y position (geographical coordinates) of the top-left output raster pixel
+#' @param resolution Spatial resolution (geographical units) of the output raster (i.e. pixel dimension)
+#' @param epsg EPSG identifier of the output projection
+#'
+#' @return A raster object
 #'
 flsgen_terrain <- function(width, height, output=tempfile(fileext=".tif"), roughness=0.5, x=0, y=0, resolution=0.0001, epsg="EPSG:4326") {
   # Check arguments
