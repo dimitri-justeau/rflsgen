@@ -52,7 +52,7 @@ jobs:
       - name: Install package
         run: |
           install.packages(c("rcmdcheck", "rJava", "checkmate", "raster"), INSTALL_opts = c("--no-multiarch"))
-          install.packages("./", repos = NULL, type="source")
+          install.packages("./", repos = NULL, type="source", INSTALL_opts = c("--no-multiarch"))
         shell: Rscript {0}
 
       - uses: r-lib/actions/check-r-package@v1
