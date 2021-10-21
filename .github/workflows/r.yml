@@ -51,8 +51,8 @@ jobs:
 
       - name: Install package
         run: |
+          install.packages(c("rcmdcheck", "rJava", "checkmate"))
           install.packages("./", repos = NULL, type="source")
-          install.packages("rcmdcheck")
         shell: Rscript {0}
 
       - uses: r-lib/actions/check-r-package@v1
