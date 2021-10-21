@@ -1,3 +1,23 @@
+# Copyright (c) 2021, Dimitri Justeau-Allaire
+#
+# Institut Agronomique neo-Caledonien (IAC), 98800 Noumea, New Caledonia
+# AMAP, Univ Montpellier, CIRAD, CNRS, INRA, IRD, Montpellier, France
+#
+# This file is part of rflsgen
+#
+# rflsgen is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# rflsgen is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with rflsgen  If not, see <https://www.gnu.org/licenses/>.
+
 #' Landscape raster generator
 #'
 #' @description Generate landscape raster from landscape structure
@@ -61,12 +81,30 @@ flsgen_generate <- function(structure_str, structure_file, output=tempfile(filee
     }
   }
   if (min_distance == 1) {
-    buffer <- J("grid.neighborhood.Neighborhoods")$FOUR_CONNECTED
+    if (connectivity == 4) {
+      buffer <- J("grid.neighborhood.Neighborhoods")$FOUR_CONNECTED
+    } else {
+      if (connectivity == 8) {
+        buffer <- J("grid.neighborhood.Neighborhoods")$HEIGHT_CONNECTED
+      }
+    }
   } else {
     if (min_distance == 2) {
-      buffer <- J("grid.neighborhood.Neighborhoods")$TWO_WIDE_FOUR_CONNECTED
+      if (connectivity == 4) {
+        buffer <- J("grid.neighborhood.Neighborhoods")$TWO_WIDE_FOUR_CONNECTED
+      } else {
+        if (connectivity == 8) {
+          buffer <- J("grid.neighborhood.Neighborhoods")$TWO_WIDE_HEIGHT_CONNECTED
+        }
+      }
     } else {
-      buffer <- J("grid.neighborhood.Neighborhoods")$K_WIDE_FOUR_CONNECTED(as.integer(min_distance))
+      if (connectivity == 4) {
+        buffer <- J("grid.neighborhood.Neighborhoods")$K_WIDE_FOUR_CONNECTED(as.integer(min_distance))
+      } else {
+        if (connectivity == 8) {
+          buffer <- J("grid.neighborhood.Neighborhoods")$K_WIDE_HEIGHT_CONNECTED(as.integer(min_distance))
+        }
+      }
     }
   }
   grid <- .jnew("grid.regular.square.RegularSquareGrid", struct$nbRows, struct$nbCols)
