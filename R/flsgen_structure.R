@@ -22,11 +22,13 @@
 #'
 #' @description Generate landscape structures satisfying user targets
 #'
+#' @import rJava
+#'
 #' @details The input user targets must be either specified as a JSON-formatted string
 #'  (targets_str parameter) or as a JSON file (target_file parameter)
 #'
 #' @param targets_str JSON-formatted string describing user targets
-#' @param target_file JSON file describing user targets
+#' @param targets_file JSON file describing user targets
 #' @param nb_solutions Number of solutions to generate
 #' @param time_limit Time limit in seconds (if time_limit = 0, no time limit is set)
 #' @param search_strategy Choco solver search strategy (for more details refer to Choco solver documentation:
@@ -84,12 +86,12 @@ flsgen_structure <- function(targets_str, targets_file, nb_solutions=1, time_lim
         }
       }
     }
-    cat("Landscape structure", i, "found in", as.numeric(difftime(Sys.time(), start_sol_time, unit = "s")), "s\n", sep = " ")
+    cat("Landscape structure", i, "found in", as.numeric(difftime(Sys.time(), start_sol_time, units = "s")), "s\n", sep = " ")
     sol <- .jcall(struct, "Ljava/lang/String;", "toJSON");
     structs_json <- append(structs_json, sol)
   }
   if (nb_solutions > 1) {
-    cat("All landscape structures found in", as.numeric(difftime(Sys.time(), start_time, unit = "s")), "s\n", sep = " ")
+    cat("All landscape structures found in", as.numeric(difftime(Sys.time(), start_time, units = "s")), "s\n", sep = " ")
   }
   return(structs_json)
 }

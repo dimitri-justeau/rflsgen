@@ -4,13 +4,14 @@ Title: R interface to the flsgen neutral landscape generator with targets on lan
 Version: 0.1.0
 Author: Dimitri Justeau-Allaire
 Maintainer: Dimitri Justeau-Allaire <dimitri.justeau@gmail.com>
-Description: This interface to the flsgen neutral landscape generator allows to:
-  - Generate fractal terrain
-  - Generate landscape structures satisfying user targets over landscape indices
-  - Generate landscape raster from landscape structures
-License: What license is it under?
+Description: This interface to the flsgen neutral landscape generator. It allows to
+  - Generate fractal terrain;
+  - Generate landscape structures satisfying user targets over landscape indices;
+  - Generate landscape raster from landscape structures.
+License: GPL-3 + file LICENCE
 Encoding: UTF-8
 LazyData: true
 Depends: rJava
+Imports: raster, checkmate
 SystemRequirements: Java
 RoxygenNote: 7.1.2

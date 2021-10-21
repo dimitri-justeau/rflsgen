@@ -22,6 +22,8 @@
 #'
 #' @description Fractal terrain generation with the diamond-square algorithm
 #'
+#' @import rJava
+#'
 #' @param width Width (in pixels) of output raster
 #' @param height Height (in pixels) of output raster
 #' @param output Path of output raster file (temporary file by default)

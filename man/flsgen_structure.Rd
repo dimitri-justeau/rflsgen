@@ -15,14 +15,14 @@ flsgen_structure(
 \arguments{
 \item{targets_str}{JSON-formatted string describing user targets}
 
+\item{targets_file}{JSON file describing user targets}
+
 \item{nb_solutions}{Number of solutions to generate}
 
 \item{time_limit}{Time limit in seconds (if time_limit = 0, no time limit is set)}
 
 \item{search_strategy}{Choco solver search strategy (for more details refer to Choco solver documentation:
 \url{https://choco-solver.org/docs/})}
-
-\item{target_file}{JSON file describing user targets}
 }
 \value{
 A vector of JSON-formatted landscape structures satisfying user targets.

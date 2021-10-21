@@ -22,6 +22,8 @@
 #'
 #' @description Generate landscape raster from landscape structure
 #'
+#' @import rJava
+#'
 #' @details The input landscape structure must be either specified as a JSON-formatted string
 #'  (structure_str parameter) or as a JSON file (structure_file parameter)
 #'
