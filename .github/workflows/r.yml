@@ -42,9 +42,6 @@ jobs:
         with:
           java-version: ${{ matrix.config.java }}
 
-      - name: Build
-        run: "sh mkdist"
-
       - name: Info
         run: "bash -c 'java -version && which java && echo $PATH && echo $JAVA_HOME'"
 
