@@ -51,8 +51,8 @@ jobs:
 
       - name: Install package
         run: |
-        install.packages("./", repos = NULL)
-        install.packages("rcmdcheck")
+          install.packages("./", repos = NULL)
+          install.packages("rcmdcheck")
         shell: Rscript {0}
 
       - uses: r-lib/actions/check-r-package@v1
