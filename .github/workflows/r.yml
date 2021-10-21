@@ -60,7 +60,7 @@ jobs:
         uses: r-lib/actions/check-r-package@v1
 
       - name: Show testthat output
-        if: if: runner.os != "Windows"
+        if: runner.os != "Windows"
         run: find check -name 'testthat.Rout*' -exec cat '{}' \; || true
         shell: bash
 
