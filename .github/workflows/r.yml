@@ -55,10 +55,12 @@ jobs:
           install.packages("./", repos = NULL, type="source", INSTALL_opts = c("--no-multiarch"))
         shell: Rscript {0}
 
-      - uses: r-lib/actions/check-r-package@v1
+      - name: check package
+        if: runner.os != "Windows"
+        uses: r-lib/actions/check-r-package@v1
 
       - name: Show testthat output
-        if: always()
+        if: if: runner.os != "Windows"
         run: find check -name 'testthat.Rout*' -exec cat '{}' \; || true
         shell: bash
 
