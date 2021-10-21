@@ -51,7 +51,7 @@ jobs:
 
       - name: Install package
         run: |
-          install.packages(c("rcmdcheck", "rJava", "checkmate", "raster")
+          install.packages(c("rcmdcheck", "rJava", "checkmate", "raster"))
           install.packages("./", repos = NULL, type="source")
         shell: Rscript {0}
 
