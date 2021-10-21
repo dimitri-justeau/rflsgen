@@ -18,11 +18,11 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: macOS-latest,   r: 'release', java: [ 8, 11 ]}
-          - {os: windows-latest, r: 'release', java: [ 8, 11 ]}
-          - {os: ubuntu-latest,   r: 'devel', http-user-agent: 'release', java: [ 8, 11 ]}
-          - {os: ubuntu-latest,   r: 'release', java: [ 8, 11 ]}
-          - {os: ubuntu-latest,   r: 'oldrel-1', java: [ 8, 11 ]}
+          - {os: macOS-latest,   r: 'release', java: 8}
+          - {os: windows-latest, r: 'release', java: 8}
+          - {os: ubuntu-latest,   r: 'devel', http-user-agent: 'release', java: 11}
+          - {os: ubuntu-latest,   r: 'release', java: 8}
+          - {os: ubuntu-latest,   r: 'oldrel-1', java: 8}
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
