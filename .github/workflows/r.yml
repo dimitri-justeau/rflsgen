@@ -51,7 +51,7 @@ jobs:
 
       - name: Install package
         run: |
-          install.packages("./", repos = NULL)
+          install.packages("./", repos = NULL, type="source")
           install.packages("rcmdcheck")
         shell: Rscript {0}
 
