@@ -12,6 +12,7 @@
 #' @param roughness Roughness factor (or H), between 0 and 1 (only need when terrain_file is NULL)
 #' @param terrain_dependency Terrain dependency factor for landscape generation, between 0 and 1
 #' @param min_distance Minimum distance between patches of a same class
+#' @param connectivity Connectivity definition in the regular square grid (4 or 8)."
 #' @param x X position (geographical coordinates) of the top-left output raster pixel
 #' @param y Y position (geographical coordinates) of the top-left output raster pixel
 #' @param resolution Spatial resolution (geographical units) of the output raster (i.e. pixel dimension)
@@ -21,9 +22,9 @@
 #'
 #' @return A raster object
 #'
-flsgen_generate <- function(structure_str, structure_file, output=tempfile(fileext=".tif"),
-                                      terrain_file=NULL, roughness=0.5, terrain_dependency=0.5, min_distance=2,
-                                      x=0, y=0, resolution=0.0001, epsg="EPSG:4326", max_try=2, max_try_patch=10) {
+flsgen_generate <- function(structure_str, structure_file, output=tempfile(fileext=".tif"), terrain_file=NULL,
+                            roughness=0.5, terrain_dependency=0.5, min_distance=2, connectivity=4,
+                            x=0, y=0, resolution=0.0001, epsg="EPSG:4326", max_try=2, max_try_patch=10) {
   # Check arguments
   if (missing(structure_str)) {
     if (missing(structure_file)) {
@@ -42,6 +43,8 @@ flsgen_generate <- function(structure_str, structure_file, output=tempfile(filee
   checkmate::assert_number(terrain_dependency, lower=0, upper=1)
   checkmate::assert_number(x)
   checkmate::assert_number(y)
+  checkmate::assert_number(connectivity)
+  checkmate::assert_choice(connectivity, c(4, 8))
   checkmate::assert_number(resolution)
   checkmate::assert_string(epsg)
   checkmate::assert_string(output)
@@ -50,7 +53,13 @@ flsgen_generate <- function(structure_str, structure_file, output=tempfile(filee
   # Generate landscape raster using flsgen jar
   reader <- .jnew("java.io.StringReader", structure_str)
   struct <- J("solver.LandscapeStructure")$fromJSON(reader)
-  neigh <- J("grid.neighborhood.Neighborhoods")$FOUR_CONNECTED
+  if (connectivity == 4) {
+    neigh <- J("grid.neighborhood.Neighborhoods")$FOUR_CONNECTED
+  } else {
+    if (connectivity == 8) {
+      neigh <- J("grid.neighborhood.Neighborhoods")$HEIGHT_CONNECTED
+    }
+  }
   if (min_distance == 1) {
     buffer <- J("grid.neighborhood.Neighborhoods")$FOUR_CONNECTED
   } else {

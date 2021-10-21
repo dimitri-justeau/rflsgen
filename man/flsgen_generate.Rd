@@ -12,6 +12,7 @@ flsgen_generate(
   roughness = 0.5,
   terrain_dependency = 0.5,
   min_distance = 2,
+  connectivity = 4,
   x = 0,
   y = 0,
   resolution = 1e-04,
@@ -34,6 +35,8 @@ flsgen_generate(
 \item{terrain_dependency}{Terrain dependency factor for landscape generation, between 0 and 1}
 
 \item{min_distance}{Minimum distance between patches of a same class}
+
+\item{connectivity}{Connectivity definition in the regular square grid (4 or 8)."}
 
 \item{x}{X position (geographical coordinates) of the top-left output raster pixel}
 
