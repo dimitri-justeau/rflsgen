@@ -34,6 +34,7 @@
 #' @param epsg EPSG identifier of the output projection
 #'
 #' @return A raster object
+#' @export
 #'
 flsgen_terrain <- function(width, height, output=tempfile(fileext=".tif"), roughness=0.5, x=0, y=0, resolution=0.0001, epsg="EPSG:4326") {
   # Check arguments
@@ -46,8 +47,8 @@ flsgen_terrain <- function(width, height, output=tempfile(fileext=".tif"), rough
   checkmate::assert_string(epsg)
   checkmate::assert_string(output)
   # Generate fractal terrain using flsgen jar
-  grid <- .jnew("grid.regular.square.RegularSquareGrid", as.integer(height), as.integer(width))
-  terrain <- .jnew("solver.Terrain", grid)
+  grid <- .jnew("org.flsgen.grid.regular.square.RegularSquareGrid", as.integer(height), as.integer(width))
+  terrain <- .jnew("org.flsgen.solver.Terrain", grid)
   .jcall(terrain, "V", "generateDiamondSquare", roughness)
   .jcall(terrain, "V", "exportRaster", x, y, resolution, epsg, output)
   return(raster::raster(output))

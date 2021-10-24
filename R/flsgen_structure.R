@@ -35,6 +35,7 @@
 #'  \url{https://choco-solver.org/docs/})
 #'
 #' @return A vector of JSON-formatted landscape structures satisfying user targets.
+#' @export
 #'
 flsgen_structure <- function(targets_str, targets_file, nb_solutions=1, time_limit = 0, search_strategy="DEFAULT") {
   # Check arguments
@@ -54,7 +55,7 @@ flsgen_structure <- function(targets_str, targets_file, nb_solutions=1, time_lim
 
   # Generate landscape structure using flsgen jar
   reader <- .jnew("java.io.StringReader", targets_str)
-  solver <- J("solver.LandscapeStructureSolver")$readFromJSON(reader)
+  solver <- J("org.flsgen.solver.LandscapeStructureSolver")$readFromJSON(reader)
   .jcall(solver, "V", "build")
   structs_json <- c()
   switch(search_strategy,
@@ -70,7 +71,7 @@ flsgen_structure <- function(targets_str, targets_file, nb_solutions=1, time_lim
   start_time = Sys.time()
   for (i in 1:nb_solutions) {
     start_sol_time = Sys.time()
-    struct <- .jcall(solver, "Lsolver/LandscapeStructure;", "findSolution", as.integer(time_limit))
+    struct <- .jcall(solver, "Lorg/flsgen/solver/LandscapeStructure;", "findSolution", as.integer(time_limit))
     if (is.null(struct)) {
       if (length(structs_json) == 0) {
         if (time_limit > 0) {

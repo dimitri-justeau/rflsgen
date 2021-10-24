@@ -43,6 +43,7 @@
 #' @param max_try_patch Maximum number of trials for patch generation
 #'
 #' @return A raster object
+#' @export
 #'
 flsgen_generate <- function(structure_str, structure_file, output=tempfile(fileext=".tif"), terrain_file=NULL,
                             roughness=0.5, terrain_dependency=0.5, min_distance=2, connectivity=4,
@@ -74,49 +75,49 @@ flsgen_generate <- function(structure_str, structure_file, output=tempfile(filee
 
   # Generate landscape raster using flsgen jar
   reader <- .jnew("java.io.StringReader", structure_str)
-  struct <- J("solver.LandscapeStructure")$fromJSON(reader)
+  struct <- J("org.flsgen.solver.LandscapeStructure")$fromJSON(reader)
   if (connectivity == 4) {
-    neigh <- J("grid.neighborhood.Neighborhoods")$FOUR_CONNECTED
+    neigh <- J("org.flsgen.grid.neighborhood.Neighborhoods")$FOUR_CONNECTED
   } else {
     if (connectivity == 8) {
-      neigh <- J("grid.neighborhood.Neighborhoods")$HEIGHT_CONNECTED
+      neigh <- J("org.flsgen.grid.neighborhood.Neighborhoods")$HEIGHT_CONNECTED
     }
   }
   if (min_distance == 1) {
     if (connectivity == 4) {
-      buffer <- J("grid.neighborhood.Neighborhoods")$FOUR_CONNECTED
+      buffer <- J("org.flsgen.grid.neighborhood.Neighborhoods")$FOUR_CONNECTED
     } else {
       if (connectivity == 8) {
-        buffer <- J("grid.neighborhood.Neighborhoods")$HEIGHT_CONNECTED
+        buffer <- J("org.flsgen.grid.neighborhood.Neighborhoods")$HEIGHT_CONNECTED
       }
     }
   } else {
     if (min_distance == 2) {
       if (connectivity == 4) {
-        buffer <- J("grid.neighborhood.Neighborhoods")$TWO_WIDE_FOUR_CONNECTED
+        buffer <- J("org.flsgen.grid.neighborhood.Neighborhoods")$TWO_WIDE_FOUR_CONNECTED
       } else {
         if (connectivity == 8) {
-          buffer <- J("grid.neighborhood.Neighborhoods")$TWO_WIDE_HEIGHT_CONNECTED
+          buffer <- J("org.flsgen.grid.neighborhood.Neighborhoods")$TWO_WIDE_HEIGHT_CONNECTED
         }
       }
     } else {
       if (connectivity == 4) {
-        buffer <- J("grid.neighborhood.Neighborhoods")$K_WIDE_FOUR_CONNECTED(as.integer(min_distance))
+        buffer <- J("org.flsgen.grid.neighborhood.Neighborhoods")$K_WIDE_FOUR_CONNECTED(as.integer(min_distance))
       } else {
         if (connectivity == 8) {
-          buffer <- J("grid.neighborhood.Neighborhoods")$K_WIDE_HEIGHT_CONNECTED(as.integer(min_distance))
+          buffer <- J("org.flsgen.grid.neighborhood.Neighborhoods")$K_WIDE_HEIGHT_CONNECTED(as.integer(min_distance))
         }
       }
     }
   }
-  grid <- .jnew("grid.regular.square.RegularSquareGrid", struct$nbRows, struct$nbCols)
-  terrain <- .jnew("solver.Terrain", grid)
+  grid <- .jnew("org.flsgen.grid.regular.square.RegularSquareGrid", struct$getNbRows(), struct$getNbCols())
+  terrain <- .jnew("org.flsgen.solver.Terrain", grid)
   if (is.null(terrain_file)) {
     .jcall(terrain, "V", "generateDiamondSquare", roughness)
   } else {
     .jcall(terrain, "V", "loadFromRaster", terrain_file)
   }
-  generator <- .jnew("solver.LandscapeGenerator", struct, .jcast(neigh, "grid/neighborhood/INeighborhood"), .jcast(buffer, "grid/neighborhood/INeighborhood"), terrain)
+  generator <- .jnew("org.flsgen.solver.LandscapeGenerator", struct, .jcast(neigh, "org/flsgen/grid/neighborhood/INeighborhood"), .jcast(buffer, "org/flsgen/grid/neighborhood/INeighborhood"), terrain)
   if (.jcall(generator, "Z", "generate", terrain_dependency, as.integer(max_try), as.integer(max_try_patch))) {
     .jcall(generator, "V", "exportRaster", x, y, resolution, epsg, output)
     return(raster::raster(output))
