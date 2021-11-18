@@ -12,6 +12,6 @@ License: GPL-3 + file LICENCE
 Encoding: UTF-8
 LazyData: true
 Depends: rJava
-Imports: raster, checkmate
+Imports: raster, rgdal, checkmate
 SystemRequirements: Java
 RoxygenNote: 7.1.2
