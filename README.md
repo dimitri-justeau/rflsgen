@@ -2,14 +2,14 @@
 
 [![R-CMD-check](https://github.com/dimitri-justeau/rflsgen/actions/workflows/r.yml/badge.svg)](https://github.com/dimitri-justeau/rflsgen/actions/workflows/r.yml)
 
+`rflsgen` is the R distribution of [`flsgen`](https://github.com/dimitri-justeau/flsgen), a neutral landscape generator that allows users to set targets on landscape indices. It first relies on Choco-solver to identify landscape structure satisfying user targets, then uses a stochastic algorithm to produce landscape rasters.
+
 * [Download and installation](#down)
 * [Tutorial](#tuto)
     * [Fractal terrain generation](#terrain)
     * [Landscape structure generation](#structure)
     * [Landscape raster generation](#generate)
 
-
-`rflsgen` is the R distribution of [`flsgen`](https://github.com/dimitri-justeau/flsgen), a neutral landscape generator that allows users to set targets on landscape indices. It first relies on Choco-solver to identify landscape structure satisfying user targets, then uses a stochastic algorithm to produce landscape rasters.
 
 <a name="down"></a>
 ## Download and installation
@@ -36,7 +36,7 @@ terrain <- flsgen_terrain(200, 200)
 plot(terrain)
 ```
 
-![alt-text](main/img/terrain.png "Terrain example")
+![alt-text](man/img/terrain.png "Terrain example")
 
 
 <a name="structure"></a>
@@ -98,4 +98,4 @@ landscape <- flsgen_generate(structure_str = structure)
 plot(landscape)
 ```
 
-![alt-text](main/img/landscape.png "Landscape example")
+![alt-text](man/img/landscape.png "Landscape example")
