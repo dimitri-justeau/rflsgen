@@ -26,9 +26,6 @@ jobs:
         with:
           java-version: ${{ matrix.java }}
 
-      - name: Build
-        run: "sh mkdist"
-
       - name: Info
         run: "bash -c 'java -version && which java && echo $PATH && echo $JAVA_HOME'"
 
@@ -50,7 +47,7 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v1
         with:
-          extra-packages: rcmdcheck
+          extra-packages: rcmdcheck, covr
 
       - uses: r-lib/actions/check-r-package@v1
 
@@ -65,3 +62,7 @@ jobs:
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
+
+      - name: Test coverage
+        run: covr::codecov()
+        shell: Rscript {0}
