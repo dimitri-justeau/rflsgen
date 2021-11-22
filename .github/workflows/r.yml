@@ -48,7 +48,7 @@ jobs:
         if: runner.os == 'macOS'
         run: "bash -c 'NOAWT=1 R CMD check --no-manual ../rJava_*.tar.gz'"
 
-      -       - uses: r-lib/actions/setup-r-dependencies@v1
+      - uses: r-lib/actions/setup-r-dependencies@v1
         with:
           extra-packages: rcmdcheck
 
