@@ -4,8 +4,8 @@
 
 `rflsgen` is the R distribution of [`flsgen`](https://github.com/dimitri-justeau/flsgen), a neutral landscape generator that allows users to set targets on landscape indices. It first relies on Choco-solver to identify landscape structure satisfying user targets, then uses a stochastic algorithm to produce landscape rasters.
 
-* [Download and installation](#down)
-* [Tutorial](#tuto)
+  * [Download and installation](#down)
+  * [Tutorial](#tuto)
     * [Fractal terrain generation](#terrain)
     * [Landscape structure generation](#structure)
     * [Landscape raster generation](#generate)
@@ -36,7 +36,6 @@ plot(terrain)
 ```
 
 ![alt-text](man/img/terrain.png "Terrain example")
-
 
 <a name="structure"></a>
 ### Generating landscape structures from targets
@@ -86,9 +85,8 @@ structure <- flsgen_structure(targets_file = "examples/targets.json")
 
 The result is a JSON-formatted string which contains the generated structure. It can be easily converted into a dataframe with a dedicated library such as `jsonlite`.
 
-
 <a name="generate"></a>
-### Generating landscape rasters from landscape structures.
+### Generating landscape rasters from landscape structures
 
 Now, let's generate a landscape raster from the previously generated structure. To do so, we use the `flsgen_generate` function to generate a landscape raster from the previously generated landscape structure:
 
