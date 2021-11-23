@@ -35,7 +35,7 @@ jobs:
 
       - name: Setup R Java support (Windows)
         if: runner.os == 'Windows'
-        run: "Sys.setenv(JAVA_HOME=$JAVA_HOME)"
+        run: "bash -c 'R CMD javareconf'"
 
       - uses: r-lib/actions/setup-r-dependencies@v1
         with:
