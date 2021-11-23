@@ -1,6 +1,6 @@
 # rflsgen
 
-[![R-CMD-check](https://github.com/dimitri-justeau/rflsgen/actions/workflows/r.yml/badge.svg)](https://github.com/dimitri-justeau/rflsgen/actions/workflows/r.yml)
+[![R-CMD-check](https://github.com/dimitri-justeau/rflsgen/actions/workflows/r.yml/badge.svg)](https://github.com/dimitri-justeau/rflsgen/actions/workflows/r.yml) [![codecov](https://codecov.io/gh/dimitri-justeau/rflsgen/branch/master/graph/badge.svg?token=HXA7L85S4F)](https://codecov.io/gh/dimitri-justeau/rflsgen) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/051b1240fc8e47c3926421ec99c95c8f)](https://www.codacy.com/gh/dimitri-justeau/rflsgen/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=dimitri-justeau/rflsgen&amp;utm_campaign=Badge_Grade)
 
 `rflsgen` is the R distribution of [`flsgen`](https://github.com/dimitri-justeau/flsgen), a neutral landscape generator that allows users to set targets on landscape indices. It first relies on Choco-solver to identify landscape structure satisfying user targets, then uses a stochastic algorithm to produce landscape rasters.
 
