@@ -34,6 +34,10 @@
 #' @param epsg EPSG identifier of the output projection
 #'
 #' @return A raster object
+#'
+#' @examples
+#' terrain <- flsgen_terrain(200, 200)
+#'
 #' @export
 #'
 flsgen_terrain <- function(width, height, output=tempfile(fileext=".tif"), roughness=0.5, x=0, y=0, resolution=0.0001, epsg="EPSG:4326") {

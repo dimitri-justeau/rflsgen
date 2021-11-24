@@ -1,4 +1,4 @@
-test_that("multiplication works", {
+test_that("flsgen_structure", {
   json <- "{
     \"nbRows\" : 200,
     \"nbCols\" : 200,
@@ -25,4 +25,5 @@ test_that("multiplication works", {
   }"
   structure <- rflsgen::flsgen_structure(targets_str = json, nb_solutions = 5)
   testthat::expect_vector(structure, size = 5)
+  testthat::expect_error(rflsgen::flsgen_structure())
 })

@@ -43,6 +43,35 @@
 #' @param max_try_patch Maximum number of trials for patch generation
 #'
 #' @return A raster object
+#'
+#' @examples
+#'   json <- "{
+#'     \"nbRows\" : 200,
+#'     \"nbCols\" : 200,
+#'     \"classes\" : [
+#'       {
+#'         \"name\" : \"Class A\",
+#'         \"NP\" : [1, 10],
+#'         \"AREA\" : [300, 4000],
+#'         \"CA\" : [1000, 5000],
+#'         \"MESH\" : [225, 225]
+#'       },
+#'       {
+#'         \"name\" : \"Class B\",
+#'         \"NP\" : [2, 8],
+#'         \"AREA\" : [200, 4000],
+#'         \"PLAND\" : [40, 40]
+#'       },
+#'       {
+#'         \"name\" : \"Class C\",
+#'          \"NP\" : [5, 7],
+#'          \"AREA\" : [800, 1200]
+#'       }
+#'     ]
+#'   }"
+#'   structure <- flsgen_structure(targets_str = json)
+#'   landscape <- flsgen_generate(structure_str = structure)
+#'
 #' @export
 #'
 flsgen_generate <- function(structure_str, structure_file, output=tempfile(fileext=".tif"), terrain_file=NULL,

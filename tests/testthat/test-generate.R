@@ -1,4 +1,4 @@
-test_that("multiplication works", {
+test_that("flsgen_generate", {
   json <- "{
     \"nbRows\" : 200,
     \"nbCols\" : 200,
@@ -28,4 +28,11 @@ test_that("multiplication works", {
   testthat::expect_vector(landscapes, size = 2)
   testthat::expect_s4_class(landscapes[[1]], class = "RasterLayer")
   testthat::expect_s4_class(landscapes[[2]], class = "RasterLayer")
+  testthat::expect_error(rflsgen::flsgen_generate())
+  landscapes <- lapply(structure, rflsgen::flsgen_generate, connectivity = 8)
+  testthat::expect_s4_class(landscapes[[1]], class = "RasterLayer")
+  landscapes <- lapply(structure, rflsgen::flsgen_generate, min_distance = 3)
+  testthat::expect_s4_class(landscapes[[1]], class = "RasterLayer")
+  landscapes <- lapply(structure, rflsgen::flsgen_generate, min_distance = 3, connectivity = 8)
+  testthat::expect_s4_class(landscapes[[1]], class = "RasterLayer")
 })
