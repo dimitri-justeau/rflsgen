@@ -39,6 +39,8 @@ A raster object
 Fractal terrain generation with the diamond-square algorithm
 }
 \examples{
-terrain <- flsgen_terrain(200, 200)
+  \dontrun{
+    terrain <- flsgen_terrain(200, 200)
+  }
 
 }

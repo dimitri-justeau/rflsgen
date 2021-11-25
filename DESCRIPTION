@@ -1,8 +1,8 @@
 Package: rflsgen
 Type: Package
 Title: R Interface to the 'Flsgen' Neutral Landscape Generator with Targets on Landscape Indices
-Version: 0.1.0
-Author: Dimitri Justeau-Allaire
+Version: 0.1.1
+Author: Dimitri Justeau-Allaire, Grégoire Blanchard, Thomas Ibanez, Xavier Lorca, Ghislain Vieilledent, Philippe Birnbaum
 Maintainer: Dimitri Justeau-Allaire <dimitri.justeau@gmail.com>
 Description: Interface to the 'flsgen' neutral landscape generator <https://github.com/dimitri-justeau/flsgen>. It allows to
   - Generate fractal terrain;
@@ -11,10 +11,10 @@ Description: Interface to the 'flsgen' neutral landscape generator <https://gith
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-Depends: rJava
+Depends: rJava,
 Imports: raster, rgdal, checkmate, utils
-SystemRequirements: Java
+SystemRequirements: Java (>= 8)
 RoxygenNote: 7.1.2
-Suggests: 
-    testthat (>= 3.0.0)
-Config/testthat/edition: 3
+Suggests: testthat (>= 3.0.0)
+URL: https://github.com/dimitri-justeau/rflsgen
+BugReports: https://github.com/dimitri-justeau/rflsgen/issues

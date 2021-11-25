@@ -36,7 +36,9 @@
 #' @return A raster object
 #'
 #' @examples
-#' terrain <- flsgen_terrain(200, 200)
+#'   \dontrun{
+#'     terrain <- flsgen_terrain(200, 200)
+#'   }
 #'
 #' @export
 #'
