@@ -14,4 +14,5 @@
     utils::download.file("https://github.com/dimitri-justeau/flsgen/releases/download/1.0b/flsgen-1.0-SNAPSHOT.jar", destfile = jar_path)
   }
   .jpackage(pkgname, lib.loc = libname)
+  J("java.lang.System")$setProperty("EPSG-HSQL.directory", tempdir())
 }

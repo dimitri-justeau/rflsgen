@@ -1,3 +1,7 @@
+# rflsgen 0.1.2
+
+* According to CRAN requirements, configure Geotools to store its temporary EPSG database in R session's temporary directory.
+
 # rflsgen 0.1.1
 
 * Update `DESCRIPTION`: add `URL`, `BugReports`, and specify the required minimum Java version (>= 8) in `SystemRequirements`.

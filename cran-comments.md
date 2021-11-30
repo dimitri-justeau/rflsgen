@@ -1,4 +1,8 @@
-## Release summary
+## rflsgen 0.1.2
+
+Configure Geotools to store its temporary EPSG database in R session's temporary directory.
+
+## rflsgen 0.1.1
 
 This second release fixes the problems reported by the CRAN Team:
 
