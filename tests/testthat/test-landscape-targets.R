@@ -1,0 +1,11 @@
+test_that("landscape_targets", {
+  cls_1 <- class_targets("class 1", NP=c(1, 10), AREA=c(1, 1000))
+  cls_2 <- class_targets("class 1", NP=c(1, 10), AREA=c(0, 2000))
+  testthat::expect_error(landscape_targets(200, 200, list(cls_1, cls_2)))
+  cls_2 <- class_targets("class 2", NP=c(1, 10), AREA=c(0, 2000))
+  ls_targets <- landscape_targets(200, 200, list(cls_1, cls_2))
+  testthat::expect_equal(class(ls_targets), "FlsgenLandscapeTargets")
+  testthat::expect_equal(ls_targets$nbCols, 200)
+  testthat::expect_equal(ls_targets$nbRows, 200)
+  testthat::expect_length(ls_targets$classes, 2)
+})

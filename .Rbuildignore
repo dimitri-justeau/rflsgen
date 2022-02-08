@@ -4,3 +4,5 @@
 .github
 .RData
 cran-comments.md
+^doc$
+^Meta$

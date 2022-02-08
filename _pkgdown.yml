@@ -1,0 +1,19 @@
+template:
+  bootstrap: 5
+  bootswatch: sandstone
+
+navbar:
+  structure:
+    left: [reference, usecases, news]
+
+  components:
+    usecases:
+      icon: bi-lightbulb-fill
+      text: "Use cases"
+      menu:
+        - text: "Use case 1"
+          href: articles/UseCase1.html
+        - text: "Use case 2"
+          href: articles/UseCase2.html
+        - text: "Use case 3"
+          href: articles/UseCase3.html

@@ -24,8 +24,8 @@
 #'
 #' @import rJava
 #'
-#' @details The input user targets must be either specified as a JSON-formatted string
-#'  (targets_str parameter) or as a JSON file (target_file parameter)
+#' @details The input user targets must be either specified as a JSON-formatted
+#'  string (targets_str parameter) or as a JSON file (target_file parameter).
 #'
 #' @param targets_str JSON-formatted string describing user targets
 #' @param targets_file JSON file describing user targets

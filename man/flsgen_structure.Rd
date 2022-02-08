@@ -31,8 +31,8 @@ A vector of JSON-formatted landscape structures satisfying user targets.
 Generate landscape structures satisfying user targets
 }
 \details{
-The input user targets must be either specified as a JSON-formatted string
- (targets_str parameter) or as a JSON file (target_file parameter)
+The input user targets must be either specified as a JSON-formatted
+ string (targets_str parameter) or as a JSON file (target_file parameter).
 }
 \examples{
   \dontrun{

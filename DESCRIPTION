@@ -15,6 +15,7 @@ Depends: rJava,
 Imports: raster, rgdal, checkmate, utils
 SystemRequirements: Java (>= 8)
 RoxygenNote: 7.1.2
-Suggests: testthat (>= 3.0.0)
+Suggests: testthat (>= 3.0.0), knitr, rmarkdown
+VignetteBuilder: knitr
 URL: https://github.com/dimitri-justeau/rflsgen
 BugReports: https://github.com/dimitri-justeau/rflsgen/issues
