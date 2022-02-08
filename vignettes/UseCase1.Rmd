@@ -3,22 +3,89 @@ title: "Use case 1"
 output: html_document
 ---
 
-## R Markdown
+In this use case, we will see how rflsgen can be used to generate a series of landscapes with a fixed composition and varying spatial configurations. First let's load rflsgen:
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+```{r, warning=FALSE, message=FALSE}
+library(rflsgen)
 ```
 
-## Including Plots
+## Defining targets for landscape composition
 
-You can also embed plots, for example:
+Let's say that, we want to generate 500x500 landscapes composed of three focal land-use classes: shrubland, savanna, and forest. A fourth land-use will correspond to areas with no vegetation cover. The first thing we need to to is to define class-level composition targets for our focal classes. We keep it simple and just impose strict constraints on landcape proportion (PLAND), while setting a wide target interval for the number of patches (NP) and patch area (AREA):
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+| Class     | NP      | AREA         | PLAND |
+| --------- |---------| ------------ |------ |
+| shrubland | [1, 50] | [500, 50000] | 30%   |
+| savanna   | [1, 50] | [500, 50000] | 15%   |
+| forest    | [1, 50] | [500, 50000] | 10%   |
+
+
+We can use a JSON file or string to define these targets:
+
+```{js}
+{
+  "nbRows" : 500,
+  "nbCols" : 500,
+  "classes" : [
+    {
+      "name" : "shrubland",
+      "NP" : [1, 50],
+      "AREA": [500, 50000],
+      "PLAND": [30, 30],
+    },
+    {
+      "name" : "savanna",
+      "NP" : [1, 50],
+      "AREA": [500, 50000],
+      "PLAND": [15, 15],
+    },
+    {
+      "name" : "forest",
+      "NP" : [1, 50],
+      "AREA": [500, 50000],
+      "PLAND": [10, 10],
+    }
+  ]
+}
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+We can also use rflsgen `class_targets` and `landscape_targets` functions:
+
+```{r}
+shrubland <- class_targets("shrubland", NP = c(1, 20), AREA = c(500, 50000), PLAND = c(30, 30))
+savanna <- class_targets("savanna", NP = c(1, 20), AREA = c(500, 50000), PLAND = c(15, 15))
+forest <- class_targets("forest", NP = c(1, 20), AREA = c(500, 50000), PLAND = c(10, 10))
+ls_targets <- landscape_targets(500, 500, list(shrubland, savanna, forest))
+```
+
+## Generating a landscape structure
+
+To generate a landscape structure satisfying these targets, we use the `flsgen_structure` methods:
+
+```{r}
+structure <- flsgen_structure(ls_targets, search_strategy = "RANDOM")
+```
+
+This structure is formatted as a JSON string, which can be easily converted to a dataframe using the [jsonlite](https://cran.r-project.org/package=jsonlite) package:
+
+```{r}
+structure_df <- jsonlite::fromJSON(structure)
+for (i in 1:length(structure_df)) {
+  cat(paste(structure_df$classes[i,]$name, ":",
+            "\n\t number of patches", structure_df$classes[i,]$NP,
+            "\n\t smallest patch size", structure_df$classes[i,]$SPI,
+            "\n\t largest patch size", structure_df$classes[i,]$LPI, "\n\n"))
+}
+```
+
+**Note:** The `search_strategy` parameter indicate to [Choco-solver](https://choco-solver.org/) how to construct its search tree. Because our targets are not very restrictive, we use the `"RANDOM"` strategy here to have more diversity between patch sizes. Note that the search strategy does not influences whether the targets will be satisfied or not, it just indicates to the solver how to construct its search tree, according to its available strategies, which are: `""DEFAULT", "RANDOM", "DOM_OVER_W_DEG", "DOM_OVER_W_DEG_REF", "ACTIVITY_BASED", "CONFLICT_HISTORY", "MIN_DOM_LB", "MIN_DOM_UB"` (please refer to [Choco documentation](https://choco-solver.org/docs/solving/strategies/) if you want more details).
+
+## Generating our first landscape
+
+At this point, we can quickly generate a landscape raster using the `flsgen_generate` method:
+
+```{r}
+landscape <- flsgen_generate(structure)
+plot(landscape)
+```
+

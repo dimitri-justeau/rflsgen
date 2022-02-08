@@ -77,6 +77,12 @@ flsgen_structure <- function(targets_str, targets_file, nb_solutions=1, time_lim
     if (!missing(targets_file)) {
       stop("Either targets_str or targets_file must be used in generate_landscape_structure function to specify user targets, not both")
     }
+    if (class(targets_str) == "FlsgenLandscapeTargets") {
+      for (i in 1:length(targets_str$classes)) {
+        targets_str$classes[[i]] <- unclass(targets_str$classes[[i]])
+      }
+      targets_str <- jsonlite::toJSON(unclass(targets_str), auto_unbox = TRUE)
+    }
   }
   checkmate::assert_int(nb_solutions, lower=1)
   checkmate::assert_int(time_limit, lower=0)

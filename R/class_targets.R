@@ -53,7 +53,7 @@
 #' @export
 #'
 class_targets <- function(class_name, NP=NULL, AREA=NULL, CA=NULL, PLAND=NULL,
-                          PD=NULL, SPI=NULL, LPS=NULL, MESH=NULL, SPLI=NULL,
+                          PD=NULL, SPI=NULL, LPI=NULL, MESH=NULL, SPLI=NULL,
                           NPRO=NULL, SDEN=NULL, COHE=NULL, DIVI=NULL) {
   checkmate::assert_string(class_name)
   class_targets <- list(

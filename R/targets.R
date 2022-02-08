@@ -29,7 +29,7 @@ CLASS_LEVEL_TARGETS <- c(
   "PLAND",   # Proportion of landscape
   "PD",      # Patch density
   "SPI",     # Smallest patch index
-  "LPS",     # Largest patch index
+  "LPI",     # Largest patch index
   "MESH",    # Effective mesh size
   "SPLI",    # Splitting index
   "NPRO",    # Net product

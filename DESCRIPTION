@@ -11,8 +11,8 @@ Description: Interface to the 'flsgen' neutral landscape generator <https://gith
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-Depends: rJava,
-Imports: raster, rgdal, checkmate, utils
+Depends: rJava, raster
+Imports: raster, rgdal, checkmate, utils, jsonlite
 SystemRequirements: Java (>= 8)
 RoxygenNote: 7.1.2
 Suggests: testthat (>= 3.0.0), knitr, rmarkdown
