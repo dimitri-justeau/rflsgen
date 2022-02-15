@@ -133,10 +133,10 @@ flsgen_generate <- function(structure_str, structure_file, output=tempfile(filee
       }
     } else {
       if (connectivity == 4) {
-        buffer <- J("org.flsgen.grid.neighborhood.Neighborhoods")$K_WIDE_FOUR_CONNECTED(as.integer(min_distance))
+        buffer <- J("org.flsgen.grid.neighborhood.Neighborhoods")$VARIABLE_WIDTH_FOUR_CONNECTED(as.integer(min_distance), as.integer(min_distance * 2))
       } else {
         if (connectivity == 8) {
-          buffer <- J("org.flsgen.grid.neighborhood.Neighborhoods")$K_WIDE_HEIGHT_CONNECTED(as.integer(min_distance))
+          buffer <- J("org.flsgen.grid.neighborhood.Neighborhoods")$VARIABLE_WIDTH_HEIGHT_CONNECTED(as.integer(min_distance), as.integer(min_distance * 2))
         }
       }
     }
@@ -146,6 +146,15 @@ flsgen_generate <- function(structure_str, structure_file, output=tempfile(filee
   if (is.null(terrain_file)) {
     .jcall(terrain, "V", "generateDiamondSquare", roughness)
   } else {
+    if (inherits(terrain_file, "Raster")) {
+      if (nchar(filename(terrain_file)) > 0) {
+        terrain_file <- filename(terrain_file)
+      } else {
+        file_name <- tempfile(fileext = ".tif")
+        writeRaster(terrain_file, file_name)
+        terrain_file <- file_name
+      }
+    }
     .jcall(terrain, "V", "loadFromRaster", terrain_file)
   }
   generator <- .jnew("org.flsgen.solver.LandscapeGenerator", struct, .jcast(neigh, "org/flsgen/grid/neighborhood/INeighborhood"), .jcast(buffer, "org/flsgen/grid/neighborhood/INeighborhood"), terrain)

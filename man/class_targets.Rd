@@ -12,7 +12,7 @@ class_targets(
   PLAND = NULL,
   PD = NULL,
   SPI = NULL,
-  LPS = NULL,
+  LPI = NULL,
   MESH = NULL,
   SPLI = NULL,
   NPRO = NULL,
@@ -36,6 +36,8 @@ class_targets(
 
 \item{SPI}{smallest patch index target (must be a vector of length 2)}
 
+\item{LPI}{largest patch index target (must be a vector of length 2)}
+
 \item{MESH}{effective mesh size target (must be a vector of length 2)}
 
 \item{SPLI}{splitting index target (must be a vector of length 2)}
@@ -47,8 +49,6 @@ class_targets(
 \item{COHE}{degree of coherence target (must be a vector of length 2)}
 
 \item{DIVI}{degree of landscape division target (must be a vector of length 2)}
-
-\item{LPI}{largest patch index target (must be a vector of length 2)}
 }
 \value{
 A class targets object which can be converted to JSON for flsgen

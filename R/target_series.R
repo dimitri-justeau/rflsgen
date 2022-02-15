@@ -63,7 +63,7 @@ target_series <- function(landscape_targets, class_name=NULL, class_id=NULL,
     } else {
       checkmate::assert_vector(v, len = 2)
     }
-    targets <- ls_targets
+    targets <- landscape_targets
     targets$classes[[i]][[target_key]] <- v
     return(targets)
   }

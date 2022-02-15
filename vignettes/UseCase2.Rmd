@@ -1,5 +1,42 @@
 ---
-title: "Use case 2"
+title: "Use case 2: generating large landscape series to evaluate landscape indices"
 output: html_document
 ---
 
+<!--```{r}
+pland_series = seq(0.5, 100, by = 0.5)
+repeats = 10
+
+meta_generate <- function(pland) {
+  habitat <- class_targets("habitat", NP = c(20, 20), AREA = c(0, 200*200), PLAND = c(pland, pland))
+  ls_targets <- landscape_targets(500, 500, list(habitat))
+  structures <- flsgen_structure(ls_targets, nb_solutions = repeats, search_strategy = "RANDOM")
+  lapply(structures, function(s) {
+    jsonlite::fromJSON(s)$classes[1,]$MESH
+  })
+  #lapply(seq(1, 10, by=1), function(i) {
+  #  flsgen_generate(structure_str = structures[[i]], output = paste(basepath, "pland_", pland, "_", i, ".tif", sep = ""))
+  #})
+}
+
+lapply(pland_series, meta_generate)
+
+
+structs <- flsgen_structure(ls_targets, nb_solutions = 10, search_strategy = "RANDOM")
+
+meshes <- lapply(structs, function(s) {
+  jsonlite::fromJSON(s)$classes[1,]$MESH
+})
+```
+-->
+
+<!--```{r}
+  habitat <- class_targets("habitat", NP = c(0, 100), AREA = c(0, 500*500), MESH=c(1999, 2001))
+  ls_targets <- landscape_targets(500, 500, list(habitat))
+  structure <- flsgen_structure(ls_targets, search_strategy = "RANDOM", time_limit = 30)
+  landscape <- flsgen_generate(structure, roughness = 0.35, terrain_dependency = 0.7, min_distance = 4, epsg = "EPSG:3163", resolution = 1, max_try_patch = 20, max_try = 10)
+  shape_path <-tempfile(fileext = ".shp")
+  export_shapefile(filename(landscape), raster_value = 0, shapefile_path = shape_path)
+  shape <- st_read(shape_path)
+  PC <- MK_dPCIIC(nodes = shape, distance = list(type = "centroid"), metric = "PC", onlyoverall = TRUE, LA =500*500)
+```-->
