@@ -39,7 +39,7 @@
 #'   }
 #' @export
 #'
-landscape_targets <- function(nb_rows, nb_cols, classes) {
+landscape_targets <- function(nb_rows, nb_cols, classes, NON_FOCAL_PLAND=NULL) {
   checkmate::assert_int(nb_rows, lower=1)
   checkmate::assert_int(nb_cols, lower=1)
   if (!is.null(classes)) {
@@ -54,5 +54,9 @@ landscape_targets <- function(nb_rows, nb_cols, classes) {
     nbCols=nb_cols,
     classes = classes
   )
+  if (!is.null(NON_FOCAL_PLAND)) {
+    base_targets$NON_FOCAL_PLAND <- NON_FOCAL_PLAND
+
+  }
   return(structure(base_targets, class="FlsgenLandscapeTargets"))
 }
