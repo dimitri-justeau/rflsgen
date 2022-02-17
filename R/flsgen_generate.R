@@ -162,7 +162,6 @@ flsgen_generate <- function(structure_str, structure_file, output=tempfile(filee
     .jcall(generator, "V", "exportRaster", x, y, resolution, epsg, output)
     return(raster::raster(output))
   } else {
-    warning("Could not generate a raster satisfying the input landscape structure")
-    return(NULL)
+    stop("Could not generate a raster satisfying the input landscape structure")
   }
 }
