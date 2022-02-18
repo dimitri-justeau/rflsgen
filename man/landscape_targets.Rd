@@ -4,7 +4,7 @@
 \alias{landscape_targets}
 \title{Creates a set of targets for a landscape}
 \usage{
-landscape_targets(nb_rows, nb_cols, classes)
+landscape_targets(nb_rows, nb_cols, classes, NON_FOCAL_PLAND = NULL)
 }
 \arguments{
 \item{nb_rows}{Number of rows}

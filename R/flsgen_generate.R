@@ -89,6 +89,12 @@ flsgen_generate <- function(structure_str, structure_file, output=tempfile(filee
     if (!missing(structure_file)) {
       stop("Either structure_str or structure_file must be used in generate_landscape_raster function to specify user targets, not both")
     }
+    if (class(structure_str) == "FlsgenLandscapeStructure") {
+      for (i in 1:length(structure_str$classes)) {
+        structure_str$classes[[i]] <- unclass(structure_str$classes[[i]])
+      }
+      structure_str <- jsonlite::toJSON(unclass(structure_str), auto_unbox = TRUE)
+    }
   }
   checkmate::assert_int(min_distance, lower=1)
   checkmate::assert_int(max_try, lower=1)
