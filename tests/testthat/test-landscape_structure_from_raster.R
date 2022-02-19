@@ -1,0 +1,10 @@
+test_that("landscape_structure_from_raster", {
+  gc()
+  path <- system.file("extdata", "mask_raster.tif", package = "rflsgen")
+  struct <- flsgen_landscape_structure_from_raster(path, c(1))
+  jstruct <- jsonlite::fromJSON(struct)
+  testthat::expect_equal(jstruct$nbCols, 784)
+  testthat::expect_equal(jstruct$nbRows, 605)
+  testthat::expect_equal(nrow(jstruct$classes), 1)
+  testthat::expect_equal(jstruct$classes[1, ]$NP, 2962)
+})
