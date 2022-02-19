@@ -5,7 +5,7 @@
 \title{Creates a predefined landscape structure that can be converted as JSON
 Input for flsgen generate}
 \usage{
-flsgen_landscape_structure(nb_rows, nb_cols, classes)
+flsgen_landscape_structure(nb_rows, nb_cols, classes, mask_raster = NULL)
 }
 \arguments{
 \item{nb_rows}{Number of rows}
@@ -13,6 +13,8 @@ flsgen_landscape_structure(nb_rows, nb_cols, classes)
 \item{nb_cols}{Number of columns}
 
 \item{classes}{list of class structures}
+
+\item{mask_raster}{mask raster (path or raster object)}
 }
 \value{
 A landscape structure object which can be converted to JSON for
@@ -24,6 +26,9 @@ converted as JSON Input for flsgen generate.
 }
 \details{
 The class structures must be created prior to the call to this function
+
+Either nb_rows and nb_cols, or mask_raster must be specified. The dimensions
+of the landscape are deduced from the mask raster if it is used.
 }
 \examples{
   \dontrun{

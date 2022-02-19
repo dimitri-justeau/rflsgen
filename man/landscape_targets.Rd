@@ -4,7 +4,13 @@
 \alias{landscape_targets}
 \title{Creates a set of targets for a landscape}
 \usage{
-landscape_targets(nb_rows, nb_cols, classes, NON_FOCAL_PLAND = NULL)
+landscape_targets(
+  nb_rows,
+  nb_cols,
+  classes,
+  mask_raster = NULL,
+  NON_FOCAL_PLAND = NULL
+)
 }
 \arguments{
 \item{nb_rows}{Number of rows}
@@ -12,6 +18,10 @@ landscape_targets(nb_rows, nb_cols, classes, NON_FOCAL_PLAND = NULL)
 \item{nb_cols}{Number of columns}
 
 \item{classes}{list of class targets}
+
+\item{mask_raster}{mask raster (path or raster object)}
+
+\item{NON_FOCAL_PLAND}{PLAND (proportion of landscape) target on the non-focal land-use class}
 }
 \value{
 A landscape targets object which can be converted to JSON for flsgen
@@ -22,6 +32,9 @@ converted into JSON for flsgen.
 }
 \details{
 The class targets must be created prior to the call to this function
+
+Either nb_rows and nb_cols, or mask_raster must be specified. The dimensions
+of the landscape are deduced from the mask raster if it is used.
 }
 \examples{
   \dontrun{

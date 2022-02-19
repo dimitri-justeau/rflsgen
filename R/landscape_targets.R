@@ -28,6 +28,11 @@
 #' @param nb_rows Number of rows
 #' @param nb_cols Number of columns
 #' @param classes list of class targets
+#' @param mask_raster mask raster (path or raster object)
+#' @param NON_FOCAL_PLAND PLAND (proportion of landscape) target on the non-focal land-use class
+#'
+#' @details Either nb_rows and nb_cols, or mask_raster must be specified. The dimensions
+#' of the landscape are deduced from the mask raster if it is used.
 #'
 #' @return A landscape targets object which can be converted to JSON for flsgen
 #'
@@ -39,9 +44,7 @@
 #'   }
 #' @export
 #'
-landscape_targets <- function(nb_rows, nb_cols, classes, NON_FOCAL_PLAND=NULL) {
-  checkmate::assert_int(nb_rows, lower=1)
-  checkmate::assert_int(nb_cols, lower=1)
+landscape_targets <- function(nb_rows, nb_cols, classes, mask_raster=NULL, NON_FOCAL_PLAND=NULL) {
   if (!is.null(classes)) {
     checkmate::assert_list(classes)
     u <- unique(lapply(classes, function(c) {c$name}))
@@ -50,10 +53,25 @@ landscape_targets <- function(nb_rows, nb_cols, classes, NON_FOCAL_PLAND=NULL) {
     }
   }
   base_targets <- list(
-    nbRows=nb_rows,
-    nbCols=nb_cols,
     classes = classes
   )
+  if (is.null(mask_raster)) {
+    checkmate::assert_int(nb_rows, lower=1)
+    checkmate::assert_int(nb_cols, lower=1)
+    base_targets$nbRows <- nb_rows
+    base_targets$nbCols <- nb_cols
+  } else {
+    if (inherits(mask_raster, "Raster")) {
+      if (nchar(filename(mask_raster)) > 0) {
+        mask_raster <- filename(mask_raster)
+      } else {
+        file_name <- tempfile(fileext = ".tif")
+        writeRaster(mask_raster, file_name)
+        mask_raster <- file_name
+      }
+    }
+    base_targets$maskRasterPath <- mask_raster
+  }
   if (!is.null(NON_FOCAL_PLAND)) {
     base_targets$NON_FOCAL_PLAND <- NON_FOCAL_PLAND
 

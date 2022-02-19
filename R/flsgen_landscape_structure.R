@@ -29,6 +29,10 @@
 #' @param nb_rows Number of rows
 #' @param nb_cols Number of columns
 #' @param classes list of class structures
+#' @param mask_raster mask raster (path or raster object)
+#'
+#' @details Either nb_rows and nb_cols, or mask_raster must be specified. The dimensions
+#' of the landscape are deduced from the mask raster if it is used.
 #'
 #' @return A landscape structure object which can be converted to JSON for
 #' flsgen generate
@@ -41,9 +45,7 @@
 #'   }
 #'
 #' @export
-flsgen_landscape_structure <- function(nb_rows, nb_cols, classes) {
-  checkmate::assert_int(nb_rows, lower=1)
-  checkmate::assert_int(nb_cols, lower=1)
+flsgen_landscape_structure <- function(nb_rows, nb_cols, classes, mask_raster=NULL) {
   if (!is.null(classes)) {
     checkmate::assert_list(classes)
     u <- unique(lapply(classes, function(c) {c$name}))
@@ -52,10 +54,25 @@ flsgen_landscape_structure <- function(nb_rows, nb_cols, classes) {
     }
   }
   lstruct <- list(
-    nbRows=nb_rows,
-    nbCols=nb_cols,
     classes = classes
   )
+  if (is.null(mask_raster)) {
+    checkmate::assert_int(nb_rows, lower=1)
+    checkmate::assert_int(nb_cols, lower=1)
+    lstruct$nbRows <- nb_rows
+    lstruct$nbCols <- nb_cols
+  } else {
+    if (inherits(mask_raster, "Raster")) {
+      if (nchar(filename(mask_raster)) > 0) {
+        mask_raster <- filename(mask_raster)
+      } else {
+        file_name <- tempfile(fileext = ".tif")
+        writeRaster(mask_raster, file_name)
+        mask_raster <- file_name
+      }
+    }
+    lstruct$maskRasterPath <- mask_raster
+  }
   return(structure(lstruct, class="FlsgenLandscapeStructure"))
 }
 

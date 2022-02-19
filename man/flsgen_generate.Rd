@@ -12,6 +12,7 @@ flsgen_generate(
   roughness = 0.5,
   terrain_dependency = 0.5,
   min_distance = 2,
+  min_max_distance = NULL,
   connectivity = 4,
   x = 0,
   y = 0,
@@ -35,6 +36,10 @@ flsgen_generate(
 \item{terrain_dependency}{Terrain dependency factor for landscape generation, between 0 and 1}
 
 \item{min_distance}{Minimum distance between patches of a same class}
+
+\item{min_max_distance}{If defined, the minimum distance beween patches of a
+same class is defined by a variable buffer of width between
+min_distance and min_max_distance}
 
 \item{connectivity}{Connectivity definition in the regular square grid (4 or 8)."}
 
