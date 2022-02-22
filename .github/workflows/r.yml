@@ -1,48 +1,110 @@
-on: [push, pull_request]
+# For help debugging build failures open an issue on the RStudio community with the 'github-actions' tag.
+# https://community.rstudio.com/new-topic?category=Package%20development&tags=github-actions
+on:
+  schedule:
+    - cron: 0 0 * * 1 # schedule to run at midnight on Monday each week
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+    branches:
+      - main
+      - master
 
-name: check
+name: Ubuntu
 
 jobs:
-  check:
-    runs-on: ${{ matrix.os }}
+  R-CMD-check:
+    runs-on: ${{ matrix.config.os }}
 
-    name: ${{ matrix.os }}, R ${{ matrix.r }}, Java ${{ matrix.java }}
+    name: ${{ matrix.config.os }} (${{ matrix.config.r }}, Java ${{ matrix.config.java }}, ${{ matrix.config.pkgs }} packages)
 
     strategy:
       fail-fast: false
       matrix:
-        os: [ 'ubuntu-20.04' ]
-        r:  [ 'release' ]
-        java: [ 8, 11 ]
+        config:
+          - {os: ubuntu-20.04, r: 'release', pkgs: 'all', java: 8}
+          - {os: ubuntu-20.04, r: 'release', pkgs: 'all', java: 11}
+          - {os: ubuntu-20.04, r: 'devel', pkgs: 'all', java: 8}
+          - {os: ubuntu-20.04, r: 'devel', pkgs: 'all', java: 11}
+          - {os: ubuntu-20.04, r: 'devel', pkgs: 'depends only', java: 11}
+
+    env:
+      _R_REMOTES_NO_ERRORS_FROM_WARNINGS_: true
+      _R_CHECK_FORCE_SUGGESTS_: false
+      _R_CHECK_TIMINGS_: 10
+      _R_CHECK_CRAN_INCOMING_REMOTE_: false
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      CI: true
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
 
-      - uses: r-lib/actions/setup-r@master
+      - uses: r-lib/actions/setup-r@v1
         with:
-          r-version: ${{ matrix.r }}
+          r-version: ${{ matrix.config.r }}
 
       - uses: actions/setup-java@v1
         with:
-          java-version: ${{ matrix.java }}
+          java-version: ${{ matrix.config.java }}
 
-      - name: Info
-        run: "bash -c 'java -version && which java && echo $PATH && echo $JAVA_HOME'"
+      - uses: r-lib/actions/setup-pandoc@v1
 
-      - name: Setup R Java support
+      - name: Query dependencies
+        run: |
+          install.packages('remotes')
+          saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
+          writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
+        shell: Rscript {0}
+
+      - name: Cache R packages
         if: runner.os != 'Windows'
-        run: "echo export PATH=$PATH > reconf.sh; echo export JAVA_HOME=$JAVA_HOME >> reconf.sh; echo R CMD javareconf >> reconf.sh; sudo bash reconf.sh"
-
-      - uses: r-lib/actions/setup-r-dependencies@v1
+        uses: actions/cache@v2
         with:
-          extra-packages: rcmdcheck, covr
+          path: ${{ env.R_LIBS_USER }}
+          key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
+          restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
 
-      - uses: r-lib/actions/check-r-package@v1
+      - name: Install system dependencies
+        run: |
+          sudo apt-get -y install \
+            libcurl4-openssl-dev \
+            libudunits2-dev libgdal-dev libgeos-dev libproj-dev libglpk-dev
+          while read -r cmd
+          do
+            eval sudo $cmd
+          done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "20.04"))')
+          echo export PATH=$PATH > reconf.sh; echo export JAVA_HOME=$JAVA_HOME >> reconf.sh; echo R CMD javareconf >> reconf.sh; sudo bash reconf.sh
+          rm -f reconf.sh
+      - name: Install dependencies
+        run: |
+          remotes::install_deps(dependencies = TRUE)
+          remotes::install_cran("rcmdcheck")
+          remotes::install_cran("covr")
+          remotes::install_bioc("lpsymphony")
+          remotes::install_cran("urlchecker")
+        shell: Rscript {0}
 
-      - name: Show testthat output
-        if: always()
-        run: find check -name 'testthat.Rout*' -exec cat '{}' \; || true
+      - name: Session information
+        run: |
+          options(width = 100)
+          pkgs <- installed.packages()[, "Package"]
+          sessioninfo::session_info(pkgs, include_base = TRUE)
+        shell: Rscript {0}
+
+      - name: Java information
+        run: java -version && which java && echo $PATH && echo $JAVA_HOME
         shell: bash
+
+      - name: Set environmental variables for package checks
+        if: matrix.config.pkgs == 'depends only'
+        run: |
+          echo "_R_CHECK_DEPENDS_ONLY_=true" >> $GITHUB_ENV
+      - name: Check
+        run: |
+          rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran", "--no-build-vignettes"), error_on = "warning", check_dir = "check")
+        shell: Rscript {0}
 
       - name: Upload check results
         if: failure()
@@ -51,6 +113,12 @@ jobs:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
 
+      - name: Show testthat output
+        if: always()
+        run: find check -name 'testthat.Rout*' -exec cat '{}' \; || true
+        shell: bash
+
       - name: Test coverage
+        if: runner.os == 'Linux' && matrix.config.r == 'release'
         run: covr::codecov()
         shell: Rscript {0}
