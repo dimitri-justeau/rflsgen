@@ -23,6 +23,7 @@
 #' @description Generate landscape raster from landscape structure
 #'
 #' @import rJava
+#' @import raster
 #'
 #' @details The input landscape structure must be either specified as a JSON-formatted string
 #'  (structure_str parameter) or as a JSON file (structure_file parameter)
@@ -40,10 +41,13 @@
 #' @param connectivity Connectivity definition in the regular square grid (4 or 8)."
 #' @param x X position (geographical coordinates) of the top-left output raster pixel
 #' @param y Y position (geographical coordinates) of the top-left output raster pixel
-#' @param resolution Spatial resolution (geographical units) of the output raster (i.e. pixel dimension)
+#' @param resolution_x x spatial resolution (geographical units) of the output raster (i.e. pixel width)
+#' @param resolution_y y-spatial resolution (geographical units) of the output raster (i.e. pixel height),
+#'                     if null, resolution_x is used
 #' @param epsg EPSG identifier of the output projection
 #' @param max_try Maximum number of trials for landscape generation
 #' @param max_try_patch Maximum number of trials for patch generation
+#' @param verbose if TRUE print information about generation
 #'
 #' @return A raster object
 #'
@@ -81,7 +85,7 @@
 #'
 flsgen_generate <- function(structure_str, structure_file, output=tempfile(fileext=".tif"), terrain_file=NULL,
                             roughness=0.5, terrain_dependency=0.5, min_distance=2, min_max_distance=NULL, connectivity=4,
-                            x=0, y=0, resolution=0.0001, epsg="EPSG:4326", max_try=2, max_try_patch=10) {
+                            x=0, y=0, resolution_x=0.0001, resolution_y=NULL, epsg="EPSG:4326", max_try=2, max_try_patch=10, verbose=TRUE) {
   # Check arguments
   if (missing(structure_str)) {
     if (missing(structure_file)) {
@@ -108,10 +112,16 @@ flsgen_generate <- function(structure_str, structure_file, output=tempfile(filee
   checkmate::assert_number(y)
   checkmate::assert_number(connectivity)
   checkmate::assert_choice(connectivity, c(4, 8))
-  checkmate::assert_number(resolution)
+  checkmate::assert_number(resolution_x)
+  if (!is.null(resolution_y)) {
+    checkmate::assert_number(resolution_y)
+  } else {
+    resolution_y <- resolution_x
+  }
   checkmate::assert_string(epsg)
   checkmate::assert_string(output)
   checkmate::assert_string(structure_str)
+  checkmate::assert_flag(verbose)
 
   # Generate landscape raster using flsgen jar
   reader <- .jnew("java.io.StringReader", structure_str)
@@ -138,10 +148,12 @@ flsgen_generate <- function(structure_str, structure_file, output=tempfile(filee
   } else {
     generator <- .jnew("org.flsgen.solver.LandscapeGenerator", struct, as.integer(connectivity), as.integer(min_distance), as.integer(min_max_distance), terrain)
   }
-  if (.jcall(generator, "Z", "generate", terrain_dependency, as.integer(max_try), as.integer(max_try_patch))) {
-    .jcall(generator, "V", "exportRaster", x, y, resolution, epsg, output)
+  if (.jcall(generator, "Z", "generate", terrain_dependency, as.integer(max_try), as.integer(max_try_patch), verbose)) {
+    .jcall(generator, "V", "exportRaster", x, y, resolution_x, resolution_y, epsg, output)
+    .jgc()
     return(raster::raster(output))
   } else {
+    .jgc()
     stop("Could not generate a raster satisfying the input landscape structure")
   }
 }

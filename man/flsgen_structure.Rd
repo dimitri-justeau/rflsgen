@@ -2,7 +2,7 @@
 % Please edit documentation in R/flsgen_structure.R
 \name{flsgen_structure}
 \alias{flsgen_structure}
-\title{Landscape structure generator}
+\title{Landscape structure solver}
 \usage{
 flsgen_structure(
   targets_str,
@@ -28,7 +28,7 @@ flsgen_structure(
 A vector of JSON-formatted landscape structures satisfying user targets.
 }
 \description{
-Generate landscape structures satisfying user targets
+Find landscape structures satisfying user targets
 }
 \details{
 The input user targets must be either specified as a JSON-formatted

@@ -1,5 +1,8 @@
 ---
 title: "Use case 3"
 output: html_document
+vignette: >
+  %\VignetteIndexEntry{Use case 3}
+  %\VignetteEngine{knitr::rmarkdown_notangle}
 ---
 

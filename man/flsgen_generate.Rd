@@ -16,10 +16,12 @@ flsgen_generate(
   connectivity = 4,
   x = 0,
   y = 0,
-  resolution = 1e-04,
+  resolution_x = 1e-04,
+  resolution_y = NULL,
   epsg = "EPSG:4326",
   max_try = 2,
-  max_try_patch = 10
+  max_try_patch = 10,
+  verbose = TRUE
 )
 }
 \arguments{
@@ -47,13 +49,18 @@ min_distance and min_max_distance}
 
 \item{y}{Y position (geographical coordinates) of the top-left output raster pixel}
 
-\item{resolution}{Spatial resolution (geographical units) of the output raster (i.e. pixel dimension)}
+\item{resolution_x}{x spatial resolution (geographical units) of the output raster (i.e. pixel width)}
+
+\item{resolution_y}{y-spatial resolution (geographical units) of the output raster (i.e. pixel height),
+if null, resolution_x is used}
 
 \item{epsg}{EPSG identifier of the output projection}
 
 \item{max_try}{Maximum number of trials for landscape generation}
 
 \item{max_try_patch}{Maximum number of trials for patch generation}
+
+\item{verbose}{if TRUE print information about generation}
 }
 \value{
 A raster object

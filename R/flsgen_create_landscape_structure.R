@@ -1,0 +1,77 @@
+# Copyright (c) 2021, Dimitri Justeau-Allaire
+#
+# Institut Agronomique neo-Caledonien (IAC), 98800 Noumea, New Caledonia
+# AMAP, Univ Montpellier, CIRAD, CNRS, INRA, IRD, Montpellier, France
+#
+# This file is part of rflsgen
+#
+# rflsgen is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# rflsgen is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with rflsgen  If not, see <https://www.gnu.org/licenses/>.
+
+#' Creates a predefined landscape structure that can be converted as JSON
+#' Input for flsgen generate
+#'
+#' @description Creates a predefined landscape structure that can be converted as JSON
+#' converted as JSON Input for flsgen generate.
+#'
+#' @details The class structures must be created prior to the call to this function
+#'
+#' @param nb_rows Number of rows
+#' @param nb_cols Number of columns
+#' @param classes list of class structures
+#' @param mask_raster mask raster (path or raster object)
+#'
+#' @details Either nb_rows and nb_cols, or mask_raster must be specified. The dimensions
+#' of the landscape are deduced from the mask raster if it is used.
+#'
+#' @return A landscape structure object which can be converted to JSON for
+#' flsgen generate
+#'
+#' @examples
+#'   \dontrun{
+#'     cls_1 <- flsgen_class_structure("class 1", c(10, 100, 1000))
+#'     cls_2 <- flsgen_class_structure("class 2", c(20, 200, 2000))
+#'     ls_struct <- flsgen_landscape_structure(200, 200, list(cls_1, cls_2))
+#'   }
+#'
+#' @export
+flsgen_create_landscape_structure <- function(nb_rows, nb_cols, classes, mask_raster=NULL) {
+  if (!is.null(classes)) {
+    checkmate::assert_list(classes)
+    u <- unique(lapply(classes, function(c) {c$name}))
+    if (length(u) != length(classes)) {
+      stop("The class names are not unique")
+    }
+  }
+  lstruct <- list(
+    classes = classes
+  )
+  if (is.null(mask_raster)) {
+    checkmate::assert_int(nb_rows, lower=1)
+    checkmate::assert_int(nb_cols, lower=1)
+    lstruct$nbRows <- nb_rows
+    lstruct$nbCols <- nb_cols
+  } else {
+    if (inherits(mask_raster, "Raster")) {
+      if (nchar(filename(mask_raster)) > 0) {
+        mask_raster <- filename(mask_raster)
+      } else {
+        file_name <- tempfile(fileext = ".tif")
+        writeRaster(mask_raster, file_name)
+        mask_raster <- file_name
+      }
+    }
+    lstruct$maskRasterPath <- mask_raster
+  }
+  return(structure(lstruct, class="FlsgenLandscapeStructure"))
+}

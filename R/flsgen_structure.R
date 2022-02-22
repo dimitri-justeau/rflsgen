@@ -18,9 +18,9 @@
 # You should have received a copy of the GNU General Public License
 # along with rflsgen  If not, see <https://www.gnu.org/licenses/>.
 
-#' Landscape structure generator
+#' Landscape structure solver
 #'
-#' @description Generate landscape structures satisfying user targets
+#' @description Find landscape structures satisfying user targets
 #'
 #' @import rJava
 #'
@@ -110,14 +110,18 @@ flsgen_structure <- function(targets_str, targets_file, nb_solutions=1, time_lim
     if (is.null(struct)) {
       if (length(structs_json) == 0) {
         if (time_limit > 0) {
+          .jgc()
           stop("User targets could not be satisfied under the specified time limit")
         } else {
+          .jgc()
           stop("User targets cannot be satisfied")
         }
       } else {
         if (time_limit > 0) {
+          .jgc()
           stop("No more solutions satisfying user targets were found under the specified time limit")
         } else {
+          .jgc()
           stop("No more solutions satisfying user targets exist")
         }
       }
@@ -129,5 +133,6 @@ flsgen_structure <- function(targets_str, targets_file, nb_solutions=1, time_lim
   if (nb_solutions > 1) {
     cat("All landscape structures found in", as.numeric(difftime(Sys.time(), start_time, units = "s")), "s\n", sep = " ")
   }
+  .jgc()
   return(structs_json)
 }

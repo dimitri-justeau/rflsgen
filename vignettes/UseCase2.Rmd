@@ -1,6 +1,9 @@
 ---
-title: "Use case 2: generating large landscape series to evaluate landscape indices"
+title: "Use case 2"
 output: html_document
+vignette: >
+  %\VignetteIndexEntry{Use case 2}
+  %\VignetteEngine{knitr::rmarkdown_notangle}
 ---
 
 <!--```{r}
