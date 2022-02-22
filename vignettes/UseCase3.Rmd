@@ -10,7 +10,7 @@ In this use case, we show how rflsgen can be used to extract landscape structure
 
 We focus on the forest cover of the main island of New Caledonia, a tropical archipelago located in the South Pacific. Using open data from the Copernicus Global Land Service database (see [References](#ref)), we produced a 105x105 m map with open and closed forest cover in the main island of New Caledonia:
 
-```{r, warning=FALSE, message=FALSE}
+```{r, warning=FALSE, message=FALSE,eval=FALSE}
 library(raster)
 
 path <- system.file("extdata", "copernicus_nc_grande_terre_closed_and_open_forests.tif", package = "rflsgen")
@@ -18,9 +18,11 @@ existing_landscape <- raster(path)
 plot(existing_landscape)
 ```
 
+![](figures/use_case_3_real_landscape.png)
+
 To extract the landscape structure, we use the `flsgen_load_structure_from_raster` function:
 
-```{r, warning=FALSE, message=FALSE}
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
 # The default memory allocated to the JVM by rJava is 512mb, which will be insufficient
 # as the input raster is large (3297x2724). We increase it with the following line.
 options(java.parameters = "-Xmx4g")
@@ -29,17 +31,11 @@ library(rflsgen)
 struct <- flsgen_load_structure_from_raster(path, c(0, 1), connectivity = 8)
 ```
 
-The second argument corresponds to the focal classes raster values (0 is open forest, and 1 closed forest), and for this use case we use the 8-connectivity rule. We can print information about the landscape structure by converting the json structure to a dataframe:
-
-```{r}
-df_struct <- jsonlite::fromJSON(struct)
-df_struct$classes$NP
-df_struct$classes$PLAND
-```
+The second argument corresponds to the focal classes raster values (0 is open forest, and 1 closed forest), and for this use case we use the 8-connectivity rule.
 
 We then use `flsgen_generate` to recreate a neutral landscape from the extracted structure. We use the digital elevation model of New Caledonia as the continuous environmental gradient.
 
-```{r, warning=FALSE, message=FALSE}
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
 dem_path <- system.file("extdata", "dem_nc_grande_terre_100.tif", package = "rflsgen")
 r <- flsgen_generate(struct, terrain_file = dem_path, terrain_dependency = 0.9,
                      epsg = "EPSG:3163", connectivity=8,
@@ -48,6 +44,8 @@ r <- flsgen_generate(struct, terrain_file = dem_path, terrain_dependency = 0.9,
                      x = 159615, y = 467655)
 plot(r)
 ```
+
+![](figures/use_case_3_neutral_landscape.png)
 
 **Note:** We used geographical metadata from the original raster to produce a landscape with the same geographical attributes (`epsg`, `resolution_x`, `resolution_y`, `x`, and `y`).
 
