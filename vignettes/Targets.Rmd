@@ -1,0 +1,7 @@
+---
+title: "Available landscape targets"
+output: html_document
+vignette: >
+  %\VignetteIndexEntry{Available landscape targets}
+  %\VignetteEngine{knitr::rmarkdown_notangle}
+---

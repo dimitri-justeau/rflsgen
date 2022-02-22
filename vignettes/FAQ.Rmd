@@ -1,0 +1,25 @@
+---
+title: "Frequently asked questions"
+output: html_document
+vignette: >
+  %\VignetteIndexEntry{Frequently asked questions}
+  %\VignetteEngine{knitr::rmarkdown_notangle}
+---
+
+### Why `flsgen_structure` did not find a structure satisfying my targets ?
+
+### Why `flsgen_generate` failed to generate a landscape ?
+
+### Can I specify the spatial extent and resolution of produced landscapes ?
+
+### How can I change the spatial configuration of produced landscapes ?
+
+### Can I speficy the minimum distance between patches of a same class ?
+
+### How does the computing time of rflsgen varies according to input and parameters ?
+
+### How does `flsgen_structure` selects the structures to return if there are several possibilities ?
+
+### What is Choco Solver ?
+
+### What is Constraint Programming ?
