@@ -104,7 +104,7 @@ Terrain rasters can either be generated "on-the-fly" by flsgen, which relies on 
 
 Here, we will generate landscape with various spatial configurations by varying the terrain dependency parameter. We also fix the `roughness` parameter to 0.2 for on-the-fly diamond-square terrain generation, and the `min_distance` parameter to 4.
 
-```{r}
+```{r, eval=FALSE}
 td_seq <- seq(0, 1, by=0.1)
 landscapes <- lapply(td_seq, function(td) {
   flsgen_generate(structure, roughness = 0.2, terrain_dependency = td, min_distance = 4, verbose = FALSE)
