@@ -1,0 +1,11 @@
+pandoc: 2.14.0.3
+pkgdown: 2.0.2
+pkgdown_sha: ~
+articles:
+  FAQ: FAQ.html
+  Targets: Targets.html
+  UseCase1: UseCase1.html
+  UseCase2: UseCase2.html
+  UseCase3: UseCase3.html
+last_built: 2022-02-22T11:08Z
+
