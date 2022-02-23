@@ -9,10 +9,19 @@
     * [Fractal terrain generation](#terrain)
     * [Landscape structure generation](#structure)
     * [Landscape raster generation](#generate)
+    * [Masking](#masking)
+    * [Extracting structures from existing landscape](#extract)
 
 ## Download and installation <a name="down"></a>
 
 Java 8+ must be installed in your system to run rflsgen. Download and installation instructions for Java are available here: https://www.oracle.com/java/technologies/javase-downloads.html, or here: https://openjdk.java.net/install/. To provide an R interface to flsgen, which is written in Java, rflsgen relies on rJava, which is a dependency of rflsgen and will be installed automatically. If you have any trouble during the installation of rflsgen due to rJava, please refer to rJava's documentation: https://rforge.net/rJava/index.html.
+
+rflsgen is available on CRAN, so you can install it from R using the following command:
+
+```
+install.packages("rflsgen")
+library(rflsgen)
+```
 
 To install rflsgen from Github, you can use the devtools library (https://www.r-project.org/nosvn/pandoc/devtools.html) and use the following commands in R:
 
@@ -26,14 +35,14 @@ library(rflsgen)
 
 ### Generating a fractal terrain raster <a name="terrain"></a>
 
-You can easily generate a fractal terrain raster using the `flsgen_terrain` function. For example, if you want to generate a 200x200 fractal terrain default parameters, use the following command:
+You can easily generate a fractal terrain raster using the `flsgen_terrain` function. For example, if you want to generate a 200x200 fractal terrain with default parameters, use the following command:
 
 ```r
 terrain <- flsgen_terrain(200, 200)
 plot(terrain)
 ```
 
-![alt-text](man/figures/terrain.png "Terrain example")
+<img src="man/figures/terrain.png" alt="Terrain example" width="400"/>
 
 ### Generating landscape structures from targets <a name="structure"></a>
 
@@ -45,7 +54,7 @@ Say that we want to generate a landscape structure for a 200x200 landscape conta
 | 1     | [2, 8]  | [200, 4000] |-             |-     | 40%   |
 | 2     | [5, 7]  | [800, 1200] |-             |-     | -     |
 
-The first step is to create a JSON file (e.g. `target.json`) describing these targets:
+The first possibility is to create a JSON file (e.g. `target.json`) describing these targets (note that you can also store this json in a string variable):
 
 ```json
 {
@@ -74,13 +83,47 @@ The first step is to create a JSON file (e.g. `target.json`) describing these ta
 }
 ```
 
+The second possibility is to use rflsgen helper functions:
+
+```r
+cls_a <- flsgen_create_class_targets(
+    "Class A",
+    NP = c(1, 10),
+    AREA = c(300, 4000),
+    CA = c(1000, 5000),
+    MESH = c(225, 225)
+)
+cls_b <- flsgen_create_class_targets(
+    "Class B",
+    NP = c(2, 8),
+    AREA = c(200, 4000),
+    PLAND = c(40, 40)
+)
+cls_c <- flsgen_create_class_targets(
+    "Class C",
+    NP = c(5, 7),
+    AREA = c(800, 1200)
+)
+ls_targets <- flsgen_create_landscape_targets(
+    nb_rows = 200, 
+    nb_cols = 200,
+    classes = list(cls_a, cls_b, cls_c)
+)
+```
+
 Using the `flsgen_structure` function, you can generate a non-spatially-explicit landscape structure:
 
 ```r
 structure <- flsgen_structure(targets_file = "examples/targets.json")
 ```
 
-The result is a JSON-formatted string which contains the generated structure. It can be easily converted into a dataframe with a dedicated library such as `jsonlite`.
+or
+
+```r
+structure <- flsgen_structure(ls_targets)
+```
+
+The result is a JSON-formatted string that contains the generated structure. It can be easily converted into a data frame with a dedicated library such as `jsonlite`.
 
 ### Generating landscape rasters from landscape structures <a name="generate"></a>
 
@@ -91,4 +134,45 @@ landscape <- flsgen_generate(structure_str = structure)
 plot(landscape)
 ```
 
-![alt-text](man/figures/landscape.png "Landscape example")
+<img src="man/figures/landscape.png" alt="Landscape example" width="400"/>
+
+### Masking  <a name="masking"></a>
+
+It is possible to use a mask raster, whose NO_DATA cell will be unavailable for both focal and non-focal classes. To do so, instead of specifying the number of rows and columns in the targets, specify the mask raster with the `maskRasterPath` key:
+
+```json
+{
+  "maskRasterPath": "mask.tif"
+  "classes" : [
+    {
+      "name" : "Class A", 
+      "NP" : [2, 30], 
+      "AREA" : [200, 4000], 
+      "PLAND" : [40, 40]
+    }
+  ]
+}
+```
+
+or:
+
+```r
+cls_a <- flsgen_create_class_targets(
+    "Class A",
+    NP = c(2, 30),
+    AREA = c(200, 4000),
+    PLAND = c(40, 40)
+)
+ls_targets <- flsgen_create_landscape_targets(
+    mask_raster = "mask.tif",
+    classes = list(cls_a)
+)
+```
+
+### Extracting structures from existing landscapes <a name="extract"></a>
+
+Instead of generating landscape structure from targets, it is also possible to extract existing structures from real landscapes and use them to recreate real composition patterns. To do so, simply use the `flsgen_extract_structure_from_raster` function, indicating the raster values of focal classes:
+
+```r
+struct <- flsgen_extract_structure_from_raster("existing_raster.tif", focal_classes=c(0, 1))
+```

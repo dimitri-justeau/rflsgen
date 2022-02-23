@@ -8,6 +8,7 @@ flsgen_create_class_targets(
   class_name,
   NP = NULL,
   AREA = NULL,
+  AREA_MN = NULL,
   CA = NULL,
   PLAND = NULL,
   PD = NULL,
@@ -27,6 +28,8 @@ flsgen_create_class_targets(
 \item{NP}{number of patches target (must be a vector of length 2)}
 
 \item{AREA}{patch area target (must be a vector of length 2)}
+
+\item{AREA_MN}{mean patch area target (must be a vector of length 2)}
 
 \item{CA}{total class area target (must be a vector of length 2)}
 

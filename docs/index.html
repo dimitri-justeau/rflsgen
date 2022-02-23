@@ -44,6 +44,20 @@
 <li class="nav-item">
   <a class="nav-link" href="reference/index.html">Reference</a>
 </li>
+<li class="nav-item">
+  <a class="nav-link" href="articles/Targets.html">
+    <span class="fa fa fa fa-bullseye"></span>
+     
+    Available targets
+  </a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="articles/FAQ.html">
+    <span class="fa fa fa fa-question-circle"></span>
+     
+    Frequently asked questions
+  </a>
+</li>
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown--use-cases">
     <span class="bi bi-lightbulb-fill"></span>
@@ -51,9 +65,9 @@
     Use cases
   </a>
   <div class="dropdown-menu" aria-labelledby="dropdown--use-cases">
-    <a class="dropdown-item" href="articles/UseCase1.html">Use case 1</a>
-    <a class="dropdown-item" href="articles/UseCase2.html">Use case 2</a>
-    <a class="dropdown-item" href="articles/UseCase3.html">Use case 3</a>
+    <a class="dropdown-item" href="articles/UseCase1.html">Use case 1: Fixed structure and varying spatial configurations</a>
+    <a class="dropdown-item" href="articles/UseCase2.html">Use case 2: Exploring correlations between landscape indices</a>
+    <a class="dropdown-item" href="articles/UseCase3.html">Use case 3: Recreating large landscape composition patterns</a>
   </div>
 </li>
 <li class="nav-item">
@@ -91,6 +105,8 @@
 <li><a href="#terrain">Fractal terrain generation</a></li>
 <li><a href="#structure">Landscape structure generation</a></li>
 <li><a href="#generate">Landscape raster generation</a></li>
+<li><a href="#masking">Masking</a></li>
+<li><a href="#extract">Extracting structures from existing landscape</a></li>
 </ul>
 </li>
 </ul>
@@ -99,8 +115,11 @@
 <a class="anchor" aria-label="anchor" href="#download-and-installation-"></a>
 </h2>
 <p>Java 8+ must be installed in your system to run rflsgen. Download and installation instructions for Java are available here: <a href="https://www.oracle.com/java/technologies/javase-downloads.html" class="external-link uri">https://www.oracle.com/java/technologies/javase-downloads.html</a>, or here: <a href="https://openjdk.java.net/install/" class="external-link uri">https://openjdk.java.net/install/</a>. To provide an R interface to flsgen, which is written in Java, rflsgen relies on rJava, which is a dependency of rflsgen and will be installed automatically. If you have any trouble during the installation of rflsgen due to rJava, please refer to rJava’s documentation: <a href="https://rforge.net/rJava/index.html" class="external-link uri">https://rforge.net/rJava/index.html</a>.</p>
+<p>rflsgen is available on CRAN, so you can install it from R using the following command:</p>
+<pre><code><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"rflsgen"</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dimitri-justeau/rflsgen" class="external-link">rflsgen</a></span><span class="op">)</span></code></pre>
 <p>To install rflsgen from Github, you can use the devtools library (<a href="https://www.r-project.org/nosvn/pandoc/devtools.html" class="external-link uri">https://www.r-project.org/nosvn/pandoc/devtools.html</a>) and use the following commands in R:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"dimitri-justeau/rflsgen"</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dimitri-justeau/rflsgen" class="external-link">rflsgen</a></span><span class="op">)</span></code></pre></div>
 </div>
@@ -112,13 +131,11 @@
 <h3 id="generating-a-fractal-terrain-raster-">Generating a fractal terrain raster <a name="terrain"></a>
 <a class="anchor" aria-label="anchor" href="#generating-a-fractal-terrain-raster-"></a>
 </h3>
-<p>You can easily generate a fractal terrain raster using the <code>flsgen_terrain</code> function. For example, if you want to generate a 200x200 fractal terrain default parameters, use the following command:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<p>You can easily generate a fractal terrain raster using the <code>flsgen_terrain</code> function. For example, if you want to generate a 200x200 fractal terrain with default parameters, use the following command:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">terrain</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flsgen_terrain.html">flsgen_terrain</a></span><span class="op">(</span><span class="fl">200</span>, <span class="fl">200</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">terrain</span><span class="op">)</span></code></pre></div>
-<div class="figure">
-<img src="reference/figures/terrain.png" title="Terrain example" alt=""><p class="caption">alt-text</p>
-</div>
+<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">terrain</span><span class="op">)</span></code></pre></div>
+<p><img src="reference/figures/terrain.png" alt="Terrain example" width="400"></p>
 </div>
 <div class="section level3">
 <h3 id="generating-landscape-structures-from-targets-">Generating landscape structures from targets <a name="structure"></a>
@@ -161,47 +178,110 @@
 </tr>
 </tbody>
 </table>
-<p>The first step is to create a JSON file (e.g. <code>target.json</code>) describing these targets:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"nbRows"</span> <span class="fu">:</span> <span class="dv">200</span><span class="fu">,</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"nbCols"</span> <span class="fu">:</span> <span class="dv">200</span><span class="fu">,</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"classes"</span> <span class="fu">:</span> <span class="ot">[</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"name"</span> <span class="fu">:</span> <span class="st">"Class A"</span><span class="fu">,</span> </span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"NP"</span> <span class="fu">:</span> <span class="ot">[</span><span class="dv">1</span><span class="ot">,</span> <span class="dv">10</span><span class="ot">]</span><span class="fu">,</span> </span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"AREA"</span> <span class="fu">:</span> <span class="ot">[</span><span class="dv">300</span><span class="ot">,</span> <span class="dv">4000</span><span class="ot">]</span><span class="fu">,</span> </span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"CA"</span> <span class="fu">:</span> <span class="ot">[</span><span class="dv">1000</span><span class="ot">,</span> <span class="dv">5000</span><span class="ot">]</span><span class="fu">,</span> </span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"MESH"</span> <span class="fu">:</span> <span class="ot">[</span><span class="dv">225</span><span class="ot">,</span> <span class="dv">225</span><span class="ot">]</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span><span class="ot">,</span> </span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"name"</span> <span class="fu">:</span> <span class="st">"Class B"</span><span class="fu">,</span> </span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"NP"</span> <span class="fu">:</span> <span class="ot">[</span><span class="dv">2</span><span class="ot">,</span> <span class="dv">8</span><span class="ot">]</span><span class="fu">,</span> </span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"AREA"</span> <span class="fu">:</span> <span class="ot">[</span><span class="dv">200</span><span class="ot">,</span> <span class="dv">4000</span><span class="ot">]</span><span class="fu">,</span> </span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"PLAND"</span> <span class="fu">:</span> <span class="ot">[</span><span class="dv">40</span><span class="ot">,</span> <span class="dv">40</span><span class="ot">]</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span><span class="ot">,</span> </span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"name"</span> <span class="fu">:</span> <span class="st">"Class C"</span><span class="fu">,</span> </span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"NP"</span> <span class="fu">:</span> <span class="ot">[</span><span class="dv">5</span><span class="ot">,</span> <span class="dv">7</span><span class="ot">]</span><span class="fu">,</span> </span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"AREA"</span> <span class="fu">:</span> <span class="ot">[</span><span class="dv">800</span><span class="ot">,</span> <span class="dv">1200</span><span class="ot">]</span></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<p>The first possibility is to create a JSON file (e.g. <code>target.json</code>) describing these targets (note that you can also store this json in a string variable):</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"nbRows"</span> <span class="fu">:</span> <span class="dv">200</span><span class="fu">,</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"nbCols"</span> <span class="fu">:</span> <span class="dv">200</span><span class="fu">,</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"classes"</span> <span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"name"</span> <span class="fu">:</span> <span class="st">"Class A"</span><span class="fu">,</span> </span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"NP"</span> <span class="fu">:</span> <span class="ot">[</span><span class="dv">1</span><span class="ot">,</span> <span class="dv">10</span><span class="ot">]</span><span class="fu">,</span> </span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"AREA"</span> <span class="fu">:</span> <span class="ot">[</span><span class="dv">300</span><span class="ot">,</span> <span class="dv">4000</span><span class="ot">]</span><span class="fu">,</span> </span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"CA"</span> <span class="fu">:</span> <span class="ot">[</span><span class="dv">1000</span><span class="ot">,</span> <span class="dv">5000</span><span class="ot">]</span><span class="fu">,</span> </span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"MESH"</span> <span class="fu">:</span> <span class="ot">[</span><span class="dv">225</span><span class="ot">,</span> <span class="dv">225</span><span class="ot">]</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span><span class="ot">,</span> </span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"name"</span> <span class="fu">:</span> <span class="st">"Class B"</span><span class="fu">,</span> </span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"NP"</span> <span class="fu">:</span> <span class="ot">[</span><span class="dv">2</span><span class="ot">,</span> <span class="dv">8</span><span class="ot">]</span><span class="fu">,</span> </span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"AREA"</span> <span class="fu">:</span> <span class="ot">[</span><span class="dv">200</span><span class="ot">,</span> <span class="dv">4000</span><span class="ot">]</span><span class="fu">,</span> </span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"PLAND"</span> <span class="fu">:</span> <span class="ot">[</span><span class="dv">40</span><span class="ot">,</span> <span class="dv">40</span><span class="ot">]</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span><span class="ot">,</span> </span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"name"</span> <span class="fu">:</span> <span class="st">"Class C"</span><span class="fu">,</span> </span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"NP"</span> <span class="fu">:</span> <span class="ot">[</span><span class="dv">5</span><span class="ot">,</span> <span class="dv">7</span><span class="ot">]</span><span class="fu">,</span> </span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"AREA"</span> <span class="fu">:</span> <span class="ot">[</span><span class="dv">800</span><span class="ot">,</span> <span class="dv">1200</span><span class="ot">]</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<p>The second possibility is to use rflsgen helper functions:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">cls_a</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flsgen_create_class_targets.html">flsgen_create_class_targets</a></span><span class="op">(</span>
+    <span class="st">"Class A"</span>,
+    NP <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">10</span><span class="op">)</span>,
+    AREA <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">300</span>, <span class="fl">4000</span><span class="op">)</span>,
+    CA <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">5000</span><span class="op">)</span>,
+    MESH <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">225</span>, <span class="fl">225</span><span class="op">)</span>
+<span class="op">)</span>
+<span class="va">cls_b</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flsgen_create_class_targets.html">flsgen_create_class_targets</a></span><span class="op">(</span>
+    <span class="st">"Class B"</span>,
+    NP <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">8</span><span class="op">)</span>,
+    AREA <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">200</span>, <span class="fl">4000</span><span class="op">)</span>,
+    PLAND <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">40</span><span class="op">)</span>
+<span class="op">)</span>
+<span class="va">cls_c</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flsgen_create_class_targets.html">flsgen_create_class_targets</a></span><span class="op">(</span>
+    <span class="st">"Class C"</span>,
+    NP <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">7</span><span class="op">)</span>,
+    AREA <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">800</span>, <span class="fl">1200</span><span class="op">)</span>
+<span class="op">)</span>
+<span class="va">ls_targets</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flsgen_create_landscape_targets.html">flsgen_create_landscape_targets</a></span><span class="op">(</span>
+    nb_rows <span class="op">=</span> <span class="fl">200</span>, 
+    nb_cols <span class="op">=</span> <span class="fl">200</span>,
+    classes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">cls_a</span>, <span class="va">cls_b</span>, <span class="va">cls_c</span><span class="op">)</span>
+<span class="op">)</span></code></pre></div>
 <p>Using the <code>flsgen_structure</code> function, you can generate a non-spatially-explicit landscape structure:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">structure</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flsgen_structure.html">flsgen_structure</a></span><span class="op">(</span>targets_file <span class="op">=</span> <span class="st">"examples/targets.json"</span><span class="op">)</span></code></pre></div>
-<p>The result is a JSON-formatted string which contains the generated structure. It can be easily converted into a dataframe with a dedicated library such as <code>jsonlite</code>.</p>
+<p>or</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">structure</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flsgen_structure.html">flsgen_structure</a></span><span class="op">(</span><span class="va">ls_targets</span><span class="op">)</span></code></pre></div>
+<p>The result is a JSON-formatted string that contains the generated structure. It can be easily converted into a data frame with a dedicated library such as <code>jsonlite</code>.</p>
 </div>
 <div class="section level3">
 <h3 id="generating-landscape-rasters-from-landscape-structures-">Generating landscape rasters from landscape structures <a name="generate"></a>
 <a class="anchor" aria-label="anchor" href="#generating-landscape-rasters-from-landscape-structures-"></a>
 </h3>
 <p>Now, let’s generate a landscape raster from the previously generated structure. To do so, we use the <code>flsgen_generate</code> function to generate a landscape raster from the previously generated landscape structure:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">landscape</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flsgen_generate.html">flsgen_generate</a></span><span class="op">(</span>structure_str <span class="op">=</span> <span class="va">structure</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">landscape</span><span class="op">)</span></code></pre></div>
-<div class="figure">
-<img src="reference/figures/landscape.png" title="Landscape example" alt=""><p class="caption">alt-text</p>
+<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">landscape</span><span class="op">)</span></code></pre></div>
+<p><img src="reference/figures/landscape.png" alt="Landscape example" width="400"></p>
 </div>
+<div class="section level3">
+<h3 id="masking-">Masking <a name="masking"></a>
+<a class="anchor" aria-label="anchor" href="#masking-"></a>
+</h3>
+<p>It is possible to use a mask raster, whose NO_DATA cell will be unavailable for both focal and non-focal classes. To do so, instead of specifying the number of rows and columns in the targets, specify the mask raster:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"maskRasterPath"</span><span class="fu">:</span> <span class="st">"mask.tif"</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"classes"</span> <span class="er">:</span> <span class="ot">[</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"name"</span> <span class="fu">:</span> <span class="st">"Class A"</span><span class="fu">,</span> </span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"NP"</span> <span class="fu">:</span> <span class="ot">[</span><span class="dv">2</span><span class="ot">,</span> <span class="dv">30</span><span class="ot">]</span><span class="fu">,</span> </span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"AREA"</span> <span class="fu">:</span> <span class="ot">[</span><span class="dv">200</span><span class="ot">,</span> <span class="dv">4000</span><span class="ot">]</span><span class="fu">,</span> </span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"PLAND"</span> <span class="fu">:</span> <span class="ot">[</span><span class="dv">40</span><span class="ot">,</span> <span class="dv">40</span><span class="ot">]</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<p>or:</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">cls_a</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flsgen_create_class_targets.html">flsgen_create_class_targets</a></span><span class="op">(</span>
+    <span class="st">"Class A"</span>,
+    NP <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">30</span><span class="op">)</span>,
+    AREA <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">200</span>, <span class="fl">4000</span><span class="op">)</span>,
+    PLAND <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">40</span><span class="op">)</span>
+<span class="op">)</span>
+<span class="va">ls_targets</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flsgen_create_landscape_targets.html">flsgen_create_landscape_targets</a></span><span class="op">(</span>
+    mask_raster <span class="op">=</span> <span class="st">"mask.tif"</span>,
+    classes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">cls_a</span><span class="op">)</span>
+<span class="op">)</span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="extracting-structures-from-existing-landscapes-">Extracting structures from existing landscapes <a name="extract"></a>
+<a class="anchor" aria-label="anchor" href="#extracting-structures-from-existing-landscapes-"></a>
+</h3>
+<p>Instead of generating landscape structure from targets, it is also possible to extract existing structures from real landscapes and use them to recreate real composition patterns. To do so, simply use the <code>flsgen_extract_structure_from_raster</code> function, indicating the raster values of focal classes:</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">struct</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flsgen_extract_structure_from_raster.html">flsgen_extract_structure_from_raster</a></span><span class="op">(</span><span class="st">"existing_raster.tif"</span>, focal_classes<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 </div>

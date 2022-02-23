@@ -15,7 +15,7 @@ Depends: rJava, raster
 Imports: rgdal, checkmate, utils, jsonlite
 SystemRequirements: Java (>= 8)
 RoxygenNote: 7.1.2
-Suggests: testthat (>= 3.0.0), knitr, rmarkdown
+Suggests: testthat (>= 3.0.0), knitr, rmarkdown, landscapemetrics
 VignetteBuilder: knitr
 URL: https://github.com/dimitri-justeau/rflsgen
 BugReports: https://github.com/dimitri-justeau/rflsgen/issues

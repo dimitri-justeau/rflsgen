@@ -5,3 +5,116 @@ vignette: >
   %\VignetteIndexEntry{Available landscape targets}
   %\VignetteEngine{knitr::rmarkdown_notangle}
 ---
+
+| Name                                  | Abbreviation             | Level   | Unit                     |
+| --------------------------------------|--------------------------| --------|--------------------------|
+| [Patch area](#AREA)                   | AREA                     | class   | cell surfaces            |
+| [Mean patch area](#AREA_MN)           | AREA_MN                  | class   | cell surfaces            |
+| [Total class area](#CA)               | CA                       | class   | cell surfaces            |
+| [Proportion of landscape](#PLAND)     | PLAND / NON_FOCAL_PLAND  | class   | percentage               |
+| [Number of patches](#NP)              | NP                       | class   | unitless                 |
+| [Patch density](#PD)                  | PD                       | class   | patches per cell surface |
+| [Smallest patch index](#SPI)          | SPI                      | class   | cell surfaces            |
+| [Largest patch index](#LPI)           | LPI                      | class   | cell surfaces            |
+| [Effective mesh size](#MESH)          | MESH                     | class   | cell surfaces            |
+| [Splitting index](#SPLI)              | SPLI                     | class   | unitless                 |
+| [Net product](#NPRO)                  | NPRO                     | class   | (cell surfaces)^2        |
+| [Splitting density](#SDEN)            | SDEN                     | class   | (cell surfaces)^-1       |
+| [Degree of coherence](#COHE)          | COHE                     | class   | probability (in [0, 1])  |
+| [Degree of landscape division](#DIVI) | DIVI                     | class   | probability (in [0, 1])  |
+
+- **`AREA` : Patch area  <a name="AREA"></a>**
+
+Interval that defines the minimum and maximum allowed area for all patches of the landscape class.
+
+- **`AREA_MN` : Mean patch area  <a name="AREA_MN"></a>**
+
+Interval that defines the minimum and maximum allowed mean patch area for the landscape class.
+
+- **`CA` : Total class area  <a name="CA"></a>**
+
+Interval that defines the minimum and maximum allowed total area of the landscape class.
+
+- **`PLAND` and `NON_FOCAL_PLAND`: Proportion of landscape  <a name="PLAND"></a>**
+
+Interval that defines the minimum and maximum allowed proportion of landscape occupied by the landscape class.
+`NON_FOCAL_PLAND` is used to enforce a PLAND target on the non-focal class, and is defined at the landscape level.
+
+- **`NP` : Number of patches  <a name="NP"></a>**
+
+Interval that defines the minimum and maximum allowed number of patches in the landscape class.
+
+- **`PD` : Patch density  <a name="PD"></a>**
+
+Interval that defines the minimum and maximum allowed patch density of the landscape class. Patch density is given by:
+
+$$PD = \frac{NP}{L}$$
+
+With NP the number of patches and L the landscape area.
+
+- **`SPI` : Smallest patch index  <a name="SPI"></a>**
+
+Interval that defines the minimum and maximum allowed size for the smallest patch of the landscape class.
+
+- **`LPI` : Largest patch index  <a name="LPI"></a>**
+
+Interval that defines the minimum and maximum allowed size for the largest patch of the landscape class.
+
+- **`MESH` : Effective mesh size  <a name="MESH"></a>**
+
+Interval that defines the minimum and maximum allowed effective mesh size. The effective mesh size is a fragmentation index based on the probability that two points that are randomly chosen are located in the main patch (Jaeger, 2000). It is given by:
+
+$$MESH = \frac{1}{L} \sum_{i=1}^{NP} A_i^2$$
+With L the total landscape area, NP the number of patches in the landscape class, and $A_i$ the area of patch $i$.
+
+- **`SPLI` : Splitting index  <a name="SPLI"></a>**
+
+Interval that defines the minimum and maximum allowed splitting index. The splitting index was defined by Jaeger (2000) and is given by:
+
+$$
+SPLI = \frac{L^2}{\sum_{i=1}^{NP} A_i^2}
+$$
+
+With L the total landscape area, NP the number of patches, and $A_i$ the area of patch i.
+
+- **`NPRO` : Net product  <a name="NPRO"></a>**
+
+Interval that defines the minimum and maximum allowed net product. The net product was defined by Jaeger (2000) and is given by:
+
+$$
+NPRO = \sum_{i=1}^{NP} A_i^2
+$$
+Where NP is the number of patches of the landscape class and $A_i$ the area of patch i.
+
+- **`SDEN` : Splitting density  <a name="SDEN"></a>**
+
+Interval that defines the minimum and maximum allowed splitting density. The splitting density was defined by Jaeger (2000) and is given by:
+
+$$
+SDEN = \frac{L}{\sum_{i=1}^{NP} A_i^2}
+$$
+
+With L the total landscape area, NP the number of patches, and $A_i$ the area of patch i.
+
+- **`COHE` : Degree of coherence  <a name="COHE"></a>**
+
+Interval that defines the minimum and maximum allowed degree of coherence. The degree of coherence was defined by Jaeger (2000) and is given by:
+
+$$
+COHE = \sum_{i=1}^{NP}(\frac{A_i}{L})^2
+$$
+With L the total landscape area, NP the number of patches, and $A_i$ the area of patch i.
+
+- **`DIVI` : Degree of landscape division  <a name="DIVI"></a>**
+
+Interval that defines the minimum and maximum allowed degree of landscape division. The degree of landscape division was defined by Jaeger (2000) and is given by:
+
+$$
+DIVI = 1 - \sum_{i=1}^{NP}(\frac{A_i}{L})^2
+$$
+
+With L the total landscape area, NP the number of patches, and $A_i$ the area of patch i.
+
+#### References  <a name="ref"></a>
+
+Jaeger, J. A. G. (2000). Landscape division, splitting index, and effective mesh size: New measures of landscape fragmentation. Landscape Ecology, 15(2), 115-130. https://doi.org/10.1023/A:1008129329289

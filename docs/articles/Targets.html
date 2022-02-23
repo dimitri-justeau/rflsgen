@@ -38,6 +38,20 @@
 <li class="nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
+<li class="active nav-item">
+  <a class="nav-link" href="../articles/Targets.html">
+    <span class="fa fa fa fa-bullseye"></span>
+     
+    Available targets
+  </a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../articles/FAQ.html">
+    <span class="fa fa fa fa-question-circle"></span>
+     
+    Frequently asked questions
+  </a>
+</li>
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown--use-cases">
     <span class="bi bi-lightbulb-fill"></span>
@@ -45,9 +59,9 @@
     Use cases
   </a>
   <div class="dropdown-menu" aria-labelledby="dropdown--use-cases">
-    <a class="dropdown-item" href="../articles/UseCase1.html">Use case 1</a>
-    <a class="dropdown-item" href="../articles/UseCase2.html">Use case 2</a>
-    <a class="dropdown-item" href="../articles/UseCase3.html">Use case 3</a>
+    <a class="dropdown-item" href="../articles/UseCase1.html">Use case 1: Fixed structure and varying spatial configurations</a>
+    <a class="dropdown-item" href="../articles/UseCase2.html">Use case 2: Exploring correlations between landscape indices</a>
+    <a class="dropdown-item" href="../articles/UseCase3.html">Use case 3: Recreating large landscape composition patterns</a>
   </div>
 </li>
 <li class="nav-item">
@@ -86,7 +100,182 @@
 
     
     
-
+<table class="table">
+<thead><tr class="header">
+<th>Name</th>
+<th>Abbreviation</th>
+<th>Level</th>
+<th>Unit</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><a href="#AREA">Patch area</a></td>
+<td>AREA</td>
+<td>class</td>
+<td>cell surfaces</td>
+</tr>
+<tr class="even">
+<td><a href="#AREA_MN">Mean patch area</a></td>
+<td>AREA_MN</td>
+<td>class</td>
+<td>cell surfaces</td>
+</tr>
+<tr class="odd">
+<td><a href="#CA">Total class area</a></td>
+<td>CA</td>
+<td>class</td>
+<td>cell surfaces</td>
+</tr>
+<tr class="even">
+<td><a href="#PLAND">Proportion of landscape</a></td>
+<td>PLAND / NON_FOCAL_PLAND</td>
+<td>class</td>
+<td>percentage</td>
+</tr>
+<tr class="odd">
+<td><a href="#NP">Number of patches</a></td>
+<td>NP</td>
+<td>class</td>
+<td>unitless</td>
+</tr>
+<tr class="even">
+<td><a href="#PD">Patch density</a></td>
+<td>PD</td>
+<td>class</td>
+<td>patches per cell surface</td>
+</tr>
+<tr class="odd">
+<td><a href="#SPI">Smallest patch index</a></td>
+<td>SPI</td>
+<td>class</td>
+<td>cell surfaces</td>
+</tr>
+<tr class="even">
+<td><a href="#LPI">Largest patch index</a></td>
+<td>LPI</td>
+<td>class</td>
+<td>cell surfaces</td>
+</tr>
+<tr class="odd">
+<td><a href="#MESH">Effective mesh size</a></td>
+<td>MESH</td>
+<td>class</td>
+<td>cell surfaces</td>
+</tr>
+<tr class="even">
+<td><a href="#SPLI">Splitting index</a></td>
+<td>SPLI</td>
+<td>class</td>
+<td>unitless</td>
+</tr>
+<tr class="odd">
+<td><a href="#NPRO">Net product</a></td>
+<td>NPRO</td>
+<td>class</td>
+<td>(cell surfaces)^2</td>
+</tr>
+<tr class="even">
+<td><a href="#SDEN">Splitting density</a></td>
+<td>SDEN</td>
+<td>class</td>
+<td>(cell surfaces)^-1</td>
+</tr>
+<tr class="odd">
+<td><a href="#COHE">Degree of coherence</a></td>
+<td>COHE</td>
+<td>class</td>
+<td>probability (in [0, 1])</td>
+</tr>
+<tr class="even">
+<td><a href="#DIVI">Degree of landscape division</a></td>
+<td>DIVI</td>
+<td>class</td>
+<td>probability (in [0, 1])</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong><code>AREA</code> : Patch area <a name="AREA"></a></strong></li>
+</ul>
+<p>Interval that defines the minimum and maximum allowed area for all patches of the landscape class.</p>
+<ul>
+<li><strong><code>AREA_MN</code> : Mean patch area <a name="AREA_MN"></a></strong></li>
+</ul>
+<p>Interval that defines the minimum and maximum allowed mean patch area for the landscape class.</p>
+<ul>
+<li><strong><code>CA</code> : Total class area <a name="CA"></a></strong></li>
+</ul>
+<p>Interval that defines the minimum and maximum allowed total area of the landscape class.</p>
+<ul>
+<li><strong><code>PLAND</code> and <code>NON_FOCAL_PLAND</code>: Proportion of landscape <a name="PLAND"></a></strong></li>
+</ul>
+<p>Interval that defines the minimum and maximum allowed proportion of landscape occupied by the landscape class. <code>NON_FOCAL_PLAND</code> is used to enforce a PLAND target on the non-focal class, and is defined at the landscape level.</p>
+<ul>
+<li><strong><code>NP</code> : Number of patches <a name="NP"></a></strong></li>
+</ul>
+<p>Interval that defines the minimum and maximum allowed number of patches in the landscape class.</p>
+<ul>
+<li><strong><code>PD</code> : Patch density <a name="PD"></a></strong></li>
+</ul>
+<p>Interval that defines the minimum and maximum allowed patch density of the landscape class. Patch density is given by:</p>
+<p><span class="math display">\[PD = \frac{NP}{L}\]</span></p>
+<p>With NP the number of patches and L the landscape area.</p>
+<ul>
+<li><strong><code>SPI</code> : Smallest patch index <a name="SPI"></a></strong></li>
+</ul>
+<p>Interval that defines the minimum and maximum allowed size for the smallest patch of the landscape class.</p>
+<ul>
+<li><strong><code>LPI</code> : Largest patch index <a name="LPI"></a></strong></li>
+</ul>
+<p>Interval that defines the minimum and maximum allowed size for the largest patch of the landscape class.</p>
+<ul>
+<li><strong><code>MESH</code> : Effective mesh size <a name="MESH"></a></strong></li>
+</ul>
+<p>Interval that defines the minimum and maximum allowed effective mesh size. The effective mesh size is a fragmentation index based on the probability that two points that are randomly chosen are located in the main patch (Jaeger, 2000). It is given by:</p>
+<p><span class="math display">\[MESH = \frac{1}{L} \sum_{i=1}^{NP} A_i^2\]</span> With L the total landscape area, NP the number of patches in the landscape class, and <span class="math inline">\(A_i\)</span> the area of patch <span class="math inline">\(i\)</span>.</p>
+<ul>
+<li><strong><code>SPLI</code> : Splitting index <a name="SPLI"></a></strong></li>
+</ul>
+<p>Interval that defines the minimum and maximum allowed splitting index. The splitting index was defined by Jaeger (2000) and is given by:</p>
+<p><span class="math display">\[
+SPLI = \frac{L^2}{\sum_{i=1}^{NP} A_i^2}
+\]</span></p>
+<p>With L the total landscape area, NP the number of patches, and <span class="math inline">\(A_i\)</span> the area of patch i.</p>
+<ul>
+<li><strong><code>NPRO</code> : Net product <a name="NPRO"></a></strong></li>
+</ul>
+<p>Interval that defines the minimum and maximum allowed net product. The net product was defined by Jaeger (2000) and is given by:</p>
+<p><span class="math display">\[
+NPRO = \sum_{i=1}^{NP} A_i^2
+\]</span> Where NP is the number of patches of the landscape class and <span class="math inline">\(A_i\)</span> the area of patch i.</p>
+<ul>
+<li><strong><code>SDEN</code> : Splitting density <a name="SDEN"></a></strong></li>
+</ul>
+<p>Interval that defines the minimum and maximum allowed splitting density. The splitting density was defined by Jaeger (2000) and is given by:</p>
+<p><span class="math display">\[
+SDEN = \frac{L}{\sum_{i=1}^{NP} A_i^2}
+\]</span></p>
+<p>With L the total landscape area, NP the number of patches, and <span class="math inline">\(A_i\)</span> the area of patch i.</p>
+<ul>
+<li><strong><code>COHE</code> : Degree of coherence <a name="COHE"></a></strong></li>
+</ul>
+<p>Interval that defines the minimum and maximum allowed degree of coherence. The degree of coherence was defined by Jaeger (2000) and is given by:</p>
+<p><span class="math display">\[
+COHE = \sum_{i=1}^{NP}(\frac{A_i}{L})^2
+\]</span> With L the total landscape area, NP the number of patches, and <span class="math inline">\(A_i\)</span> the area of patch i.</p>
+<ul>
+<li><strong><code>DIVI</code> : Degree of landscape division <a name="DIVI"></a></strong></li>
+</ul>
+<p>Interval that defines the minimum and maximum allowed degree of landscape division. The degree of landscape division was defined by Jaeger (2000) and is given by:</p>
+<p><span class="math display">\[
+DIVI = 1 - \sum_{i=1}^{NP}(\frac{A_i}{L})^2
+\]</span></p>
+<p>With L the total landscape area, NP the number of patches, and <span class="math inline">\(A_i\)</span> the area of patch i.</p>
+<div class="section level4">
+<h4 id="references">References <a name="ref"></a><a class="anchor" aria-label="anchor" href="#references"></a>
+</h4>
+<p>Jaeger, J. A. G. (2000). Landscape division, splitting index, and effective mesh size: New measures of landscape fragmentation. Landscape Ecology, 15(2), 115-130. <a href="https://doi.org/10.1023/A:1008129329289" class="external-link uri">https://doi.org/10.1023/A:1008129329289</a></p>
+</div>
   </main>
 </div>
 

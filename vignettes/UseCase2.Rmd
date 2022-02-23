@@ -6,11 +6,11 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown_notangle}
 ---
 
-In this use case, we illustrate how rflsgen can help exploring correlations between landscape indices. Specifically, we focus on the relation between the effective mesh size (MESH; Jaeger, 2000) fragmentation index and the probability of connectivity index (PC; Saura and Pascual-Hortal, 2007) connectivity index (see [References](#ref) for more details on these landscape indices). Will we generate a series of landscape where the value of MESH is controlled through targets, for each target value of MESH, we will generate various landscapes with various structures. Then, we will use the [Makurhini](https://connectscape.github.io/Makurhini/) package to evaluate PC on each generated landscape.
+In this use case, we illustrate how rflsgen can help explore correlations between landscape indices. Specifically, we focus on the relation between the effective mesh size (MESH; Jaeger, 2000) fragmentation index and the probability of connectivity index (PC; Saura and Pascual-Hortal, 2007) connectivity index (see [References](#ref) for more details on these landscape indices). Will we generate a series of landscapes where the value of MESH is controlled through targets, for each target value of MESH, we will generate various landscapes with various structures. Then, we will use the [Makurhini](https://connectscape.github.io/Makurhini/) package to evaluate PC on each generated landscape.
 
 ## Generating the landscape series
 
-The following code generates ten 500x500 landscapes with a different structure for each target value of MESH between 1000 and 60000 (with a maximum allowed deviation of 1%), with a increment step of 250. Each landscape can have between 1 and 200 patches, and patch area can vary from 10 to 250000.
+The following code generates ten 500x500 landscapes with a different structure for each target value of MESH between 1000 and 60000 (with a maximum allowed deviation of 1%), with an increment step of 250. Each landscape can have between 1 and 200 patches, and patch areas can vary from 10 to 250000.
 
 **Note:** Although target values are in cell surfaces, we will configure rflsgen to generate landscapes on a projected coordinate system with a 30x30 m resolution. In geographical units, the total extent will be 22,500ha, and MESH will vary from 90 ha to 5400 ha.
 
@@ -91,11 +91,11 @@ meta_generate <- function(mesh) {
 lapply(mesh_seq, meta_generate)
 ```
 
-**Note:** In `flsgen_structure`, we set the `search_strategy` parameter to `"RANDOM"`. This parameter configures [Choco-solver](https://choco-solver.org/) to randomly construct and explore its search tree, and thus ensure a greater variability in landscape structures. The downside of using a random search strategy is that Choco will not take advantage of the problem structure to build its search tree, there are in consequence less guarantees on the run time. This is why we set a limit of 60 seconds, to restart the search if it takes too long. Also note that the search strategy does not influences whether the targets will be satisfied or not, it just indicates to the solver how to construct its search tree, according to its available strategies, which are: `""DEFAULT", "RANDOM", "DOM_OVER_W_DEG", "DOM_OVER_W_DEG_REF", "ACTIVITY_BASED", "CONFLICT_HISTORY", "MIN_DOM_LB", "MIN_DOM_UB"` (please refer to [Choco documentation](https://choco-solver.org/docs/solving/strategies/) if you want more details).
+**Note:** In `flsgen_structure`, we set the `search_strategy` parameter to `"RANDOM"`. This parameter configures [Choco-solver](https://choco-solver.org/) to randomly construct and explore its search tree, and thus ensure a greater variability in landscape structures. The downside of using a random search strategy is that Choco will not take advantage of the problem structure to build its search tree, there are in consequence fewer guarantees on the run time. This is why we set a limit of 60 seconds, to restart the search if it takes too long. Also, note that the search strategy does not influence whether the targets will be satisfied or not, it just indicates to the solver how to construct its search tree, according to its available strategies, which are: `" DEFAULT", "RANDOM", "DOM_OVER_W_DEG", "DOM_OVER_W_DEG_REF", "ACTIVITY_BASED", "CONFLICT_HISTORY", "MIN_DOM_LB", "MIN_DOM_UB"` (please refer to [Choco documentation](https://choco-solver.org/docs/solving/strategies/) if you want more details).
 
 ## Converting rasters into vectors
 
-The [Makurhini](https://connectscape.github.io/Makurhini/) package can compute connectivity metrics on vector datasets. Consequently we first need to convert our generated landscapes into vectors. There are several ways to do it (e.g. using a GIS software such as QGIS, using GDAL, etc). We suggest a rather efficient way to do it with R, relying on the [sf](https://r-spatial.github.io/sf/) and [stars](https://r-spatial.github.io/stars/) packages. 
+The [Makurhini](https://connectscape.github.io/Makurhini/) package can compute connectivity metrics on vector datasets. Consequently, we first need to convert our generated landscapes into vectors. There are several ways to do it (e.g. using GIS software such as QGIS, using GDAL, etc). We suggest a rather efficient way to do it with R, relying on the [sf](https://r-spatial.github.io/sf/) and [stars](https://r-spatial.github.io/stars/) packages. 
 
 ```{r, eval=FALSE}
 library(stars)
@@ -119,7 +119,7 @@ lapply(mesh_seq, function(mesh) {
 
 ## Computing the probability of connectivity (PC)
 
-We are now ready to compute the PC index on our generated landscapes, and prepare our dataset for the correlation analysis. In the following code, we populate a dataframe where each row correspond to one of our generated landscape. For each of these, we use [Makurhini](https://connectscape.github.io/Makurhini/) to compute PC (we rely on the default probability threshold method based on the inverse of the mean distance between patches, see Makurhini documentation for more detail), we also use [landscapemetrics](https://r-spatialecology.github.io/landscapemetrics/) to compute the exact MESH value (as we allowed a maximum deviation of 1%).
+We are now ready to compute the PC index on our generated landscapes, and prepare our dataset for the correlation analysis. In the following code, we populate a data frame where each row corresponds to one of our generated landscapes. For each of these, we use [Makurhini](https://connectscape.github.io/Makurhini/) to compute PC (we rely on the default probability threshold method based on the inverse of the mean distance between patches, see Makurhini documentation for more detail), we also use [landscapemetrics](https://r-spatialecology.github.io/landscapemetrics/) to compute the exact MESH value (as we allowed a maximum deviation of 1%).
 
 ```{r, eval=FALSE}
 library(landscapemetrics)
@@ -193,8 +193,8 @@ sample estimates:
 
 ## References  <a name="ref"></a>
 
-Jaeger, J. A. G. (2000). Landscape division, splitting index, and effective mesh size : New measures of landscape fragmentation. Landscape Ecology, 15(2), 115‑130. https://doi.org/10.1023/A:1008129329289
+Jaeger, J. A. G. (2000). Landscape division, splitting index, and effective mesh size: New measures of landscape fragmentation. Landscape Ecology, 15(2), 115-130. https://doi.org/10.1023/A:1008129329289
 
-Saura, S., & Pascual-Hortal, L. (2007). A new habitat availability index to integrate connectivity in landscape conservation planning : Comparison with existing indices and application to a case study. Landscape and Urban Planning, 83(2), 91‑103. https://doi.org/10.1016/j.landurbplan.2007.03.005
+Saura, S., & Pascual-Hortal, L. (2007). A new habitat availability index to integrate connectivity in landscape conservation planning: Comparison with existing indices and application to a case study. Landscape and Urban Planning, 83(2), 91-103. https://doi.org/10.1016/j.landurbplan.2007.03.005
 
 

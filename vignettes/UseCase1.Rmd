@@ -14,7 +14,7 @@ library(rflsgen)
 
 ## Defining targets for landscape composition
 
-Let's say that, we want to generate 500x500 landscapes composed of three focal land-use classes: shrubland, savanna, and forest. A fourth non-focal land-use class will correspond to areas with no vegetation cover. The first thing we need to to is to define class-level composition targets for our focal classes. We keep it simple and just impose strict constraints on landcape proportion (PLAND), the number of patches (NP), and a looser constraint on patch area (AREA):
+Let's say that, we want to generate 500x500 landscapes composed of three focal land-use classes: shrubland, savanna, and forest. A fourth non-focal land-use class will correspond to areas with no vegetation cover. The first thing we need to do is to define class-level composition targets for our focal classes. We keep it simple and just impose strict constraints on landscape proportion (PLAND), the number of patches (NP), and a looser constraint on patch area (AREA):
 
 | Class     | NP      | AREA         | PLAND |
 | --------- |---------| ------------ |------ |
@@ -81,7 +81,7 @@ for (i in 1:nrow(structure_df$classes)) {
 }
 ```
 
-**Note:** There is a `search_strategy` parameter in `flsgen_structure` which indicate to [Choco-solver](https://choco-solver.org/) how to construct its search tree. Although this search strategy does not influences whether the targets will be satisfied or not, it can help diversifying the generated structure by exploring the search tree in different ways. Available search strategies in Choco are: `""DEFAULT", "RANDOM", "DOM_OVER_W_DEG", "DOM_OVER_W_DEG_REF", "ACTIVITY_BASED", "CONFLICT_HISTORY", "MIN_DOM_LB", "MIN_DOM_UB"` (please refer to [Choco documentation](https://choco-solver.org/docs/solving/strategies/) if you want more details).
+**Note:** There is a `search_strategy` parameter in `flsgen_structure` which indicate to [Choco-solver](https://choco-solver.org/) how to construct its search tree. Although this search strategy does not influence whether the targets will be satisfied or not, it can help diversify the generated structure by exploring the search tree in different ways. Available search strategies in Choco are: `""DEFAULT", "RANDOM", "DOM_OVER_W_DEG", "DOM_OVER_W_DEG_REF", "ACTIVITY_BASED", "CONFLICT_HISTORY", "MIN_DOM_LB", "MIN_DOM_UB"` (please refer to [Choco documentation](https://choco-solver.org/docs/solving/strategies/) if you want more details).
 
 ## Generating our first landscape
 
@@ -96,13 +96,13 @@ plot(landscape)
 
 There are three parameters influencing the spatial configuration of produced landscapes in `flsgen_generate`:
 
-- The `min_distance` parameter, which defines the minimum distance between any two patches of the same class.
-- The `terrain` parameter, which a continuous raster guiding the generation algorithm.
-- The `terrain_dependency` parameter, which defines to which extent the generation algorithm is influenced by the terrain.
+- The `min_distance` parameter, defines the minimum distance between any two patches of the same class.
+- The `terrain` parameter, is a continuous raster guiding the generation algorithm.
+- The `terrain_dependency` parameter, defines to which extent the generation algorithm is influenced by the terrain.
 
-Terrain rasters can either be generated "on-the-fly" by flsgen, which relies on the diamond-square (or midpoint displacement) algorithm, or given as input. This last option makes it possible to use continuous neutral landscapes generated with other software packages such as [`NLMR`](https://ropensci.github.io/NLMR/), or even digital elevation models from real landscapes.
+Terrain rasters can either be generated "on-the-fly" by flsgen, which relies on the diamond-square (or midpoint displacement) algorithm or given as input. This last option makes it possible to use continuous neutral landscapes generated with other software packages such as [`NLMR`](https://ropensci.github.io/NLMR/), or even digital elevation models from real landscapes.
 
-Here, we will generate landscape with various spatial configurations by varying the terrain dependency parameter. We also fix the `roughness` parameter to 0.2 for on-the-fly diamond-square terrain generation, and the `min_distance` parameter to 4.
+Here, we will generate a landscape with various spatial configurations by varying the terrain dependency parameter. We also fix the `roughness` parameter to 0.2 for on-the-fly diamond-square terrain generation and the `min_distance` parameter to 4.
 
 ```{r, eval=FALSE}
 td_seq <- seq(0, 1, by=0.1)
@@ -135,7 +135,7 @@ levelplot(
 
 ![](figures/use_case_1_landscape_mosaic.png)
 
-Although they look different, all these landscape have the exact same composition. We can check this using the landscapemetrics package:
+Although they look different, all these landscapes have the exact same composition. We can check this using the landscapemetrics package:
 
 ```{r, warning=FALSE,message=FALSE, eval=FALSE}
 library(landscapemetrics)

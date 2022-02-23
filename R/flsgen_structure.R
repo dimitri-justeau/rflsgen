@@ -66,7 +66,7 @@
 #'   }
 #' @export
 #'
-flsgen_structure <- function(targets_str, targets_file, nb_solutions=1, time_limit = 0, search_strategy="DEFAULT") {
+flsgen_structure <- function(targets_str, targets_file, nb_solutions=1, time_limit = 60, search_strategy="DEFAULT") {
   # Check arguments
   if (missing(targets_str)) {
     if (missing(targets_file)) {
@@ -109,7 +109,7 @@ flsgen_structure <- function(targets_str, targets_file, nb_solutions=1, time_lim
     struct <- .jcall(solver, "Lorg/flsgen/solver/LandscapeStructure;", "findSolution", as.integer(time_limit))
     if (is.null(struct)) {
       if (length(structs_json) == 0) {
-        if (time_limit > 0) {
+        if (time_limit > 0 && as.numeric(difftime(Sys.time(), start_sol_time, units = "s")) >= time_limit) {
           .jgc()
           stop("User targets could not be satisfied under the specified time limit")
         } else {
@@ -117,7 +117,7 @@ flsgen_structure <- function(targets_str, targets_file, nb_solutions=1, time_lim
           stop("User targets cannot be satisfied")
         }
       } else {
-        if (time_limit > 0) {
+        if (time_limit > 0 && as.numeric(difftime(Sys.time(), start_sol_time, units = "s")) >= time_limit) {
           .jgc()
           stop("No more solutions satisfying user targets were found under the specified time limit")
         } else {

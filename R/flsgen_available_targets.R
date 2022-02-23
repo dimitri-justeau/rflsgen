@@ -25,6 +25,7 @@
 CLASS_LEVEL_TARGETS <- c(
   "NP",      # Number of patches
   "AREA",    # Area of patches
+  "AREA_MN", # Mean patche area
   "CA",      # Total class area
   "PLAND",   # Proportion of landscape
   "PD",      # Patch density

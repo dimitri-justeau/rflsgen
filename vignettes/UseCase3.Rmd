@@ -28,10 +28,10 @@ To extract the landscape structure, we use the `flsgen_load_structure_from_raste
 options(java.parameters = "-Xmx4g")
 library(rflsgen)
 
-struct <- flsgen_load_structure_from_raster(path, c(0, 1), connectivity = 8)
+struct <- flsgen_extract_structure_from_raster(path, c(0, 1), connectivity = 8)
 ```
 
-The second argument corresponds to the focal classes raster values (0 is open forest, and 1 closed forest), and for this use case we use the 8-connectivity rule.
+The second argument corresponds to the focal classes raster values (0 is open forest, and 1 is closed forest), and for this use case, we use the 8-connectivity rule.
 
 We then use `flsgen_generate` to recreate a neutral landscape from the extracted structure. We use the digital elevation model of New Caledonia as the continuous environmental gradient.
 
@@ -51,5 +51,5 @@ plot(r)
 
 ## References  <a name="ref"></a>
 
-Buchhorn, M., Smets, B., Bertels, L., Roo, B. D., Lesiv, M., Tsendbazar, N.-E., Herold, M., & Fritz, S. (2020). Copernicus Global Land Service : Land Cover 100m: collection 3: epoch 2019: Globe (V3.0.1) [Data set]. Zenodo. https://doi.org/10.5281/ZENODO.3939050
+Buchhorn, M., Smets, B., Bertels, L., Roo, B. D., Lesiv, M., Tsendbazar, N.-E., Herold, M., & Fritz, S. (2020). Copernicus Global Land Service: Land Cover 100m: collection 3: epoch 2019: Globe (V3.0.1) [Data set]. Zenodo. https://doi.org/10.5281/ZENODO.3939050
 

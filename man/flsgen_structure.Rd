@@ -8,7 +8,7 @@ flsgen_structure(
   targets_str,
   targets_file,
   nb_solutions = 1,
-  time_limit = 0,
+  time_limit = 60,
   search_strategy = "DEFAULT"
 )
 }

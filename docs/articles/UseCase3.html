@@ -38,6 +38,20 @@
 <li class="nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
+<li class="nav-item">
+  <a class="nav-link" href="../articles/Targets.html">
+    <span class="fa fa fa fa-bullseye"></span>
+     
+    Available targets
+  </a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../articles/FAQ.html">
+    <span class="fa fa fa fa-question-circle"></span>
+     
+    Frequently asked questions
+  </a>
+</li>
 <li class="active nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown--use-cases">
     <span class="bi bi-lightbulb-fill"></span>
@@ -45,9 +59,9 @@
     Use cases
   </a>
   <div class="dropdown-menu" aria-labelledby="dropdown--use-cases">
-    <a class="dropdown-item" href="../articles/UseCase1.html">Use case 1</a>
-    <a class="dropdown-item" href="../articles/UseCase2.html">Use case 2</a>
-    <a class="dropdown-item" href="../articles/UseCase3.html">Use case 3</a>
+    <a class="dropdown-item" href="../articles/UseCase1.html">Use case 1: Fixed structure and varying spatial configurations</a>
+    <a class="dropdown-item" href="../articles/UseCase2.html">Use case 2: Exploring correlations between landscape indices</a>
+    <a class="dropdown-item" href="../articles/UseCase3.html">Use case 3: Recreating large landscape composition patterns</a>
   </div>
 </li>
 <li class="nav-item">
@@ -102,8 +116,8 @@
 <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>java.parameters <span class="op">=</span> <span class="st">"-Xmx4g"</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dimitri-justeau/rflsgen" class="external-link">rflsgen</a></span><span class="op">)</span>
 
-<span class="va">struct</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flsgen_load_structure_from_raster.html">flsgen_load_structure_from_raster</a></span><span class="op">(</span><span class="va">path</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, connectivity <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></code></pre></div>
-<p>The second argument corresponds to the focal classes raster values (0 is open forest, and 1 closed forest), and for this use case we use the 8-connectivity rule.</p>
+<span class="va">struct</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flsgen_extract_structure_from_raster.html">flsgen_extract_structure_from_raster</a></span><span class="op">(</span><span class="va">path</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, connectivity <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></code></pre></div>
+<p>The second argument corresponds to the focal classes raster values (0 is open forest, and 1 is closed forest), and for this use case, we use the 8-connectivity rule.</p>
 <p>We then use <code>flsgen_generate</code> to recreate a neutral landscape from the extracted structure. We use the digital elevation model of New Caledonia as the continuous environmental gradient.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dem_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"dem_nc_grande_terre_100.tif"</span>, package <span class="op">=</span> <span class="st">"rflsgen"</span><span class="op">)</span>
@@ -118,7 +132,7 @@
 <div class="section level2">
 <h2 id="references">References <a name="ref"></a><a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
-<p>Buchhorn, M., Smets, B., Bertels, L., Roo, B. D., Lesiv, M., Tsendbazar, N.-E., Herold, M., &amp; Fritz, S. (2020). Copernicus Global Land Service : Land Cover 100m: collection 3: epoch 2019: Globe (V3.0.1) [Data set]. Zenodo. <a href="https://doi.org/10.5281/ZENODO.3939050" class="external-link uri">https://doi.org/10.5281/ZENODO.3939050</a></p>
+<p>Buchhorn, M., Smets, B., Bertels, L., Roo, B. D., Lesiv, M., Tsendbazar, N.-E., Herold, M., &amp; Fritz, S. (2020). Copernicus Global Land Service: Land Cover 100m: collection 3: epoch 2019: Globe (V3.0.1) [Data set]. Zenodo. <a href="https://doi.org/10.5281/ZENODO.3939050" class="external-link uri">https://doi.org/10.5281/ZENODO.3939050</a></p>
 </div>
   </main>
 </div>

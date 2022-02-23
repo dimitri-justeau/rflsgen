@@ -4,16 +4,27 @@ template:
 
 navbar:
   structure:
-    left: [reference, usecases, news]
+    left: [reference, targets, faq, usecases, news]
 
   components:
+
+    targets:
+      text: "Available targets"
+      icon: fa fa-bullseye
+      href: articles/Targets.html
+
+    faq:
+      text: "Frequently asked questions"
+      icon: fa fa-question-circle
+      href: articles/FAQ.html
+
     usecases:
       icon: bi-lightbulb-fill
       text: "Use cases"
       menu:
-        - text: "Use case 1"
+        - text: "Use case 1: Fixed structure and varying spatial configurations"
           href: articles/UseCase1.html
-        - text: "Use case 2"
+        - text: "Use case 2: Exploring correlations between landscape indices"
           href: articles/UseCase2.html
-        - text: "Use case 3"
+        - text: "Use case 3: Recreating large landscape composition patterns"
           href: articles/UseCase3.html

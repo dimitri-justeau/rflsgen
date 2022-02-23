@@ -32,6 +32,7 @@
 #' @param class_name Name of the class
 #' @param NP number of patches target (must be a vector of length 2)
 #' @param AREA patch area target (must be a vector of length 2)
+#' @param AREA_MN mean patch area target (must be a vector of length 2)
 #' @param CA total class area target (must be a vector of length 2)
 #' @param PLAND proportion of landscape target (must be a vector of length 2)
 #' @param PD patch density target (must be a vector of length 2)
@@ -52,10 +53,10 @@
 #'   }
 #' @export
 #'
-flsgen_create_class_targets <- function(class_name, NP=NULL, AREA=NULL, CA=NULL,
-                                        PLAND=NULL, PD=NULL, SPI=NULL, LPI=NULL,
-                                        MESH=NULL, SPLI=NULL, NPRO=NULL, SDEN=NULL,
-                                        COHE=NULL, DIVI=NULL) {
+flsgen_create_class_targets <- function(class_name, NP=NULL, AREA=NULL, AREA_MN=NULL,
+                                        CA=NULL, PLAND=NULL, PD=NULL, SPI=NULL,
+                                        LPI=NULL, MESH=NULL, SPLI=NULL, NPRO=NULL,
+                                        SDEN=NULL, COHE=NULL, DIVI=NULL) {
   checkmate::assert_string(class_name)
   class_targets <- list(
     name=class_name
