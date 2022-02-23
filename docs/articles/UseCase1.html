@@ -102,7 +102,7 @@
     
 <p>In this use case, we will see how rflsgen can be used to generate a series of landscapes with a fixed composition and varying spatial configurations. First let’s load rflsgen:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dimitri-justeau/rflsgen" class="external-link">rflsgen</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dimitri-justeau.github.io/rflsgen/" class="external-link">rflsgen</a></span><span class="op">)</span></code></pre></div>
 <div class="section level2">
 <h2 id="defining-targets-for-landscape-composition">Defining targets for landscape composition<a class="anchor" aria-label="anchor" href="#defining-targets-for-landscape-composition"></a>
 </h2>
@@ -198,7 +198,7 @@
 <p>To generate a landscape structure satisfying these targets, we use the <code>flsgen_structure</code> methods:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">structure</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flsgen_structure.html">flsgen_structure</a></span><span class="op">(</span><span class="va">ls_targets</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## Landscape structure 1 found in 0.08286309 s</span></code></pre>
+<pre><code><span class="co">## Landscape structure 1 found in 0.4099681 s</span></code></pre>
 <p>This structure is formatted as a JSON string, which can be easily converted to a dataframe using the <a href="https://cran.r-project.org/package=jsonlite" class="external-link">jsonlite</a> package:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">structure_df</span> <span class="op">&lt;-</span> <span class="fu">jsonlite</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jsonlite/man/fromJSON.html" class="external-link">fromJSON</a></span><span class="op">(</span><span class="va">structure</span><span class="op">)</span>
@@ -211,16 +211,16 @@
 <pre><code><span class="co">## shrubland : </span>
 <span class="co">##   number of patches 40 </span>
 <span class="co">##   smallest patch size 500 </span>
-<span class="co">##   largest patch size 1896 </span>
+<span class="co">##   largest patch size 3000 </span>
 <span class="co">## </span>
 <span class="co">## savanna : </span>
 <span class="co">##   number of patches 30 </span>
-<span class="co">##   smallest patch size 500 </span>
-<span class="co">##   largest patch size 1262 </span>
+<span class="co">##   smallest patch size 833 </span>
+<span class="co">##   largest patch size 834 </span>
 <span class="co">## </span>
 <span class="co">## forest : </span>
 <span class="co">##   number of patches 20 </span>
-<span class="co">##   smallest patch size 765 </span>
+<span class="co">##   smallest patch size 500 </span>
 <span class="co">##   largest patch size 3000</span></code></pre>
 <p><strong>Note:</strong> There is a <code>search_strategy</code> parameter in <code>flsgen_structure</code> which indicate to <a href="https://choco-solver.org/" class="external-link">Choco-solver</a> how to construct its search tree. Although this search strategy does not influence whether the targets will be satisfied or not, it can help diversify the generated structure by exploring the search tree in different ways. Available search strategies in Choco are: <code>""DEFAULT", "RANDOM", "DOM_OVER_W_DEG", "DOM_OVER_W_DEG_REF", "ACTIVITY_BASED", "CONFLICT_HISTORY", "MIN_DOM_LB", "MIN_DOM_UB"</code> (please refer to <a href="https://choco-solver.org/docs/solving/strategies/" class="external-link">Choco documentation</a> if you want more details).</p>
 </div>

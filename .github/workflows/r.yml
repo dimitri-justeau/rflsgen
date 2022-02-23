@@ -28,7 +28,6 @@ jobs:
           - {os: ubuntu-20.04, r: 'release', pkgs: 'all', java: 11}
           - {os: ubuntu-20.04, r: 'devel', pkgs: 'all', java: 8}
           - {os: ubuntu-20.04, r: 'devel', pkgs: 'all', java: 11}
-          - {os: ubuntu-20.04, r: 'devel', pkgs: 'depends only', java: 11}
 
     env:
       _R_REMOTES_NO_ERRORS_FROM_WARNINGS_: true
