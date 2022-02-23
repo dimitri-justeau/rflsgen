@@ -198,7 +198,7 @@
 <p>To generate a landscape structure satisfying these targets, we use the <code>flsgen_structure</code> methods:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">structure</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flsgen_structure.html">flsgen_structure</a></span><span class="op">(</span><span class="va">ls_targets</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## Landscape structure 1 found in 0.4099681 s</span></code></pre>
+<pre><code><span class="co">## Landscape structure 1 found in 0.2535198 s</span></code></pre>
 <p>This structure is formatted as a JSON string, which can be easily converted to a dataframe using the <a href="https://cran.r-project.org/package=jsonlite" class="external-link">jsonlite</a> package:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">structure_df</span> <span class="op">&lt;-</span> <span class="fu">jsonlite</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jsonlite/man/fromJSON.html" class="external-link">fromJSON</a></span><span class="op">(</span><span class="va">structure</span><span class="op">)</span>
