@@ -96,7 +96,7 @@ flsgen_generate <- function(structure_str, structure_file, output=tempfile(filee
     if (!missing(structure_file)) {
       stop("Either structure_str or structure_file must be used in generate_landscape_raster function to specify user targets, not both")
     }
-    if (class(structure_str) == "FlsgenLandscapeStructure") {
+    if (inherits(structure_str, "FlsgenLandscapeStructure")) {
       for (i in 1:length(structure_str$classes)) {
         structure_str$classes[[i]] <- unclass(structure_str$classes[[i]])
       }

@@ -77,7 +77,7 @@ flsgen_structure <- function(targets_str, targets_file, nb_solutions=1, time_lim
     if (!missing(targets_file)) {
       stop("Either targets_str or targets_file must be used in generate_landscape_structure function to specify user targets, not both")
     }
-    if (class(targets_str) == "FlsgenLandscapeTargets") {
+    if (inherits(targets_str, "FlsgenLandscapeTargets")) {
       for (i in 1:length(targets_str$classes)) {
         targets_str$classes[[i]] <- unclass(targets_str$classes[[i]])
       }
