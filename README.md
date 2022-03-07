@@ -46,7 +46,7 @@ plot(terrain)
 
 ### Generating landscape structures from targets <a name="structure"></a>
 
-Say that we want to generate a landscape structure for a 200x200 landscape containing three landscape classes (plus a background class), with the following user targets:
+Say that we want to generate a landscape structure for a 200x200 landscape containing three landscape classes (plus a non focal class), with the following user targets:
 
 | Class | NP      | AREA        | CA           | MESH | PLAND |
 | ----- |---------| ----------- |------------- |------| ----- |
