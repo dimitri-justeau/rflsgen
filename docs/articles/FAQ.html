@@ -88,8 +88,7 @@
 
 
 
-
-<div class="row">
+<script src="FAQ_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <main id="main"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Frequently asked questions</h1>
             
@@ -125,7 +124,7 @@
 <ul>
 <li><strong>Why <code><a href="../reference/flsgen_generate.html">flsgen_generate()</a></code> failed to generate a landscape ? <a name="no_land"></a></strong></li>
 </ul>
-<p>Although <code><a href="../reference/flsgen_structure.html">flsgen_structure()</a></code> relies on exact search algorithms to identify suitable landscape structures, the spatial generation algorithm used in <code><a href="../reference/flsgen_generate.html">flsgen_generate()</a></code> is stochastic and can fail. The reason for using a stochastic algorithm is that finding a spatial embedding of a landscape structure is equivalent to the polyomino packing problem, which is known to be NP-Complete (i.e. computational complexity increases exponentially with problem size). It would not be possible to generate reasonably large landscapes (e.g. larger than 100x100) in a feasible time. Using a stochastic algorithm offers fast runtime, but at the price that it can fail without knowing if a solution exists. In practice, the success of <code><a href="../reference/flsgen_generate.html">flsgen_generate()</a></code> is highly constrained by the proportion of the non-focal landscape class (NON_FOCAL_PLAND), and to a lesser extent by the <code>min_distance</code> parameter. In conclusion, you have two possibilities: (1) if NON_FOCAL_PLAND is less than 15%, you should probably generate a landscape structure with a high NON_FOCAL_PLAND, (2) else, you can increase the number of trials with the <code>max_try</code> and <code>max_try_patch</code> parameters or decrease the <code>min_distance</code> parameter.</p>
+<p>Although <code><a href="../reference/flsgen_structure.html">flsgen_structure()</a></code> relies on exact search algorithms to identify suitable landscape structures, the spatial generation algorithm used in <code><a href="../reference/flsgen_generate.html">flsgen_generate()</a></code> is stochastic and can fail. The reason for using a stochastic algorithm is that finding a spatial embedding of a landscape structure is equivalent to the polyomino packing problem, which is known to be NP-Complete (i.e. computational complexity increases exponentially with problem size). It would not be possible to generate reasonably large landscapes (e.g. larger than 100x100) in a feasible time. Using a stochastic algorithm offers fast runtime, but at the price that it can fail without knowing if a solution exists. In practice, the success of <code><a href="../reference/flsgen_generate.html">flsgen_generate()</a></code> is highly constrained by the proportion of the non-focal landscape class (NON_FOCAL_PLAND), and to a lesser extent by the <code>min_distance</code> parameter. In conclusion, you have two possibilities: (1) if NON_FOCAL_PLAND is less than 15%, you should probably generate a landscape structure with a higher NON_FOCAL_PLAND, (2) else, you can increase the number of trials with the <code>max_try</code> and <code>max_try_patch</code> parameters or decrease the <code>min_distance</code> parameter.</p>
 <ul>
 <li><strong>Can I specify the spatial extent and resolution of produced landscapes ? <a name="spatial_extent"></a></strong></li>
 </ul>

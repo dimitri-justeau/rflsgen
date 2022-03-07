@@ -1,4 +1,4 @@
-pandoc: 2.14.0.3
+pandoc: 2.9.2
 pkgdown: 2.0.2
 pkgdown_sha: ~
 articles:
@@ -7,5 +7,5 @@ articles:
   UseCase1: UseCase1.html
   UseCase2: UseCase2.html
   UseCase3: UseCase3.html
-last_built: 2022-03-07T01:13Z
+last_built: 2022-03-07T03:14Z
 
