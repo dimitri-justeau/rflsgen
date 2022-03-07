@@ -1,5 +1,5 @@
 ---
-title: "Use case 3: Recreating large landscape composition patterns"
+title: "Use Case 3: Recreating large landscape composition patterns"
 output: html_document
 vignette: >
   %\VignetteIndexEntry{Use case 3: Recreating large landscape composition patterns}
@@ -46,6 +46,19 @@ plot(r)
 ```
 
 ![](figures/use_case_3_neutral_landscape.png)
+It is interesting to see that the generated landscape has an almost inverted spatial distribution compared to the real landscape. This is not surprising as the forest cover in New Caledonia is known to be positively correlated with the elevation. If we want to generate a neutral forest landscape also positively correlated with the elevation, we just need to use and inverted digital elevation model 
+
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
+dem <- raster(dem_path)
+values(dem) <- -values(dem)
+r <- flsgen_generate(struct, terrain_file = dem, terrain_dependency = 0.9,
+                     epsg = "EPSG:3163", connectivity=8,
+                     resolution_x = 105.4308639672429422,
+                     resolution_y = 105.4037645741556588,
+                     x = 159615, y = 467655)
+```
+
+![](figures/use_case_3_neutral_landscape_inv.png)
 
 **Note:** We used geographical metadata from the original raster to produce a landscape with the same geographical attributes (`epsg`, `resolution_x`, `resolution_y`, `x`, and `y`).
 

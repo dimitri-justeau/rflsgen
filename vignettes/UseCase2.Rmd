@@ -1,5 +1,5 @@
 ---
-title: "Use case 2: Exploring correlations between landscape indices"
+title: "Use Case 2: Exploring correlations between landscape indices"
 output: html_document
 vignette: >
   %\VignetteIndexEntry{Use case 2: Exploring correlations between landscape indices}
