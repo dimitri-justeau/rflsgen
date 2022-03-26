@@ -13,7 +13,8 @@ We focus on the forest cover of the main island of New Caledonia, a tropical arc
 ```{r, warning=FALSE, message=FALSE,eval=FALSE}
 library(raster)
 
-path <- system.file("extdata", "copernicus_nc_grande_terre_closed_and_open_forests.tif", package = "rflsgen")
+path <- system.file("extdata", "copernicus_nc_grande_terre_closed_and_open_forests.tif",
+                    package = "rflsgen")
 existing_landscape <- raster(path)
 plot(existing_landscape)
 ```

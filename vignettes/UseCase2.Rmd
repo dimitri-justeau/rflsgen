@@ -126,10 +126,12 @@ library(landscapemetrics)
 library(Makurhini)
 
 df <- expand.grid("mesh_target" = mesh_seq, "n" = repeats)
-df$file <- paste0(basepath, df$mesh_target, "/shape_mesh_", df$mesh_target, "__", df$n, ".shp")
+df$file <- paste0(basepath, df$mesh_target, "/shape_mesh_", df$mesh_target, "__",
+                  df$n, ".shp")
 df$mesh <- sapply(seq(1, nrow(df), by=1), function(i) {
   cat(paste("compute MESH for", i, "\n"))
-  path <- paste0(basepath, df[i,]$mesh_target, "/mesh_", df[i,]$mesh_target, "__", df[i,]$n, ".tif")
+  path <- paste0(basepath, df[i,]$mesh_target, "/mesh_", df[i,]$mesh_target, "__",
+                 df[i,]$n, ".tif")
   lsm_c_mesh(raster(path))[2,]$value
 })
 
