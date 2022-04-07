@@ -5,6 +5,8 @@
 
 `rflsgen` is the R distribution of [`flsgen`](https://github.com/dimitri-justeau/flsgen), a neutral landscape generator that allows users to set targets on landscape indices. It first relies on [Choco-solver](https://choco-solver.org/) to identify landscape structure satisfying user targets, then uses a stochastic algorithm to produce landscape rasters.
 
+For more details and tutorials, please visit `rflsgen`'s website: https://dimitri-justeau.github.io/rflsgen/
+
   * [Download and installation](#down)
   * [Tutorial](#tuto)
     * [Fractal terrain generation](#terrain)
