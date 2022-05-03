@@ -5,11 +5,11 @@ on:
     - cron: 0 0 * * 1 # schedule to run at midnight on Monday each week
   push:
     branches:
-      - main
+      - github_actions
       - master
   pull_request:
     branches:
-      - main
+      - github_actions
       - master
 
 name: macOS
