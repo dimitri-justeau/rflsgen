@@ -88,7 +88,8 @@
 
 
 
-<script src="FAQ_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+
+<div class="row">
   <main id="main"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Frequently asked questions</h1>
             
@@ -99,69 +100,215 @@
 
     
     
-<p><em><a href="#heap">Why do I get the “Java heap space” error, and how to fix it ?</a></em></p>
-<p><em><a href="#no_struct">Why <code>flsgen_structure</code> did not find a structure satisfying my targets ?</a></em></p>
-<p><em><a href="#no_land">Why <code>flsgen_generate</code> failed to generate a landscape ?</a></em></p>
-<p><em><a href="#spatial_extent">Can I specify the spatial extent and resolution of produced landscapes ?</a></em></p>
-<p><em><a href="#spatial_conf">How can I change the spatial configuration of produced landscapes ?</a></em></p>
-<p><em><a href="#min_dist">Can I specify the minimum distance between patches of the same class ?</a></em></p>
-<p><em><a href="#time">How does the computing time of rflsgen varies according to input and parameters ?</a></em></p>
-<p><em><a href="#nb_solutions">How does <code>flsgen_structure</code> selects the structures to return if there are several possibilities ?</a></em></p>
+<p><em><a href="#heap">Why do I get the “Java heap space” error, and how
+to fix it ?</a></em></p>
+<p><em><a href="#no_struct">Why <code>flsgen_structure</code> did not
+find a structure satisfying my targets ?</a></em></p>
+<p><em><a href="#no_land">Why <code>flsgen_generate</code> failed to
+generate a landscape ?</a></em></p>
+<p><em><a href="#spatial_extent">Can I specify the spatial extent and
+resolution of produced landscapes ?</a></em></p>
+<p><em><a href="#spatial_conf">How can I change the spatial
+configuration of produced landscapes ?</a></em></p>
+<p><em><a href="#min_dist">Can I specify the minimum distance between
+patches of the same class ?</a></em></p>
+<p><em><a href="#time">How does the computing time of rflsgen varies
+according to input and parameters ?</a></em></p>
+<p><em><a href="#nb_solutions">How does <code>flsgen_structure</code>
+selects the structures to return if there are several possibilities
+?</a></em></p>
 <p><em><a href="#choco">What is Choco Solver ?</a></em></p>
-<p><em><a href="#constraint%20programming">What is Constraint Programming ?</a></em></p>
+<p><em><a href="#constraint%20programming">What is Constraint
+Programming ?</a></em></p>
 <ul>
-<li><strong>Why do I get the “Java heap space” error, and how to fix it ? <a name="heap"></a></strong></li>
+<li><strong>Why do I get the “Java heap space” error, and how to fix it
+? <a name="heap"></a></strong></li>
 </ul>
-<p>By default, <code>rJava</code> allocate 512MB to the Java virtual machine (JVM). When generating large landscapes, this can be insufficient. The solution is, before loading <code>rflsgen</code> (and any other package using <code>rJava</code>), to increase the memory allocated to the JVM using <code>options(java.parameters = "-Xmx4g")</code>. Note that this allocates 4GB to the JVM. If you want to allocate another amount of memory just replace <code>4g</code> with the desired value.</p>
+<p>By default, <code>rJava</code> allocate 512MB to the Java virtual
+machine (JVM). When generating large landscapes, this can be
+insufficient. The solution is, before loading <code>rflsgen</code> (and
+any other package using <code>rJava</code>), to increase the memory
+allocated to the JVM using
+<code>options(java.parameters = "-Xmx4g")</code>. Note that this
+allocates 4GB to the JVM. If you want to allocate another amount of
+memory just replace <code>4g</code> with the desired value.</p>
 <ul>
-<li><strong>Why <code><a href="../reference/flsgen_structure.html">flsgen_structure()</a></code> did not find a structure satisfying my targets ? <a name="no_struct"></a></strong></li>
+<li><strong>Why <code><a href="../reference/flsgen_structure.html">flsgen_structure()</a></code> did not find a structure
+satisfying my targets ? <a name="no_struct"></a></strong></li>
 </ul>
 <p>There are two possibilities:</p>
 <ol style="list-style-type: decimal">
-<li><p>If <code>rflsgen</code> indicates that “User targets cannot be satisfied”, it means that the solver has finished exploring the search tree and that there is no solution satisfying your targets. As the underlying Constraint Programming solver (Choco) relies on exact algorithms, this message is the guarantee that your targets cannot be satisfied. To date, this is not possible to explain why the targets are contradictory in a human-readable way. So what you can do is try to see if there are obvious contradictions in your targets (e.g. two classes that both need to occupy 60% of the landscape), or try with other targets.</p></li>
-<li><p>If <code>rflsgen</code> indicates that “User targets could not be satisfied under the specified time limit”, it means that the time limit was reached before the solver could find a solution, or prove that there is no solution. By default the time limit in <code><a href="../reference/flsgen_structure.html">flsgen_structure()</a></code> is 60 seconds, you can increase this limit with the <code>time_limit</code> argument, or disable it with the value 0. You can also change the <code>search_strategy</code>, which indicate to <a href="https://choco-solver.org/" class="external-link">Choco-solver</a> how to construct its search tree. Although this search strategy does not influence whether the targets will be satisfied or not, some strategies can be more efficient depending on the problem configuration. Available search strategies in Choco are: <code>""DEFAULT", "RANDOM", "DOM_OVER_W_DEG", "DOM_OVER_W_DEG_REF", "ACTIVITY_BASED", "CONFLICT_HISTORY", "MIN_DOM_LB", "MIN_DOM_UB"</code> (please refer to <a href="https://choco-solver.org/docs/solving/strategies/" class="external-link">Choco documentation</a> if you want more details).</p></li>
+<li><p>If <code>rflsgen</code> indicates that “User targets cannot be
+satisfied”, it means that the solver has finished exploring the search
+tree and that there is no solution satisfying your targets. As the
+underlying Constraint Programming solver (Choco) relies on exact
+algorithms, this message is the guarantee that your targets cannot be
+satisfied. To date, this is not possible to explain why the targets are
+contradictory in a human-readable way. So what you can do is try to see
+if there are obvious contradictions in your targets (e.g. two classes
+that both need to occupy 60% of the landscape), or try with other
+targets.</p></li>
+<li><p>If <code>rflsgen</code> indicates that “User targets could not be
+satisfied under the specified time limit”, it means that the time limit
+was reached before the solver could find a solution, or prove that there
+is no solution. By default the time limit in
+<code><a href="../reference/flsgen_structure.html">flsgen_structure()</a></code> is 60 seconds, you can increase this
+limit with the <code>time_limit</code> argument, or disable it with the
+value 0. You can also change the <code>search_strategy</code>, which
+indicate to <a href="https://choco-solver.org/" class="external-link">Choco-solver</a> how to
+construct its search tree. Although this search strategy does not
+influence whether the targets will be satisfied or not, some strategies
+can be more efficient depending on the problem configuration. Available
+search strategies in Choco are:
+<code>""DEFAULT", "RANDOM", "DOM_OVER_W_DEG", "DOM_OVER_W_DEG_REF", "ACTIVITY_BASED", "CONFLICT_HISTORY", "MIN_DOM_LB", "MIN_DOM_UB"</code>
+(please refer to <a href="https://choco-solver.org/docs/solving/strategies/" class="external-link">Choco
+documentation</a> if you want more details).</p></li>
 </ol>
 <ul>
-<li><strong>Why <code><a href="../reference/flsgen_generate.html">flsgen_generate()</a></code> failed to generate a landscape ? <a name="no_land"></a></strong></li>
+<li><strong>Why <code><a href="../reference/flsgen_generate.html">flsgen_generate()</a></code> failed to generate a
+landscape ? <a name="no_land"></a></strong></li>
 </ul>
-<p>Although <code><a href="../reference/flsgen_structure.html">flsgen_structure()</a></code> relies on exact search algorithms to identify suitable landscape structures, the spatial generation algorithm used in <code><a href="../reference/flsgen_generate.html">flsgen_generate()</a></code> is stochastic and can fail. The reason for using a stochastic algorithm is that finding a spatial embedding of a landscape structure is equivalent to the polyomino packing problem, which is known to be NP-Complete (i.e. computational complexity increases exponentially with problem size). It would not be possible to generate reasonably large landscapes (e.g. larger than 100x100) in a feasible time. Using a stochastic algorithm offers fast runtime, but at the price that it can fail without knowing if a solution exists. In practice, the success of <code><a href="../reference/flsgen_generate.html">flsgen_generate()</a></code> is highly constrained by the proportion of the non-focal landscape class (NON_FOCAL_PLAND), and to a lesser extent by the <code>min_distance</code> parameter. In conclusion, you have two possibilities: (1) if NON_FOCAL_PLAND is less than 15%, you should probably generate a landscape structure with a higher NON_FOCAL_PLAND, (2) else, you can increase the number of trials with the <code>max_try</code> and <code>max_try_patch</code> parameters or decrease the <code>min_distance</code> parameter.</p>
+<p>Although <code><a href="../reference/flsgen_structure.html">flsgen_structure()</a></code> relies on exact search
+algorithms to identify suitable landscape structures, the spatial
+generation algorithm used in <code><a href="../reference/flsgen_generate.html">flsgen_generate()</a></code> is
+stochastic and can fail. The reason for using a stochastic algorithm is
+that finding a spatial embedding of a landscape structure is equivalent
+to the polyomino packing problem, which is known to be NP-Complete
+(i.e. computational complexity increases exponentially with problem
+size). It would not be possible to generate reasonably large landscapes
+(e.g. larger than 100x100) in a feasible time. Using a stochastic
+algorithm offers fast runtime, but at the price that it can fail without
+knowing if a solution exists. In practice, the success of
+<code><a href="../reference/flsgen_generate.html">flsgen_generate()</a></code> is highly constrained by the proportion
+of the non-focal landscape class (NON_FOCAL_PLAND), and to a lesser
+extent by the <code>min_distance</code> parameter. In conclusion, you
+have two possibilities: (1) if NON_FOCAL_PLAND is less than 15%, you
+should probably generate a landscape structure with a higher
+NON_FOCAL_PLAND, (2) else, you can increase the number of trials with
+the <code>max_try</code> and <code>max_try_patch</code> parameters or
+decrease the <code>min_distance</code> parameter.</p>
 <ul>
-<li><strong>Can I specify the spatial extent and resolution of produced landscapes ? <a name="spatial_extent"></a></strong></li>
+<li><strong>Can I specify the spatial extent and resolution of produced
+landscapes ? <a name="spatial_extent"></a></strong></li>
 </ul>
-<p>This can be specified with the <code>x</code>, <code>y</code>, <code>epsg</code>, <code>resolution_x</code> and <code>resolution_y</code> parameters in the <code><a href="../reference/flsgen_generate.html">flsgen_generate()</a></code> function.</p>
+<p>This can be specified with the <code>x</code>, <code>y</code>,
+<code>epsg</code>, <code>resolution_x</code> and
+<code>resolution_y</code> parameters in the
+<code><a href="../reference/flsgen_generate.html">flsgen_generate()</a></code> function.</p>
 <ul>
-<li><strong>How can I change the spatial configuration of produced landscapes ? <a name="spatial_conf"></a></strong></li>
+<li><strong>How can I change the spatial configuration of produced
+landscapes ? <a name="spatial_conf"></a></strong></li>
 </ul>
-<p>There are three parameters influencing the spatial configuration of produced landscapes in <code>flsgen_generate</code>:</p>
+<p>There are three parameters influencing the spatial configuration of
+produced landscapes in <code>flsgen_generate</code>:</p>
 <ul>
-<li>The <code>min_distance</code> parameter, defines the minimum distance between any two patches of the same class.</li>
-<li>The <code>terrain</code> parameter, is a continuous raster guiding the generation algorithm.</li>
-<li>The <code>terrain_dependency</code> parameter, defines to which extent the generation algorithm is influenced by the terrain.</li>
+<li>The <code>min_distance</code> parameter, defines the minimum
+distance between any two patches of the same class.</li>
+<li>The <code>terrain</code> parameter, is a continuous raster guiding
+the generation algorithm.</li>
+<li>The <code>terrain_dependency</code> parameter, defines to which
+extent the generation algorithm is influenced by the terrain.</li>
 </ul>
-<p>Terrain rasters can either be generated “on-the-fly” by flsgen, which relies on the diamond-square (or midpoint displacement) algorithm or given as input. This last option makes it possible to use continuous neutral landscapes generated with other software packages such as <a href="https://ropensci.github.io/NLMR/" class="external-link"><code>NLMR</code></a>, or even digital elevation models from real landscapes.</p>
+<p>Terrain rasters can either be generated “on-the-fly” by flsgen, which
+relies on the diamond-square (or midpoint displacement) algorithm or
+given as input. This last option makes it possible to use continuous
+neutral landscapes generated with other software packages such as <a href="https://ropensci.github.io/NLMR/" class="external-link"><code>NLMR</code></a>, or even
+digital elevation models from real landscapes.</p>
 <ul>
-<li><strong>Can I speficy the minimum distance between patches of a same class ? <a name="min_dist"></a></strong></li>
+<li><strong>Can I speficy the minimum distance between patches of a same
+class ? <a name="min_dist"></a></strong></li>
 </ul>
-<p>Yes, with the <code>min_distance</code> parameter of <code><a href="../reference/flsgen_generate.html">flsgen_generate()</a></code>. You can also play with the <code>min_max_distance</code>, which makes the minimum distance between the patch variable and comprised between <code>min_distance</code> and <code>min_max_distance</code>.</p>
+<p>Yes, with the <code>min_distance</code> parameter of
+<code><a href="../reference/flsgen_generate.html">flsgen_generate()</a></code>. You can also play with the
+<code>min_max_distance</code>, which makes the minimum distance between
+the patch variable and comprised between <code>min_distance</code> and
+<code>min_max_distance</code>.</p>
 <ul>
-<li><strong>How does the computing time of rflsgen varies according to input and parameters ? <a name="time"></a></strong></li>
+<li><strong>How does the computing time of rflsgen varies according to
+input and parameters ? <a name="time"></a></strong></li>
 </ul>
-<p>As there are a lot of factors that can influence the computing time of <code>rflsgen</code>, there is no simple answer to this question.</p>
-<p>Regarding <code><a href="../reference/flsgen_structure.html">flsgen_structure()</a></code>, the number of classes and the landscape dimensions influences the size of the underlying constraint satisfaction problem. But a large problem can be solved very quickly if the solver can take advantage of the targets to filter the search tree. In general, fragmentation indices such as MESH, NPRO, or DIVI, are more difficult to satisfy if the targets only allow one value. However, in most cases <code><a href="../reference/flsgen_structure.html">flsgen_structure()</a></code> only needs a few seconds (or less) to find a solution.</p>
-<p><code><a href="../reference/flsgen_generate.html">flsgen_generate()</a></code> has a more predictable computing time, which is mainly driven by the landscape dimension and the total proportion of focal classes. In practice, it is fast even for large landscapes (several millions of cells), and the RAM should be a problem before the computing time.</p>
+<p>As there are a lot of factors that can influence the computing time
+of <code>rflsgen</code>, there is no simple answer to this question.</p>
+<p>Regarding <code><a href="../reference/flsgen_structure.html">flsgen_structure()</a></code>, the number of classes and
+the landscape dimensions influences the size of the underlying
+constraint satisfaction problem. But a large problem can be solved very
+quickly if the solver can take advantage of the targets to filter the
+search tree. In general, fragmentation indices such as MESH, NPRO, or
+DIVI, are more difficult to satisfy if the targets only allow one value.
+However, in most cases <code><a href="../reference/flsgen_structure.html">flsgen_structure()</a></code> only needs a few
+seconds (or less) to find a solution.</p>
+<p><code><a href="../reference/flsgen_generate.html">flsgen_generate()</a></code> has a more predictable computing time,
+which is mainly driven by the landscape dimension and the total
+proportion of focal classes. In practice, it is fast even for large
+landscapes (several millions of cells), and the RAM should be a problem
+before the computing time.</p>
 <ul>
-<li><strong>How does <code><a href="../reference/flsgen_structure.html">flsgen_structure()</a></code> selects the structures to return if there are several possibilities ? <a name="nb_solutions"></a></strong></li>
+<li><strong>How does <code><a href="../reference/flsgen_structure.html">flsgen_structure()</a></code> selects the
+structures to return if there are several possibilities ?
+<a name="nb_solutions"></a></strong></li>
 </ul>
-<p>Most often, there can be hundreds, thousands, or even millions of possible structures satisfying user targets. <code><a href="../reference/flsgen_structure.html">flsgen_structure()</a></code> relies on <a href="https://choco-solver.org/" class="external-link">Choco-solver</a> to identify suitable landscape structures. The default behaviour of Choco-solver is to return the first solution found. If we ask the solver to find another solution, it will return the second found, etc. The <code>nb_solutions</code> parameter in <code><a href="../reference/flsgen_structure.html">flsgen_structure()</a></code> tells Choco-solver how many solutions it must find before stopping the search. There is also a <code>search_strategy</code> parameter in <code><a href="../reference/flsgen_structure.html">flsgen_structure()</a></code> which indicate to <a href="https://choco-solver.org/" class="external-link">Choco-solver</a> how to construct its search tree. Although this search strategy does not influence whether the targets will be satisfied or not, it can help diversify the generated structure by exploring the search tree in different ways. Available search strategies in Choco are: <code>""DEFAULT", "RANDOM", "DOM_OVER_W_DEG", "DOM_OVER_W_DEG_REF", "ACTIVITY_BASED", "CONFLICT_HISTORY", "MIN_DOM_LB", "MIN_DOM_UB"</code> (please refer to <a href="https://choco-solver.org/docs/solving/strategies/" class="external-link">Choco documentation</a> if you want more details).</p>
+<p>Most often, there can be hundreds, thousands, or even millions of
+possible structures satisfying user targets.
+<code><a href="../reference/flsgen_structure.html">flsgen_structure()</a></code> relies on <a href="https://choco-solver.org/" class="external-link">Choco-solver</a> to identify suitable
+landscape structures. The default behaviour of Choco-solver is to return
+the first solution found. If we ask the solver to find another solution,
+it will return the second found, etc. The <code>nb_solutions</code>
+parameter in <code><a href="../reference/flsgen_structure.html">flsgen_structure()</a></code> tells Choco-solver how many
+solutions it must find before stopping the search. There is also a
+<code>search_strategy</code> parameter in
+<code><a href="../reference/flsgen_structure.html">flsgen_structure()</a></code> which indicate to <a href="https://choco-solver.org/" class="external-link">Choco-solver</a> how to construct its
+search tree. Although this search strategy does not influence whether
+the targets will be satisfied or not, it can help diversify the
+generated structure by exploring the search tree in different ways.
+Available search strategies in Choco are:
+<code>""DEFAULT", "RANDOM", "DOM_OVER_W_DEG", "DOM_OVER_W_DEG_REF", "ACTIVITY_BASED", "CONFLICT_HISTORY", "MIN_DOM_LB", "MIN_DOM_UB"</code>
+(please refer to <a href="https://choco-solver.org/docs/solving/strategies/" class="external-link">Choco
+documentation</a> if you want more details).</p>
 <ul>
 <li><strong>What is Choco Solver ? <a name="choco"></a></strong></li>
 </ul>
-<p><a href="https://choco-solver.org/" class="external-link">Choco-solver</a> is an open-source Java Constraint Programming solver. It is a reliable solver implemented with state-of-the-art algorithms which have been used in academic and industrial projects for years.</p>
+<p><a href="https://choco-solver.org/" class="external-link">Choco-solver</a> is an
+open-source Java Constraint Programming solver. It is a reliable solver
+implemented with state-of-the-art algorithms which have been used in
+academic and industrial projects for years.</p>
 <ul>
-<li><strong>What is Constraint Programming ? <a name="constraint%20programming"></a></strong></li>
+<li><strong>What is Constraint Programming ?
+<a name="constraint%20programming"></a></strong></li>
 </ul>
-<p>Constraint programming (CP) is a declarative paradigm for modelling and solving constraint satisfaction and constrained optimization problems. In this context declarative means that the modelling of a problem is decoupled from its solving process, which allows the primary focus to be on <em>what</em> must be solved rather than describing <em>how</em> to solve it. CP is a subfield of artificial intelligence that relies on automated reasoning, constraint propagation and search heuristics. As an exact approach, CP can provide constraint satisfaction and optimality guarantees, as well as enumerate every solution of a problem. In CP, the modeller represents a problem by declaring <em>variables</em> whose possible values belong to a specified finite <em>domain</em>, by stating <em>constraints</em> (mainly logical relations between variables), and eventually by defining an objective function to minimize or maximize. A solution to the problem is an instantiation of every variable such that every constraint is satisfied. As opposed to mixed-integer linear programming, constraints can be non-linear and variables of several types (e.g. integer, real, set, graph). A CP solver then handles the solving process relying on an automated reasoning method alternating a constraint propagation algorithm (deduction process on values within domains that does not lead to any solution) and a backtracking search algorithm. In a nutshell, more than satisfiability, each constraint embeds a filtering algorithm able to detect inconsistent values in variables domains. At each step of the backtracking search algorithm, the solver calls the constraint propagation algorithm that repeatedly applies these algorithms until a fixed point is reached. When it is proven that a part of the search tree contains no solution, the solver rolls back to a previous state and explores another part of the search tree: this is backtracking. Note that most CP solvers are also able to handle Pareto multi-objective optimization.</p>
-<p>If you are interested in learning more about Constraint Programming, you can read the Handbook of Constraint Programming: <em>Rossi, E. F., van Beek, P., &amp; Walsh, T. (2006). Handbook of Constraint Programming.</em></p>
+<p>Constraint programming (CP) is a declarative paradigm for modelling
+and solving constraint satisfaction and constrained optimization
+problems. In this context declarative means that the modelling of a
+problem is decoupled from its solving process, which allows the primary
+focus to be on <em>what</em> must be solved rather than describing
+<em>how</em> to solve it. CP is a subfield of artificial intelligence
+that relies on automated reasoning, constraint propagation and search
+heuristics. As an exact approach, CP can provide constraint satisfaction
+and optimality guarantees, as well as enumerate every solution of a
+problem. In CP, the modeller represents a problem by declaring
+<em>variables</em> whose possible values belong to a specified finite
+<em>domain</em>, by stating <em>constraints</em> (mainly logical
+relations between variables), and eventually by defining an objective
+function to minimize or maximize. A solution to the problem is an
+instantiation of every variable such that every constraint is satisfied.
+As opposed to mixed-integer linear programming, constraints can be
+non-linear and variables of several types (e.g. integer, real, set,
+graph). A CP solver then handles the solving process relying on an
+automated reasoning method alternating a constraint propagation
+algorithm (deduction process on values within domains that does not lead
+to any solution) and a backtracking search algorithm. In a nutshell,
+more than satisfiability, each constraint embeds a filtering algorithm
+able to detect inconsistent values in variables domains. At each step of
+the backtracking search algorithm, the solver calls the constraint
+propagation algorithm that repeatedly applies these algorithms until a
+fixed point is reached. When it is proven that a part of the search tree
+contains no solution, the solver rolls back to a previous state and
+explores another part of the search tree: this is backtracking. Note
+that most CP solvers are also able to handle Pareto multi-objective
+optimization.</p>
+<p>If you are interested in learning more about Constraint Programming,
+you can read the Handbook of Constraint Programming: <em>Rossi, E. F.,
+van Beek, P., &amp; Walsh, T. (2006). Handbook of Constraint
+Programming.</em></p>
   </main>
 </div>
 
@@ -174,7 +321,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
     </footer>

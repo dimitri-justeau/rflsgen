@@ -1,0 +1,25 @@
+citHeader("To cite the rflsgen package in publications, use:")
+
+citEntry(
+  entry = "Article",
+  author = personList(person(c("D"), "Justeau-Allaire"),
+                      person(c("G"), "Blanchard"),
+                      person(c("T"), "Ibanez"),
+                      person(c("X"), "Lorca"),
+                      person(c("G"), "Vieilledent"),
+                      person(c("P"), "Birnbaum")),
+  title = "Fragmented landscape generator (flsgen): A neutral landscape generator with control of landscape structure and fragmentation indices",
+  journal = "Methods in Ecology and Evolution",
+  year = 2022,
+  volume = "00",
+  pages = "1-9",
+  doi = "10.1111/2041-210X.13859",
+  textVersion = paste(
+     "Justeau-Allaire D, Blanchard G, Ibanez T, Lorca X,",
+     "Vieilledent G & Birnbaum P (2022)",
+     "Fragmented landscape generator (flsgen): A neutral landscape generator with control of landscape structure and fragmentation indices",
+     "Methods in Ecology and Evolution, 00, 1‑9."
+  )
+)
+
+citFooter("You may also want to cite the package version.\nFind it with \"help(package=rflsgen)\".")

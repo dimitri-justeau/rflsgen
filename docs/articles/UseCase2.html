@@ -88,7 +88,8 @@
 
 
 
-<script src="UseCase2_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+
+<div class="row">
   <main id="main"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Use Case 2: Exploring correlations between landscape indices</h1>
             
@@ -99,13 +100,31 @@
 
     
     
-<p>In this use case, we illustrate how rflsgen can help explore correlations between landscape indices. Specifically, we focus on the relation between the effective mesh size (MESH; Jaeger, 2000) fragmentation index and the probability of connectivity index (PC; Saura and Pascual-Hortal, 2007) connectivity index (see <a href="#ref">References</a> for more details on these landscape indices). Will we generate a series of landscapes where the value of MESH is controlled through targets, for each target value of MESH, we will generate various landscapes with various structures. Then, we will use the <a href="https://connectscape.github.io/Makurhini/" class="external-link">Makurhini</a> package to evaluate PC on each generated landscape.</p>
+<p>In this use case, we illustrate how rflsgen can help explore
+correlations between landscape indices. Specifically, we focus on the
+relation between the effective mesh size (MESH; Jaeger, 2000)
+fragmentation index and the probability of connectivity index (PC; Saura
+and Pascual-Hortal, 2007) connectivity index (see <a href="#ref">References</a> for more details on these landscape indices).
+Will we generate a series of landscapes where the value of MESH is
+controlled through targets, for each target value of MESH, we will
+generate various landscapes with various structures. Then, we will use
+the <a href="https://connectscape.github.io/Makurhini/" class="external-link">Makurhini</a>
+package to evaluate PC on each generated landscape.</p>
 <div class="section level2">
 <h2 id="generating-the-landscape-series">Generating the landscape series<a class="anchor" aria-label="anchor" href="#generating-the-landscape-series"></a>
 </h2>
-<p>The following code generates ten 500x500 landscapes with a different structure for each target value of MESH between 1000 and 60000 (with a maximum allowed deviation of 1%), with an increment step of 250. Each landscape can have between 1 and 200 patches, and patch areas can vary from 10 to 250000.</p>
-<p><strong>Note:</strong> Although target values are in cell surfaces, we will configure rflsgen to generate landscapes on a projected coordinate system with a 30x30 m resolution. In geographical units, the total extent will be 22,500ha, and MESH will vary from 90 ha to 5400 ha.</p>
-<p>First, we prepare the output directories for the generated rasters:</p>
+<p>The following code generates ten 500x500 landscapes with a different
+structure for each target value of MESH between 1000 and 60000 (with a
+maximum allowed deviation of 1%), with an increment step of 250. Each
+landscape can have between 1 and 200 patches, and patch areas can vary
+from 10 to 250000.</p>
+<p><strong>Note:</strong> Although target values are in cell surfaces,
+we will configure rflsgen to generate landscapes on a projected
+coordinate system with a 30x30 m resolution. In geographical units, the
+total extent will be 22,500ha, and MESH will vary from 90 ha to 5400
+ha.</p>
+<p>First, we prepare the output directories for the generated
+rasters:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dimitri-justeau.github.io/rflsgen/" class="external-link">rflsgen</a></span><span class="op">)</span>
 
@@ -122,7 +141,9 @@
   <span class="op">}</span>
   <span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span>
 <span class="op">}</span><span class="op">)</span></code></pre></div>
-<p>Then, we define a fuction which generates 10 landscape with varying structures for a given MESH target (see the comments in the code for details):</p>
+<p>Then, we define a fuction which generates 10 landscape with varying
+structures for a given MESH target (see the comments in the code for
+details):</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">meta_generate</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">mesh</span><span class="op">)</span> <span class="op">{</span>
   <span class="va">generate</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="op">{</span>
@@ -176,12 +197,32 @@
   <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">repeats</span>, <span class="va">generate</span><span class="op">)</span>
 <span class="op">}</span>
 <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">mesh_seq</span>, <span class="va">meta_generate</span><span class="op">)</span></code></pre></div>
-<p><strong>Note:</strong> In <code>flsgen_structure</code>, we set the <code>search_strategy</code> parameter to <code>"RANDOM"</code>. This parameter configures <a href="https://choco-solver.org/" class="external-link">Choco-solver</a> to randomly construct and explore its search tree, and thus ensure a greater variability in landscape structures. The downside of using a random search strategy is that Choco will not take advantage of the problem structure to build its search tree, there are in consequence fewer guarantees on the run time. This is why we set a limit of 60 seconds, to restart the search if it takes too long. Also, note that the search strategy does not influence whether the targets will be satisfied or not, it just indicates to the solver how to construct its search tree, according to its available strategies, which are: <code>" DEFAULT", "RANDOM", "DOM_OVER_W_DEG", "DOM_OVER_W_DEG_REF", "ACTIVITY_BASED", "CONFLICT_HISTORY", "MIN_DOM_LB", "MIN_DOM_UB"</code> (please refer to <a href="https://choco-solver.org/docs/solving/strategies/" class="external-link">Choco documentation</a> if you want more details).</p>
+<p><strong>Note:</strong> In <code>flsgen_structure</code>, we set the
+<code>search_strategy</code> parameter to <code>"RANDOM"</code>. This
+parameter configures <a href="https://choco-solver.org/" class="external-link">Choco-solver</a> to randomly construct
+and explore its search tree, and thus ensure a greater variability in
+landscape structures. The downside of using a random search strategy is
+that Choco will not take advantage of the problem structure to build its
+search tree, there are in consequence fewer guarantees on the run time.
+This is why we set a limit of 60 seconds, to restart the search if it
+takes too long. Also, note that the search strategy does not influence
+whether the targets will be satisfied or not, it just indicates to the
+solver how to construct its search tree, according to its available
+strategies, which are:
+<code>" DEFAULT", "RANDOM", "DOM_OVER_W_DEG", "DOM_OVER_W_DEG_REF", "ACTIVITY_BASED", "CONFLICT_HISTORY", "MIN_DOM_LB", "MIN_DOM_UB"</code>
+(please refer to <a href="https://choco-solver.org/docs/solving/strategies/" class="external-link">Choco
+documentation</a> if you want more details).</p>
 </div>
 <div class="section level2">
 <h2 id="converting-rasters-into-vectors">Converting rasters into vectors<a class="anchor" aria-label="anchor" href="#converting-rasters-into-vectors"></a>
 </h2>
-<p>The <a href="https://connectscape.github.io/Makurhini/" class="external-link">Makurhini</a> package can compute connectivity metrics on vector datasets. Consequently, we first need to convert our generated landscapes into vectors. There are several ways to do it (e.g. using GIS software such as QGIS, using GDAL, etc). We suggest a rather efficient way to do it with R, relying on the <a href="https://r-spatial.github.io/sf/" class="external-link">sf</a> and <a href="https://r-spatial.github.io/stars/" class="external-link">stars</a> packages.</p>
+<p>The <a href="https://connectscape.github.io/Makurhini/" class="external-link">Makurhini</a>
+package can compute connectivity metrics on vector datasets.
+Consequently, we first need to convert our generated landscapes into
+vectors. There are several ways to do it (e.g. using GIS software such
+as QGIS, using GDAL, etc). We suggest a rather efficient way to do it
+with R, relying on the <a href="https://r-spatial.github.io/sf/" class="external-link">sf</a>
+and <a href="https://r-spatial.github.io/stars/" class="external-link">stars</a> packages.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/stars/" class="external-link">stars</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span>
@@ -192,37 +233,47 @@
     <span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">basepath</span>, <span class="va">mesh</span>, <span class="st">"/mesh_"</span>, <span class="va">mesh</span>, <span class="st">"__"</span>, <span class="va">n</span>, <span class="st">".tif"</span><span class="op">)</span>
     <span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">basepath</span>, <span class="va">mesh</span>, <span class="st">"/shape_mesh_"</span>, <span class="va">mesh</span>, <span class="st">"__"</span>, <span class="va">n</span>, <span class="st">".shp"</span><span class="op">)</span>
     <span class="co"># Read the raster using stars</span>
-    <span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/stars/reference/read_stars.html" class="external-link">read_stars</a></span><span class="op">(</span><span class="va">input</span><span class="op">)</span>
+    <span class="va">s</span> <span class="op">&lt;-</span> <span class="fu">read_stars</span><span class="op">(</span><span class="va">input</span><span class="op">)</span>
     <span class="co"># Set every non-focal cell to NA</span>
     <span class="va">s</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="va">s</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">!=</span> <span class="fl">0</span><span class="op">]</span> <span class="op">=</span> <span class="cn">NA</span>
     <span class="co"># Convert the raster to vector with sf</span>
-    <span class="va">v</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/stars/reference/st_as_sf.html" class="external-link">st_as_sf</a></span><span class="op">(</span><span class="va">s</span><span class="op">)</span>
-    <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_write.html" class="external-link">st_write</a></span><span class="op">(</span><span class="va">v</span>, <span class="va">output</span><span class="op">)</span>
+    <span class="va">v</span> <span class="op">&lt;-</span> <span class="fu">st_as_sf</span><span class="op">(</span><span class="va">s</span><span class="op">)</span>
+    <span class="fu">st_write</span><span class="op">(</span><span class="va">v</span>, <span class="va">output</span><span class="op">)</span>
   <span class="op">}</span><span class="op">)</span>
 <span class="op">}</span><span class="op">)</span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="computing-the-probability-of-connectivity-pc">Computing the probability of connectivity (PC)<a class="anchor" aria-label="anchor" href="#computing-the-probability-of-connectivity-pc"></a>
 </h2>
-<p>We are now ready to compute the PC index on our generated landscapes, and prepare our dataset for the correlation analysis. In the following code, we populate a data frame where each row corresponds to one of our generated landscapes. For each of these, we use <a href="https://connectscape.github.io/Makurhini/" class="external-link">Makurhini</a> to compute PC (we rely on the default probability threshold method based on the inverse of the mean distance between patches, see Makurhini documentation for more detail), we also use <a href="https://r-spatialecology.github.io/landscapemetrics/" class="external-link">landscapemetrics</a> to compute the exact MESH value (as we allowed a maximum deviation of 1%).</p>
+<p>We are now ready to compute the PC index on our generated landscapes,
+and prepare our dataset for the correlation analysis. In the following
+code, we populate a data frame where each row corresponds to one of our
+generated landscapes. For each of these, we use <a href="https://connectscape.github.io/Makurhini/" class="external-link">Makurhini</a> to
+compute PC (we rely on the default probability threshold method based on
+the inverse of the mean distance between patches, see Makurhini
+documentation for more detail), we also use <a href="https://r-spatialecology.github.io/landscapemetrics/" class="external-link">landscapemetrics</a>
+to compute the exact MESH value (as we allowed a maximum deviation of
+1%).</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatialecology.github.io/landscapemetrics/" class="external-link">landscapemetrics</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/connectscape/Makurhini" class="external-link">Makurhini</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">Makurhini</span><span class="op">)</span>
 
 <span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html" class="external-link">expand.grid</a></span><span class="op">(</span><span class="st">"mesh_target"</span> <span class="op">=</span> <span class="va">mesh_seq</span>, <span class="st">"n"</span> <span class="op">=</span> <span class="va">repeats</span><span class="op">)</span>
-<span class="va">df</span><span class="op">$</span><span class="va">file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">basepath</span>, <span class="va">df</span><span class="op">$</span><span class="va">mesh_target</span>, <span class="st">"/shape_mesh_"</span>, <span class="va">df</span><span class="op">$</span><span class="va">mesh_target</span>, <span class="st">"__"</span>, <span class="va">df</span><span class="op">$</span><span class="va">n</span>, <span class="st">".shp"</span><span class="op">)</span>
+<span class="va">df</span><span class="op">$</span><span class="va">file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">basepath</span>, <span class="va">df</span><span class="op">$</span><span class="va">mesh_target</span>, <span class="st">"/shape_mesh_"</span>, <span class="va">df</span><span class="op">$</span><span class="va">mesh_target</span>, <span class="st">"__"</span>,
+                  <span class="va">df</span><span class="op">$</span><span class="va">n</span>, <span class="st">".shp"</span><span class="op">)</span>
 <span class="va">df</span><span class="op">$</span><span class="va">mesh</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/pkg/raster/man/ncell.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>, by<span class="op">=</span><span class="fl">1</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="op">{</span>
   <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"compute MESH for"</span>, <span class="va">i</span>, <span class="st">"\n"</span><span class="op">)</span><span class="op">)</span>
-  <span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">basepath</span>, <span class="va">df</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">mesh_target</span>, <span class="st">"/mesh_"</span>, <span class="va">df</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">mesh_target</span>, <span class="st">"__"</span>, <span class="va">df</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">n</span>, <span class="st">".tif"</span><span class="op">)</span>
+  <span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">basepath</span>, <span class="va">df</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">mesh_target</span>, <span class="st">"/mesh_"</span>, <span class="va">df</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">mesh_target</span>, <span class="st">"__"</span>,
+                 <span class="va">df</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">n</span>, <span class="st">".tif"</span><span class="op">)</span>
   <span class="fu"><a href="https://r-spatialecology.github.io/landscapemetrics/reference/lsm_c_mesh.html" class="external-link">lsm_c_mesh</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/raster.html" class="external-link">raster</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span>,<span class="op">]</span><span class="op">$</span><span class="va">value</span>
 <span class="op">}</span><span class="op">)</span>
 
 <span class="va">df</span><span class="op">$</span><span class="va">PC</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/pkg/raster/man/ncell.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>, by<span class="op">=</span><span class="fl">1</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">shape</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">st_read</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="va">i</span>, <span class="op">]</span><span class="op">$</span><span class="va">file</span><span class="op">)</span>
+  <span class="va">shape</span> <span class="op">&lt;-</span> <span class="fu">st_read</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="va">i</span>, <span class="op">]</span><span class="op">$</span><span class="va">file</span><span class="op">)</span>
   <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/ncell.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">shape</span><span class="op">)</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span> <span class="op">{</span>
     <span class="va">df</span><span class="op">[</span><span class="va">i</span>, <span class="op">]</span><span class="op">$</span><span class="va">mesh</span> <span class="op">/</span> <span class="op">(</span><span class="fl">500</span><span class="op">*</span><span class="fl">500</span><span class="op">*</span><span class="fl">30</span><span class="op">*</span><span class="fl">30</span><span class="op">/</span><span class="fl">10000</span><span class="op">)</span>
   <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
-    <span class="va">PC</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Makurhini/man/MK_dPCIIC.html" class="external-link">MK_dPCIIC</a></span><span class="op">(</span>
+    <span class="va">PC</span> <span class="op">&lt;-</span> <span class="fu">MK_dPCIIC</span><span class="op">(</span>
       nodes <span class="op">=</span> <span class="va">shape</span>,
       distance <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"centroid"</span><span class="op">)</span>, 
       metric <span class="op">=</span> <span class="st">"PC"</span>, 
@@ -273,8 +324,13 @@ sample estimates:
 <div class="section level2">
 <h2 id="references">References <a name="ref"></a><a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
-<p>Jaeger, J. A. G. (2000). Landscape division, splitting index, and effective mesh size: New measures of landscape fragmentation. Landscape Ecology, 15(2), 115-130. <a href="https://doi.org/10.1023/A:1008129329289" class="external-link uri">https://doi.org/10.1023/A:1008129329289</a></p>
-<p>Saura, S., &amp; Pascual-Hortal, L. (2007). A new habitat availability index to integrate connectivity in landscape conservation planning: Comparison with existing indices and application to a case study. Landscape and Urban Planning, 83(2), 91-103. <a href="https://doi.org/10.1016/j.landurbplan.2007.03.005" class="external-link uri">https://doi.org/10.1016/j.landurbplan.2007.03.005</a></p>
+<p>Jaeger, J. A. G. (2000). Landscape division, splitting index, and
+effective mesh size: New measures of landscape fragmentation. Landscape
+Ecology, 15(2), 115-130. <a href="https://doi.org/10.1023/A:1008129329289" class="external-link uri">https://doi.org/10.1023/A:1008129329289</a></p>
+<p>Saura, S., &amp; Pascual-Hortal, L. (2007). A new habitat
+availability index to integrate connectivity in landscape conservation
+planning: Comparison with existing indices and application to a case
+study. Landscape and Urban Planning, 83(2), 91-103. <a href="https://doi.org/10.1016/j.landurbplan.2007.03.005" class="external-link uri">https://doi.org/10.1016/j.landurbplan.2007.03.005</a></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
@@ -289,7 +345,7 @@ sample estimates:
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
     </footer>

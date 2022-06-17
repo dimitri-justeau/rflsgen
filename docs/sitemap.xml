@@ -1,112 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
-
-
-<url>
-  <loc>https://dimitri-justeau.github.io/rflsgen/</loc>
-  <lastmod>2022-04-07T23:38:00+00:00</lastmod>
-  <priority>1.00</priority>
-</url>
-<url>
-  <loc>https://dimitri-justeau.github.io/rflsgen/index.html</loc>
-  <lastmod>2022-04-07T23:38:00+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://dimitri-justeau.github.io/rflsgen/reference/index.html</loc>
-  <lastmod>2022-04-07T23:38:00+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://dimitri-justeau.github.io/rflsgen/articles/Targets.html</loc>
-  <lastmod>2022-04-07T23:38:00+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://dimitri-justeau.github.io/rflsgen/articles/FAQ.html</loc>
-  <lastmod>2022-04-07T23:38:00+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://dimitri-justeau.github.io/rflsgen/articles/UseCase1.html</loc>
-  <lastmod>2022-04-07T23:38:00+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://dimitri-justeau.github.io/rflsgen/articles/UseCase2.html</loc>
-  <lastmod>2022-04-07T23:38:00+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://dimitri-justeau.github.io/rflsgen/articles/UseCase3.html</loc>
-  <lastmod>2022-04-07T23:38:00+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://dimitri-justeau.github.io/rflsgen/news/index.html</loc>
-  <lastmod>2022-04-07T23:38:00+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://dimitri-justeau.github.io/rflsgen/reference/flsgen_terrain.html</loc>
-  <lastmod>2022-04-07T23:38:00+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://dimitri-justeau.github.io/rflsgen/reference/flsgen_create_class_targets.html</loc>
-  <lastmod>2022-04-07T23:38:00+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://dimitri-justeau.github.io/rflsgen/reference/flsgen_create_landscape_targets.html</loc>
-  <lastmod>2022-04-07T23:38:00+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://dimitri-justeau.github.io/rflsgen/reference/flsgen_structure.html</loc>
-  <lastmod>2022-04-07T23:38:00+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://dimitri-justeau.github.io/rflsgen/reference/flsgen_generate.html</loc>
-  <lastmod>2022-04-07T23:38:00+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://dimitri-justeau.github.io/rflsgen/reference/flsgen_extract_structure_from_raster.html</loc>
-  <lastmod>2022-04-07T23:38:00+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://dimitri-justeau.github.io/rflsgen/authors.html</loc>
-  <lastmod>2022-04-07T23:38:00+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://dimitri-justeau.github.io/rflsgen/reference/CLASS_LEVEL_TARGETS.html</loc>
-  <lastmod>2022-04-07T23:38:00+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://dimitri-justeau.github.io/rflsgen/reference/flsgen_create_class_structure.html</loc>
-  <lastmod>2022-04-07T23:38:00+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://dimitri-justeau.github.io/rflsgen/reference/flsgen_create_landscape_structure.html</loc>
-  <lastmod>2022-04-07T23:38:00+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://dimitri-justeau.github.io/rflsgen/reference/flsgen_create_target_series.html</loc>
-  <lastmod>2022-04-07T23:38:00+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-
-
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>/404.html</loc>
+  </url>
+  <url>
+    <loc>/articles/FAQ.html</loc>
+  </url>
+  <url>
+    <loc>/articles/Targets.html</loc>
+  </url>
+  <url>
+    <loc>/articles/UseCase1.html</loc>
+  </url>
+  <url>
+    <loc>/articles/UseCase2.html</loc>
+  </url>
+  <url>
+    <loc>/articles/UseCase3.html</loc>
+  </url>
+  <url>
+    <loc>/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>/authors.html</loc>
+  </url>
+  <url>
+    <loc>/googleb4d600c51b7e8c15.html</loc>
+  </url>
+  <url>
+    <loc>/index.html</loc>
+  </url>
+  <url>
+    <loc>/news/index.html</loc>
+  </url>
+  <url>
+    <loc>/reference/CLASS_LEVEL_TARGETS.html</loc>
+  </url>
+  <url>
+    <loc>/reference/flsgen_create_class_structure.html</loc>
+  </url>
+  <url>
+    <loc>/reference/flsgen_create_class_targets.html</loc>
+  </url>
+  <url>
+    <loc>/reference/flsgen_create_landscape_structure.html</loc>
+  </url>
+  <url>
+    <loc>/reference/flsgen_create_landscape_targets.html</loc>
+  </url>
+  <url>
+    <loc>/reference/flsgen_create_target_series.html</loc>
+  </url>
+  <url>
+    <loc>/reference/flsgen_extract_structure_from_raster.html</loc>
+  </url>
+  <url>
+    <loc>/reference/flsgen_generate.html</loc>
+  </url>
+  <url>
+    <loc>/reference/flsgen_load_structure_from_raster.html</loc>
+  </url>
+  <url>
+    <loc>/reference/flsgen_structure.html</loc>
+  </url>
+  <url>
+    <loc>/reference/flsgen_terrain.html</loc>
+  </url>
+  <url>
+    <loc>/reference/index.html</loc>
+  </url>
 </urlset>

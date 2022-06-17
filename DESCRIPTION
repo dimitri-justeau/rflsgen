@@ -14,7 +14,7 @@ LazyData: true
 Depends: rJava, raster
 Imports: rgdal, checkmate, utils, jsonlite
 SystemRequirements: Java (>= 8)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.0
 Suggests: testthat (>= 3.0.0), knitr, rmarkdown, landscapemetrics
 VignetteBuilder: knitr
 URL: https://dimitri-justeau.github.io/rflsgen/, https://dimitri-justeau.github.io/rflsgen/

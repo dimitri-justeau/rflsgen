@@ -14,6 +14,7 @@ For more details and tutorials, please visit `rflsgen`'s website: https://dimitr
     * [Landscape raster generation](#generate)
     * [Masking](#masking)
     * [Extracting structures from existing landscape](#extract)
+  * [Citation](#citation)
 
 ## Download and installation <a name="down"></a>
 
@@ -179,3 +180,12 @@ Instead of generating landscape structure from targets, it is also possible to e
 ```r
 struct <- flsgen_extract_structure_from_raster("existing_raster.tif", focal_classes=c(0, 1))
 ```
+
+## Citation <a name="citation"></a>
+
+Please cite the *rflsgen R* package when using it in publications.
+
+> Justeau-Allaire, D., Blanchard, G., Ibanez, T., Lorca, X., Vieilledent, G. & Birnbaum, P. (2022).
+> Fragmented landscape generator (flsgen): A neutral landscape generator with control of landscape
+> structure and fragmentation indices. Methods in Ecology and Evolution, 00, 1– 9.
+> https://doi.org/10.1111/2041-210X.13859

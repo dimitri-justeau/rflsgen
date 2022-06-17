@@ -88,7 +88,8 @@
 
 
 
-<script src="Targets_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+
+<div class="row">
   <main id="main"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Available landscape targets</h1>
             
@@ -100,6 +101,12 @@
     
     
 <table class="table">
+<colgroup>
+<col width="38%">
+<col width="26%">
+<col width="8%">
+<col width="26%">
+</colgroup>
 <thead><tr class="header">
 <th>Name</th>
 <th>Abbreviation</th>
@@ -194,78 +201,119 @@
 </tbody>
 </table>
 <ul>
-<li><strong><code>AREA</code> : Patch area <a name="AREA"></a></strong></li>
+<li><strong><code>AREA</code> : Patch area
+<a name="AREA"></a></strong></li>
 </ul>
-<p>Interval that defines the minimum and maximum allowed area for all patches of the landscape class.</p>
+<p>Interval that defines the minimum and maximum allowed area for all
+patches of the landscape class.</p>
 <ul>
-<li><strong><code>AREA_MN</code> : Mean patch area <a name="AREA_MN"></a></strong></li>
+<li><strong><code>AREA_MN</code> : Mean patch area
+<a name="AREA_MN"></a></strong></li>
 </ul>
-<p>Interval that defines the minimum and maximum allowed mean patch area for the landscape class.</p>
+<p>Interval that defines the minimum and maximum allowed mean patch area
+for the landscape class.</p>
 <ul>
-<li><strong><code>CA</code> : Total class area <a name="CA"></a></strong></li>
+<li><strong><code>CA</code> : Total class area
+<a name="CA"></a></strong></li>
 </ul>
-<p>Interval that defines the minimum and maximum allowed total area of the landscape class.</p>
+<p>Interval that defines the minimum and maximum allowed total area of
+the landscape class.</p>
 <ul>
-<li><strong><code>PLAND</code> and <code>NON_FOCAL_PLAND</code>: Proportion of landscape <a name="PLAND"></a></strong></li>
+<li><strong><code>PLAND</code> and <code>NON_FOCAL_PLAND</code>:
+Proportion of landscape <a name="PLAND"></a></strong></li>
 </ul>
-<p>Interval that defines the minimum and maximum allowed proportion of landscape occupied by the landscape class. <code>NON_FOCAL_PLAND</code> is used to enforce a PLAND target on the non-focal class, and is defined at the landscape level.</p>
+<p>Interval that defines the minimum and maximum allowed proportion of
+landscape occupied by the landscape class. <code>NON_FOCAL_PLAND</code>
+is used to enforce a PLAND target on the non-focal class, and is defined
+at the landscape level.</p>
 <ul>
-<li><strong><code>NP</code> : Number of patches <a name="NP"></a></strong></li>
+<li><strong><code>NP</code> : Number of patches
+<a name="NP"></a></strong></li>
 </ul>
-<p>Interval that defines the minimum and maximum allowed number of patches in the landscape class.</p>
+<p>Interval that defines the minimum and maximum allowed number of
+patches in the landscape class.</p>
 <ul>
-<li><strong><code>PD</code> : Patch density <a name="PD"></a></strong></li>
+<li><strong><code>PD</code> : Patch density
+<a name="PD"></a></strong></li>
 </ul>
-<p>Interval that defines the minimum and maximum allowed patch density of the landscape class. Patch density is given by:</p>
+<p>Interval that defines the minimum and maximum allowed patch density
+of the landscape class. Patch density is given by:</p>
 <p><span class="math display">\[PD = \frac{NP}{L}\]</span></p>
 <p>With NP the number of patches and L the landscape area.</p>
 <ul>
-<li><strong><code>SPI</code> : Smallest patch index <a name="SPI"></a></strong></li>
+<li><strong><code>SPI</code> : Smallest patch index
+<a name="SPI"></a></strong></li>
 </ul>
-<p>Interval that defines the minimum and maximum allowed size for the smallest patch of the landscape class.</p>
+<p>Interval that defines the minimum and maximum allowed size for the
+smallest patch of the landscape class.</p>
 <ul>
-<li><strong><code>LPI</code> : Largest patch index <a name="LPI"></a></strong></li>
+<li><strong><code>LPI</code> : Largest patch index
+<a name="LPI"></a></strong></li>
 </ul>
-<p>Interval that defines the minimum and maximum allowed size for the largest patch of the landscape class.</p>
+<p>Interval that defines the minimum and maximum allowed size for the
+largest patch of the landscape class.</p>
 <ul>
-<li><strong><code>MESH</code> : Effective mesh size <a name="MESH"></a></strong></li>
+<li><strong><code>MESH</code> : Effective mesh size
+<a name="MESH"></a></strong></li>
 </ul>
-<p>Interval that defines the minimum and maximum allowed effective mesh size. The effective mesh size is a fragmentation index based on the probability that two points that are randomly chosen are located in the main patch (Jaeger, 2000). It is given by:</p>
-<p><span class="math display">\[MESH = \frac{1}{L} \sum_{i=1}^{NP} A_i^2\]</span> With L the total landscape area, NP the number of patches in the landscape class, and <span class="math inline">\(A_i\)</span> the area of patch <span class="math inline">\(i\)</span>.</p>
+<p>Interval that defines the minimum and maximum allowed effective mesh
+size. The effective mesh size is a fragmentation index based on the
+probability that two points that are randomly chosen are located in the
+main patch (Jaeger, 2000). It is given by:</p>
+<p><span class="math display">\[MESH = \frac{1}{L} \sum_{i=1}^{NP}
+A_i^2\]</span> With L the total landscape area, NP the number of patches
+in the landscape class, and <span class="math inline">\(A_i\)</span> the
+area of patch <span class="math inline">\(i\)</span>.</p>
 <ul>
-<li><strong><code>SPLI</code> : Splitting index <a name="SPLI"></a></strong></li>
+<li><strong><code>SPLI</code> : Splitting index
+<a name="SPLI"></a></strong></li>
 </ul>
-<p>Interval that defines the minimum and maximum allowed splitting index. The splitting index was defined by Jaeger (2000) and is given by:</p>
+<p>Interval that defines the minimum and maximum allowed splitting
+index. The splitting index was defined by Jaeger (2000) and is given
+by:</p>
 <p><span class="math display">\[
 SPLI = \frac{L^2}{\sum_{i=1}^{NP} A_i^2}
 \]</span></p>
 <p>With L the total landscape area, NP the number of patches, and <span class="math inline">\(A_i\)</span> the area of patch i.</p>
 <ul>
-<li><strong><code>NPRO</code> : Net product <a name="NPRO"></a></strong></li>
+<li><strong><code>NPRO</code> : Net product
+<a name="NPRO"></a></strong></li>
 </ul>
-<p>Interval that defines the minimum and maximum allowed net product. The net product was defined by Jaeger (2000) and is given by:</p>
+<p>Interval that defines the minimum and maximum allowed net product.
+The net product was defined by Jaeger (2000) and is given by:</p>
 <p><span class="math display">\[
 NPRO = \sum_{i=1}^{NP} A_i^2
-\]</span> Where NP is the number of patches of the landscape class and <span class="math inline">\(A_i\)</span> the area of patch i.</p>
+\]</span> Where NP is the number of patches of the landscape class and
+<span class="math inline">\(A_i\)</span> the area of patch i.</p>
 <ul>
-<li><strong><code>SDEN</code> : Splitting density <a name="SDEN"></a></strong></li>
+<li><strong><code>SDEN</code> : Splitting density
+<a name="SDEN"></a></strong></li>
 </ul>
-<p>Interval that defines the minimum and maximum allowed splitting density. The splitting density was defined by Jaeger (2000) and is given by:</p>
+<p>Interval that defines the minimum and maximum allowed splitting
+density. The splitting density was defined by Jaeger (2000) and is given
+by:</p>
 <p><span class="math display">\[
 SDEN = \frac{L}{\sum_{i=1}^{NP} A_i^2}
 \]</span></p>
 <p>With L the total landscape area, NP the number of patches, and <span class="math inline">\(A_i\)</span> the area of patch i.</p>
 <ul>
-<li><strong><code>COHE</code> : Degree of coherence <a name="COHE"></a></strong></li>
+<li><strong><code>COHE</code> : Degree of coherence
+<a name="COHE"></a></strong></li>
 </ul>
-<p>Interval that defines the minimum and maximum allowed degree of coherence. The degree of coherence was defined by Jaeger (2000) and is given by:</p>
+<p>Interval that defines the minimum and maximum allowed degree of
+coherence. The degree of coherence was defined by Jaeger (2000) and is
+given by:</p>
 <p><span class="math display">\[
 COHE = \sum_{i=1}^{NP}(\frac{A_i}{L})^2
-\]</span> With L the total landscape area, NP the number of patches, and <span class="math inline">\(A_i\)</span> the area of patch i.</p>
+\]</span> With L the total landscape area, NP the number of patches, and
+<span class="math inline">\(A_i\)</span> the area of patch i.</p>
 <ul>
-<li><strong><code>DIVI</code> : Degree of landscape division <a name="DIVI"></a></strong></li>
+<li><strong><code>DIVI</code> : Degree of landscape division
+<a name="DIVI"></a></strong></li>
 </ul>
-<p>Interval that defines the minimum and maximum allowed degree of landscape division. The degree of landscape division was defined by Jaeger (2000) and is given by:</p>
+<p>Interval that defines the minimum and maximum allowed degree of
+landscape division. The degree of landscape division was defined by
+Jaeger (2000) and is given by:</p>
 <p><span class="math display">\[
 DIVI = 1 - \sum_{i=1}^{NP}(\frac{A_i}{L})^2
 \]</span></p>
@@ -273,7 +321,9 @@ DIVI = 1 - \sum_{i=1}^{NP}(\frac{A_i}{L})^2
 <div class="section level4">
 <h4 id="references">References <a name="ref"></a><a class="anchor" aria-label="anchor" href="#references"></a>
 </h4>
-<p>Jaeger, J. A. G. (2000). Landscape division, splitting index, and effective mesh size: New measures of landscape fragmentation. Landscape Ecology, 15(2), 115-130. <a href="https://doi.org/10.1023/A:1008129329289" class="external-link uri">https://doi.org/10.1023/A:1008129329289</a></p>
+<p>Jaeger, J. A. G. (2000). Landscape division, splitting index, and
+effective mesh size: New measures of landscape fragmentation. Landscape
+Ecology, 15(2), 115-130. <a href="https://doi.org/10.1023/A:1008129329289" class="external-link uri">https://doi.org/10.1023/A:1008129329289</a></p>
 </div>
   </main>
 </div>
@@ -287,7 +337,7 @@ DIVI = 1 - \sum_{i=1}^{NP}(\frac{A_i}{L})^2
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
     </footer>
