@@ -1,7 +1,14 @@
 # rflsgen
 
-[![R-CMD-check](https://github.com/dimitri-justeau/rflsgen/actions/workflows/r.yml/badge.svg)](https://github.com/dimitri-justeau/rflsgen/actions/workflows/r.yml) [![codecov](https://codecov.io/gh/dimitri-justeau/rflsgen/branch/master/graph/badge.svg?token=HXA7L85S4F)](https://app.codecov.io/gh/dimitri-justeau/rflsgen) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/051b1240fc8e47c3926421ec99c95c8f)](https://app.codacy.com/gh/dimitri-justeau/rflsgen/dashboard?utm_source=github.com&utm_medium=referral&utm_content=dimitri-justeau/rflsgen&utm_campaign=Badge_Grade) [![DOI](https://zenodo.org/badge/418379079.svg)](https://zenodo.org/badge/latestdoi/418379079)
-[![CRAN version](https://www.r-pkg.org/badges/version/rflsgen)](https://CRAN.R-project.org/package=rflsgen) [![Downloads](https://cranlogs.r-pkg.org/badges/rflsgen)](https://CRAN.R-project.org/package=rflsgen) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![R-CMD-check-Ubunut](https://github.com/dimitri-justeau/rflsgen/actions/workflows/R-CMD-check-ubuntu.yaml.yml/badge.svg)](https://github.com/dimitri-justeau/rflsgen/actions/workflows/r.yml)
+[![R-CMD-check-Windows](https://github.com/dimitri-justeau/rflsgen/actions/workflows/R-CMD-check-windows.yaml.yml/badge.svg)](https://github.com/dimitri-justeau/rflsgen/actions)
+[![R-CMD-check-MacOS](https://github.com/dimitri-justeau/rflsgen/actions/workflows/R-CMD-check-macos.yaml.yml/badge.svg)](https://github.com/dimitri-justeau/rflsgen/actions)
+[![codecov](https://codecov.io/gh/dimitri-justeau/rflsgen/branch/master/graph/badge.svg?token=HXA7L85S4F)](https://app.codecov.io/gh/dimitri-justeau/rflsgen)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/051b1240fc8e47c3926421ec99c95c8f)](https://app.codacy.com/gh/dimitri-justeau/rflsgen/dashboard?utm_source=github.com&utm_medium=referral&utm_content=dimitri-justeau/rflsgen&utm_campaign=Badge_Grade)
+[![DOI](https://zenodo.org/badge/418379079.svg)](https://zenodo.org/badge/latestdoi/418379079)
+[![CRAN version](https://www.r-pkg.org/badges/version/rflsgen)](https://CRAN.R-project.org/package=rflsgen)
+[![Downloads](https://cranlogs.r-pkg.org/badges/rflsgen)](https://CRAN.R-project.org/package=rflsgen)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 `rflsgen` is the R distribution of [`flsgen`](https://github.com/dimitri-justeau/flsgen), a neutral landscape generator that allows users to set targets on landscape indices. It first relies on [Choco-solver](https://choco-solver.org/) to identify landscape structure satisfying user targets, then uses a stochastic algorithm to produce landscape rasters.
 
