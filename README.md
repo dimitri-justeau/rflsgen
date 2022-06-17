@@ -1,8 +1,8 @@
 # rflsgen
 
-[![R-CMD-check-Ubunut](https://github.com/dimitri-justeau/rflsgen/actions/workflows/R-CMD-check-ubuntu.yaml.yml/badge.svg)](https://github.com/dimitri-justeau/rflsgen/actions/workflows/r.yml)
-[![R-CMD-check-Windows](https://github.com/dimitri-justeau/rflsgen/actions/workflows/R-CMD-check-windows.yaml.yml/badge.svg)](https://github.com/dimitri-justeau/rflsgen/actions)
-[![R-CMD-check-MacOS](https://github.com/dimitri-justeau/rflsgen/actions/workflows/R-CMD-check-macos.yaml.yml/badge.svg)](https://github.com/dimitri-justeau/rflsgen/actions)
+[![R-CMD-check-Ubunut](https://github.com/dimitri-justeau/rflsgen/actions/workflows/R-CMD-check-ubuntu.yaml/badge.svg)](https://github.com/dimitri-justeau/rflsgen/actions)
+[![R-CMD-check-Windows](https://github.com/dimitri-justeau/rflsgen/actions/workflows/R-CMD-check-windows.yaml/badge.svg)](https://github.com/dimitri-justeau/rflsgen/actions)
+[![R-CMD-check-MacOS](https://github.com/dimitri-justeau/rflsgen/actions/workflows/R-CMD-check-macos.yaml/badge.svg)](https://github.com/dimitri-justeau/rflsgen/actions)
 [![codecov](https://codecov.io/gh/dimitri-justeau/rflsgen/branch/master/graph/badge.svg?token=HXA7L85S4F)](https://app.codecov.io/gh/dimitri-justeau/rflsgen)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/051b1240fc8e47c3926421ec99c95c8f)](https://app.codacy.com/gh/dimitri-justeau/rflsgen/dashboard?utm_source=github.com&utm_medium=referral&utm_content=dimitri-justeau/rflsgen&utm_campaign=Badge_Grade)
 [![DOI](https://zenodo.org/badge/418379079.svg)](https://zenodo.org/badge/latestdoi/418379079)
