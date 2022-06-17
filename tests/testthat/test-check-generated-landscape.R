@@ -6,6 +6,7 @@ test_that("landscape_structure", {
   struct <- flsgen_structure(ls_targets)
   # Generate landscapes with 1 ha pixel to facilitate comparison with landscapemetrics
   ls <- flsgen_generate(struct, verbose = FALSE, epsg = "EPSG:3395", resolution_x = 100)
+  skip_if_not_installed("landscapemetrics")
   np <- landscapemetrics::lsm_c_np(ls)
   testthat::expect_equal(np[np$class==0,]$value, 10)
   testthat::expect_equal(np[np$class==1,]$value, 10)
