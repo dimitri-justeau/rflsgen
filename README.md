@@ -1,4 +1,4 @@
-# rflsgen  <img src="man/figures/logo.png" align="right" style="height:90px!important;"/>
+# rflsgen  <img src="man/figures/logo.tif" align="right" style="height:90px!important;"/>
 
 [![R-CMD-check-Ubunut](https://github.com/dimitri-justeau/rflsgen/actions/workflows/R-CMD-check-ubuntu.yaml/badge.svg)](https://github.com/dimitri-justeau/rflsgen/actions)
 [![R-CMD-check-Windows](https://github.com/dimitri-justeau/rflsgen/actions/workflows/R-CMD-check-windows.yaml/badge.svg)](https://github.com/dimitri-justeau/rflsgen/actions)
