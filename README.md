@@ -1,4 +1,4 @@
-# rflsgen: <img src="man/figures/logo.png" align="right" width="140px"/>
+# rflsgen <img src="man/figures/logo.png" align="right" width="140px"/>
 ## Neutral Landscape Generator with Targets on Landscape Indices
 
 [![R-CMD-check-Ubunut](https://github.com/dimitri-justeau/rflsgen/actions/workflows/R-CMD-check-ubuntu.yaml/badge.svg)](https://github.com/dimitri-justeau/rflsgen/actions)
@@ -11,7 +11,7 @@
 [![Downloads](https://cranlogs.r-pkg.org/badges/rflsgen)](https://CRAN.R-project.org/package=rflsgen)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-<p id="logo-credit">Logo by Camille Salmon</p>
+<p id="logo-credit" text-align="right" font-size="10px">Logo by Camille Salmon</p>
 
 `rflsgen` is the R distribution of [`flsgen`](https://github.com/dimitri-justeau/flsgen), a neutral landscape generator that allows users to set targets on landscape indices. It first relies on [Choco-solver](https://choco-solver.org/) to identify landscape structure satisfying user targets, then uses a stochastic algorithm to produce landscape rasters.
 
