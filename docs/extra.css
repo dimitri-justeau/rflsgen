@@ -1,0 +1,19 @@
+.page-header {
+  border-bottom: none !important;
+  padding-bottom: 0px !important;
+  min-height: 0px !important;
+}
+
+#neutral-landscape-generator-with-targets-on-landscape-indices {
+  padding-bottom: 10px;
+}
+
+.template-home img.logo {
+  width: 140px;
+}
+
+#logo-credit{
+  text-align: right;
+  font-size: 10px;
+  margin-bottom: 10px;
+}
