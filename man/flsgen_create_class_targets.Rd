@@ -19,7 +19,9 @@ flsgen_create_class_targets(
   NPRO = NULL,
   SDEN = NULL,
   COHE = NULL,
-  DIVI = NULL
+  DIVI = NULL,
+  IS_SQUARE = FALSE,
+  patchesAllDifferent = FALSE
 )
 }
 \arguments{
@@ -52,6 +54,8 @@ flsgen_create_class_targets(
 \item{COHE}{degree of coherence target (must be a vector of length 2)}
 
 \item{DIVI}{degree of landscape division target (must be a vector of length 2)}
+
+\item{IS_SQUARE}{if TRUE, the class is required to only produce square patches}
 }
 \value{
 A class targets object which can be converted to JSON for flsgen

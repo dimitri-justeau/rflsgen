@@ -7,7 +7,6 @@
 flsgen_terrain(
   width,
   height,
-  output = tempfile(fileext = ".tif"),
   roughness = 0.5,
   x = 0,
   y = 0,
@@ -20,8 +19,6 @@ flsgen_terrain(
 
 \item{height}{Height (in pixels) of output raster}
 
-\item{output}{Path of output raster file (temporary file by default)}
-
 \item{roughness}{Roughness factor (or H), between 0 and 1}
 
 \item{x}{X position (geographical coordinates) of the top-left output raster pixel}
@@ -33,7 +30,7 @@ flsgen_terrain(
 \item{epsg}{EPSG identifier of the output projection}
 }
 \value{
-A raster object
+A terra::rast object
 }
 \description{
 Fractal terrain generation with the diamond-square algorithm

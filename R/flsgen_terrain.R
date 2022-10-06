@@ -23,18 +23,16 @@
 #' @description Fractal terrain generation with the diamond-square algorithm
 #'
 #' @import rJava
-#' @import raster
 #'
 #' @param width Width (in pixels) of output raster
 #' @param height Height (in pixels) of output raster
-#' @param output Path of output raster file (temporary file by default)
 #' @param roughness Roughness factor (or H), between 0 and 1
 #' @param x X position (geographical coordinates) of the top-left output raster pixel
 #' @param y Y position (geographical coordinates) of the top-left output raster pixel
 #' @param resolution Spatial resolution (geographical units) of the output raster (i.e. pixel dimension)
 #' @param epsg EPSG identifier of the output projection
 #'
-#' @return A raster object
+#' @return A terra::rast object
 #'
 #' @examples
 #'   \dontrun{
@@ -43,7 +41,7 @@
 #'
 #' @export
 #'
-flsgen_terrain <- function(width, height, output=tempfile(fileext=".tif"), roughness=0.5, x=0, y=0, resolution=0.0001, epsg="EPSG:4326") {
+flsgen_terrain <- function(width, height, roughness=0.5, x=0, y=0, resolution=0.0001, epsg="EPSG:4326") {
   # Check arguments
   checkmate::assert_int(width, lower=1)
   checkmate::assert_int(height, lower=1)
@@ -52,12 +50,17 @@ flsgen_terrain <- function(width, height, output=tempfile(fileext=".tif"), rough
   checkmate::assert_number(y)
   checkmate::assert_number(resolution)
   checkmate::assert_string(epsg)
-  checkmate::assert_string(output)
   # Generate fractal terrain using flsgen jar
   grid <- .jnew("org.flsgen.grid.regular.square.RegularSquareGrid", as.integer(height), as.integer(width))
   terrain <- .jnew("org.flsgen.solver.Terrain", grid)
   .jcall(terrain, "V", "generateDiamondSquare", roughness)
-  .jcall(terrain, "V", "exportRaster", x, y, resolution, epsg, output)
+  raster_data <- .jcall(terrain, "[D", "getData")
+  terrain_raster <- terra::rast(xmin = x, xmax = x + (width * resolution),
+                                ymax = y, ymin = y - (height * resolution),
+                                crs = epsg, nrows = height, ncols = width,
+                                nlyrs = 1)
+  values(terrain_raster) <- raster_data
+  #.jcall(terrain, "V", "exportRaster", x, y, resolution, epsg, output)
   .jgc()
-  return(raster::raster(output))
+  return(terrain_raster)
 }

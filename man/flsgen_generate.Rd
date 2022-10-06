@@ -7,7 +7,6 @@
 flsgen_generate(
   structure_str,
   structure_file,
-  output = tempfile(fileext = ".tif"),
   terrain_file = NULL,
   roughness = 0.5,
   terrain_dependency = 0.5,
@@ -29,9 +28,8 @@ flsgen_generate(
 
 \item{structure_file}{JSON file containing the landscape structure to generate}
 
-\item{output}{Path of output raster file (temporary file by default)}
-
-\item{terrain_file}{Path of input terrain raster file, if NULL a terrain is generated with the diamond-square algorithm}
+\item{terrain_file}{Path of input terrain raster file, or terra::rast object.
+If NULL a terrain is generated with the diamond-square algorithm}
 
 \item{roughness}{Roughness factor (or H), between 0 and 1 (only need when terrain_file is NULL)}
 
@@ -63,7 +61,7 @@ if null, resolution_x is used}
 \item{verbose}{if TRUE print information about generation}
 }
 \value{
-A raster object
+A terra::rast object
 }
 \description{
 Generate landscape raster from landscape structure

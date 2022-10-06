@@ -23,18 +23,20 @@
 #' Vector of available class targets
 #'
 CLASS_LEVEL_TARGETS <- c(
-  "NP",      # Number of patches
-  "AREA",    # Area of patches
-  "AREA_MN", # Mean patche area
-  "CA",      # Total class area
-  "PLAND",   # Proportion of landscape
-  "PD",      # Patch density
-  "SPI",     # Smallest patch index
-  "LPI",     # Largest patch index
-  "MESH",    # Effective mesh size
-  "SPLI",    # Splitting index
-  "NPRO",    # Net product
-  "SDEN",    # Splitting density
-  "COHE",    # Degree of coherence
-  "DIVI"     # Degree of division
+  "NP",       # Number of patches
+  "AREA",     # Area of patches
+  "AREA_MN",  # Mean patche area
+  "CA",       # Total class area
+  "PLAND",    # Proportion of landscape
+  "PD",       # Patch density
+  "SPI",      # Smallest patch index
+  "LPI",      # Largest patch index
+  "MESH",     # Effective mesh size
+  "SPLI",     # Splitting index
+  "NPRO",     # Net product
+  "SDEN",     # Splitting density
+  "COHE",     # Degree of coherence
+  "DIVI",     # Degree of division
+  "IS_SQUARE", # If TRUE, all patches are square
+  "patchesAllDifferent" # If TRUE, all patches must have different size
 )

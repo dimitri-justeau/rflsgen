@@ -5,12 +5,14 @@
 \title{Creates a predefined landscape class structure that can be converted as
 JSON input for flsgen generate.}
 \usage{
-flsgen_create_class_structure(class_name, patch_areas)
+flsgen_create_class_structure(class_name, patch_areas, is_square = FALSE)
 }
 \arguments{
 \item{class_name}{Name of the class}
 
-\item{patch_areas}{vector of patch areas}
+\item{patch_areas}{Vector of patch areas}
+
+\item{is_square}{If true, all patches are required to be squares}
 }
 \value{
 A landscape class structure

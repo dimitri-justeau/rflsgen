@@ -5,7 +5,7 @@
 \alias{CLASS_LEVEL_TARGETS}
 \title{Vector of available class targets}
 \format{
-An object of class \code{character} of length 14.
+An object of class \code{character} of length 16.
 }
 \usage{
 CLASS_LEVEL_TARGETS

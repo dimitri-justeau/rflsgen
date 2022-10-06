@@ -26,7 +26,8 @@
 #'  converted as JSON input for flsgen generate.
 #'
 #' @param class_name Name of the class
-#' @param patch_areas vector of patch areas
+#' @param patch_areas Vector of patch areas
+#' @param is_square If true, all patches are required to be squares
 #'
 #' @return A landscape class structure
 #'
@@ -36,12 +37,13 @@
 #'   }
 #'
 #' @export
-flsgen_create_class_structure <- function(class_name, patch_areas) {
+flsgen_create_class_structure <- function(class_name, patch_areas, is_square=FALSE) {
   checkmate::assert_string(class_name)
   checkmate::assert_vector(patch_areas, min.len = 1)
   class_structure <- list(
     name=class_name,
-    AREA=patch_areas
+    AREA=patch_areas,
+    IS_SQUARE=is_square
   )
   return(structure(class_structure, class="FlsgenClassStructure"))
 }

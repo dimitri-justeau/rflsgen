@@ -7,5 +7,4 @@ test_that("landscape_structure", {
   testthat::expect_equal(ls_struct$nbCols, 200)
   testthat::expect_equal(ls_struct$nbRows, 200)
   testthat::expect_length(ls_struct$classes, 2)
-
 })

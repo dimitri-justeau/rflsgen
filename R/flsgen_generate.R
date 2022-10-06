@@ -23,15 +23,14 @@
 #' @description Generate landscape raster from landscape structure
 #'
 #' @import rJava
-#' @import raster
 #'
 #' @details The input landscape structure must be either specified as a JSON-formatted string
 #'  (structure_str parameter) or as a JSON file (structure_file parameter)
 #'
 #' @param structure_str JSON-formatted string describing the landscape structure to generate
 #' @param structure_file JSON file containing the landscape structure to generate
-#' @param output Path of output raster file (temporary file by default)
-#' @param terrain_file Path of input terrain raster file, if NULL a terrain is generated with the diamond-square algorithm
+#' @param terrain_file Path of input terrain raster file, or terra::rast object.
+#'                     If NULL a terrain is generated with the diamond-square algorithm
 #' @param roughness Roughness factor (or H), between 0 and 1 (only need when terrain_file is NULL)
 #' @param terrain_dependency Terrain dependency factor for landscape generation, between 0 and 1
 #' @param min_distance Minimum distance between patches of a same class
@@ -49,7 +48,7 @@
 #' @param max_try_patch Maximum number of trials for patch generation
 #' @param verbose if TRUE print information about generation
 #'
-#' @return A raster object
+#' @return A terra::rast object
 #'
 #' @examples
 #'   \dontrun{
@@ -83,9 +82,11 @@
 #'
 #' @export
 #'
-flsgen_generate <- function(structure_str, structure_file, output=tempfile(fileext=".tif"), terrain_file=NULL,
-                            roughness=0.5, terrain_dependency=0.5, min_distance=2, min_max_distance=NULL, connectivity=4,
-                            x=0, y=0, resolution_x=0.0001, resolution_y=NULL, epsg="EPSG:4326", max_try=2, max_try_patch=10, verbose=TRUE) {
+flsgen_generate <- function(structure_str, structure_file, terrain_file=NULL,
+                            roughness=0.5, terrain_dependency=0.5, min_distance=2,
+                            min_max_distance=NULL, connectivity=4, x=0, y=0,
+                            resolution_x=0.0001, resolution_y=NULL, epsg="EPSG:4326",
+                            max_try=2, max_try_patch=10, verbose=TRUE) {
   # Check arguments
   if (missing(structure_str)) {
     if (missing(structure_file)) {
@@ -119,9 +120,12 @@ flsgen_generate <- function(structure_str, structure_file, output=tempfile(filee
     resolution_y <- resolution_x
   }
   checkmate::assert_string(epsg)
-  checkmate::assert_string(output)
   checkmate::assert_string(structure_str)
   checkmate::assert_flag(verbose)
+
+  struct_json <- jsonlite::fromJSON(structure_str)
+  nb_rows <- struct_json$nbRows
+  nb_cols <- struct_json$nbCols
 
   # Generate landscape raster using flsgen jar
   reader <- .jnew("java.io.StringReader", structure_str)
@@ -132,16 +136,12 @@ flsgen_generate <- function(structure_str, structure_file, output=tempfile(filee
   if (is.null(terrain_file)) {
     .jcall(terrain, "V", "generateDiamondSquare", roughness)
   } else {
-    if (inherits(terrain_file, "Raster")) {
-      if (nchar(filename(terrain_file)) > 0) {
-        terrain_file <- filename(terrain_file)
-      } else {
-        file_name <- tempfile(fileext = ".tif")
-        writeRaster(terrain_file, file_name)
-        terrain_file <- file_name
-      }
+    terrain_raster <- terrain_file
+    if (!inherits(terrain_file, "SpatRaster")) {
+      terrain_raster <- terra::rast(terrain_file)
     }
-    .jcall(terrain, "V", "loadFromRaster", terrain_file)
+    terrain_data <- values(terrain_raster)
+    .jcall(terrain, "V", "loadFromData", terrain_data, nb_rows, nb_cols)
   }
   if (is.null(min_max_distance)) {
     generator <- .jnew("org.flsgen.solver.LandscapeGenerator", struct, as.integer(connectivity), as.integer(min_distance), terrain)
@@ -149,9 +149,14 @@ flsgen_generate <- function(structure_str, structure_file, output=tempfile(filee
     generator <- .jnew("org.flsgen.solver.LandscapeGenerator", struct, as.integer(connectivity), as.integer(min_distance), as.integer(min_max_distance), terrain)
   }
   if (.jcall(generator, "Z", "generate", terrain_dependency, as.integer(max_try), as.integer(max_try_patch), verbose)) {
-    .jcall(generator, "V", "exportRaster", x, y, resolution_x, resolution_y, epsg, output)
+    landscape_data <- .jcall(generator, "[I", "getRasterData", -2L)
+    landscape_raster <- terra::rast(xmin = x, xmax = x + (nb_cols * resolution_x),
+                                    ymax = y, ymin = y - (nb_rows * resolution_y),
+                                    crs = epsg, nrows = nb_rows, ncols = nb_cols,
+                                    nlyrs = 1)
+    values(landscape_raster) <- landscape_data
     .jgc()
-    return(raster::raster(output))
+    return(landscape_raster)
   } else {
     .jgc()
     stop("Could not generate a raster satisfying the input landscape structure")
