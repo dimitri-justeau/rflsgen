@@ -23,6 +23,8 @@
 #' @description Generate landscape raster from landscape structure
 #'
 #' @import rJava
+#' @import terra
+#' @import jsonlite
 #'
 #' @details The input landscape structure must be either specified as a JSON-formatted string
 #'  (structure_str parameter) or as a JSON file (structure_file parameter)
@@ -87,6 +89,7 @@ flsgen_generate <- function(structure_str, structure_file, terrain_file=NULL,
                             min_max_distance=NULL, connectivity=4, x=0, y=0,
                             resolution_x=0.0001, resolution_y=NULL, epsg="EPSG:4326",
                             max_try=2, max_try_patch=10, verbose=TRUE) {
+  mask_raster <- NULL
   # Check arguments
   if (missing(structure_str)) {
     if (missing(structure_file)) {
@@ -98,6 +101,10 @@ flsgen_generate <- function(structure_str, structure_file, terrain_file=NULL,
       stop("Either structure_str or structure_file must be used in generate_landscape_raster function to specify user targets, not both")
     }
     if (inherits(structure_str, "FlsgenLandscapeStructure")) {
+      if (!is.null(structure_str$maskRaster)) {
+        mask_raster <- structure_str$maskRaster
+        structure_str$maskRaster <- NULL
+      }
       for (i in 1:length(structure_str$classes)) {
         structure_str$classes[[i]] <- unclass(structure_str$classes[[i]])
       }
@@ -126,11 +133,27 @@ flsgen_generate <- function(structure_str, structure_file, terrain_file=NULL,
   struct_json <- jsonlite::fromJSON(structure_str)
   nb_rows <- struct_json$nbRows
   nb_cols <- struct_json$nbCols
+  no_data_cells <- c()
+  no_data_value <- -3000
+  if (!is.null(mask_raster)) {
+    nb_rows <- nrow(mask_raster)
+    nb_cols <- ncol(mask_raster)
+    no_data_cells <- which(is.na(mask_raster[,])) - 1
+    no_data_value <-terra::NAflag(mask_raster)
+  } else {
+    if (!is.null(struct_json$maskRasterPath)) {
+      mask_raster <- terra::rast(struct_json$maskRasterPath)
+      nb_rows <- nrow(mask_raster)
+      nb_cols <- ncol(mask_raster)
+      no_data_cells <- which(is.na(mask_raster[,])) - 1
+      no_data_value <-terra::NAflag(mask_raster)
+    }
+  }
 
   # Generate landscape raster using flsgen jar
-  reader <- .jnew("java.io.StringReader", structure_str)
-  struct <- J("org.flsgen.solver.LandscapeStructure")$fromJSON(reader)
-  reader$close()
+  struct <- J("org.flsgen.solver.LandscapeStructure")$fromJSON(
+    structure_str, as.integer(nb_rows), as.integer(nb_cols), .jarray(as.integer(no_data_cells))
+  )
   grid <- .jnew("org.flsgen.grid.regular.square.RegularSquareGrid", struct$getNbRows(), struct$getNbCols())
   terrain <- .jnew("org.flsgen.solver.Terrain", grid)
   if (is.null(terrain_file)) {
@@ -149,7 +172,7 @@ flsgen_generate <- function(structure_str, structure_file, terrain_file=NULL,
     generator <- .jnew("org.flsgen.solver.LandscapeGenerator", struct, as.integer(connectivity), as.integer(min_distance), as.integer(min_max_distance), terrain)
   }
   if (.jcall(generator, "Z", "generate", terrain_dependency, as.integer(max_try), as.integer(max_try_patch), verbose)) {
-    landscape_data <- .jcall(generator, "[I", "getRasterData", -2L)
+    landscape_data <- .jcall(generator, "[I", "getRasterData", as.integer(no_data_value))
     landscape_raster <- terra::rast(xmin = x, xmax = x + (nb_cols * resolution_x),
                                     ymax = y, ymin = y - (nb_rows * resolution_y),
                                     crs = epsg, nrows = nb_rows, ncols = nb_cols,

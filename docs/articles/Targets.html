@@ -34,7 +34,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">rflsgen</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -110,7 +110,7 @@
     
 <table class="table">
 <colgroup>
-<col width="38%">
+<col width="40%">
 <col width="26%">
 <col width="8%">
 <col width="26%">
@@ -205,6 +205,18 @@
 <td>DIVI</td>
 <td>class</td>
 <td>probability (in [0, 1])</td>
+</tr>
+<tr class="odd">
+<td><a href="#IS_SQUARE">Force square patches</a></td>
+<td>IS_SQUARE</td>
+<td>class</td>
+<td>true of false</td>
+</tr>
+<tr class="even">
+<td><a href="#ALL_DIFFERENT">Force different areas</a></td>
+<td>ALL_DIFFERENT</td>
+<td>class</td>
+<td>true of false</td>
 </tr>
 </tbody>
 </table>
@@ -326,6 +338,21 @@ Jaeger (2000) and is given by:</p>
 DIVI = 1 - \sum_{i=1}^{NP}(\frac{A_i}{L})^2
 \]</span></p>
 <p>With L the total landscape area, NP the number of patches, and <span class="math inline">\(A_i\)</span> the area of patch i.</p>
+<ul>
+<li><strong><code>IS_SQUARE</code> : Force all patches to be square
+<a name="IS_SQUARE"></a></strong></li>
+</ul>
+<p>This target forces rflsgen to produce only patches that areperfect
+squares. Note that this restricts the range of possible areas, as
+patches areas must be in the form <span class="math inline">\(A_i = w *
+w\)</span>, where <span class="math inline">\(w\)</span> is the width of
+a perfect square.</p>
+<ul>
+<li><strong><code>ALL_DIFFERENT</code> : Force patches to have different
+areas <a name="ALL_DIFFERENT"></a></strong></li>
+</ul>
+<p>This target forces rflsgen to produce patches that all have a
+different area.</p>
 <div class="section level4">
 <h4 id="references">References <a name="ref"></a><a class="anchor" aria-label="anchor" href="#references"></a>
 </h4>

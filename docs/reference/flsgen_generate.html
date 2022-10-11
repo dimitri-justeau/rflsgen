@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">rflsgen</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -80,7 +80,6 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">flsgen_generate</span><span class="op">(</span>
   <span class="va">structure_str</span>,
   <span class="va">structure_file</span>,
-  output <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".tif"</span><span class="op">)</span>,
   terrain_file <span class="op">=</span> <span class="cn">NULL</span>,
   roughness <span class="op">=</span> <span class="fl">0.5</span>,
   terrain_dependency <span class="op">=</span> <span class="fl">0.5</span>,
@@ -104,10 +103,9 @@
 <dd><p>JSON-formatted string describing the landscape structure to generate</p></dd>
 <dt>structure_file</dt>
 <dd><p>JSON file containing the landscape structure to generate</p></dd>
-<dt>output</dt>
-<dd><p>Path of output raster file (temporary file by default)</p></dd>
 <dt>terrain_file</dt>
-<dd><p>Path of input terrain raster file, if NULL a terrain is generated with the diamond-square algorithm</p></dd>
+<dd><p>Path of input terrain raster file, or terra::rast object.
+If NULL a terrain is generated with the diamond-square algorithm</p></dd>
 <dt>roughness</dt>
 <dd><p>Roughness factor (or H), between 0 and 1 (only need when terrain_file is NULL)</p></dd>
 <dt>terrain_dependency</dt>
@@ -140,7 +138,7 @@ if null, resolution_x is used</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A raster object</p>
+    <p>A terra::rast object</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>

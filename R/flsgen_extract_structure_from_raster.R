@@ -22,13 +22,13 @@
 #'
 #' @description Extracts a landscape structure from an existing raster
 #'
-#' @param raster_file raster object or path of the raster
+#' @param raster_file terra::rast object or path of the raster
 #' @param focal_classes vector of integers representing the raster values of
 #' the focal classes to extract the structure from
 #' @param connectivity Connectivity definition in the regular square grid (4 or 8)."
 #'
 #' @import rJava
-#' @import raster
+#' @import terra
 #'
 #' @return A JSON landscape structure that can be used with flsgen generate
 #'
@@ -41,18 +41,14 @@
 flsgen_extract_structure_from_raster <- function(raster_file, focal_classes, connectivity=4) {
   checkmate::assert_vector(focal_classes, min.len = 1)
   checkmate::assert_choice(connectivity, c(4, 8))
-  if (inherits(raster_file, "Raster")) {
-    if (nchar(filename(raster_file)) > 0) {
-      raster_file <- filename(raster_file)
-    } else {
-      file_name <- tempfile(fileext = ".tif")
-      writeRaster(raster_file, file_name)
-      raster_file <- file_name
-    }
-  } else {
-    checkmate::assert_string(raster_file)
-    checkmate::assert(file.exists(raster_file))
+  if (!inherits(raster_file, "SpatRaster")) {
+    raster_file <- terra::rast(raster_file)
   }
+  nb_rows <- nrow(raster_file)
+  nb_cols <- ncol(raster_file)
+  no_data_cells <- which(is.na(raster_file[,])) - 1
+  no_data_value <-terra::NAflag(raster_file)
+  s <- terra::sources(raster_file)[[1]]
   if (connectivity == 4) {
     neigh <- J("org.flsgen.grid.neighborhood.Neighborhoods")$FOUR_CONNECTED
   } else {
@@ -60,10 +56,14 @@ flsgen_extract_structure_from_raster <- function(raster_file, focal_classes, con
       neigh <- J("org.flsgen.grid.neighborhood.Neighborhoods")$HEIGHT_CONNECTED
     }
   }
-  struct <- J("org.flsgen.solver.LandscapeStructure")$fromRaster(
-    raster_file,
+  struct <- J("org.flsgen.solver.LandscapeStructure")$fromRasterData(
+    .jarray(as.integer(values(raster_file))),
+    as.integer(nb_rows),
+    as.integer(nb_cols),
+    as.integer(no_data_value),
     .jarray(as.integer(focal_classes)),
-    neigh
+    neigh,
+    s
   )
   .jgc()
   return(struct$toJSON())

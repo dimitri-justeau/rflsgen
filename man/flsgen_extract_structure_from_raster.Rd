@@ -11,7 +11,7 @@ flsgen_extract_structure_from_raster(
 )
 }
 \arguments{
-\item{raster_file}{raster object or path of the raster}
+\item{raster_file}{terra::rast object or path of the raster}
 
 \item{focal_classes}{vector of integers representing the raster values of
 the focal classes to extract the structure from}

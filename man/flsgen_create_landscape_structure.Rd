@@ -19,7 +19,7 @@ flsgen_create_landscape_structure(
 
 \item{classes}{list of class structures}
 
-\item{mask_raster}{mask raster (path or raster object)}
+\item{mask_raster}{mask raster (path or terra::rast object)}
 }
 \value{
 A landscape structure object which can be converted to JSON for

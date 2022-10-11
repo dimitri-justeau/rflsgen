@@ -38,5 +38,5 @@ CLASS_LEVEL_TARGETS <- c(
   "COHE",     # Degree of coherence
   "DIVI",     # Degree of division
   "IS_SQUARE", # If TRUE, all patches are square
-  "patchesAllDifferent" # If TRUE, all patches must have different size
+  "ALL_DIFFERENT" # If TRUE, all patches must have different size
 )

@@ -12,7 +12,7 @@ test_that("landscape_with_square_patches_2", {
   cls_target_1 <- flsgen_create_class_targets("class A", NP = c(1, 50),
                                               PLAND = c(30, 40),
                                               AREA = c(100, 100000),
-                                              IS_SQUARE = TRUE, patchesAllDifferent=TRUE)
+                                              IS_SQUARE = TRUE, ALL_DIFFERENT = TRUE)
   ls_target <- flsgen_create_landscape_targets(500, 500, list(cls_target_1))
   struct <- flsgen_structure(ls_target)
   json_struct <- jsonlite::fromJSON(struct)

@@ -45,6 +45,7 @@
 #' @param COHE degree of coherence target (must be a vector of length 2)
 #' @param DIVI degree of landscape division target (must be a vector of length 2)
 #' @param IS_SQUARE if TRUE, the class is required to only produce square patches
+#' @param ALL_DIFFERENT if TRUE, the class is required to have differently sized patches
 #'
 #' @return A class targets object which can be converted to JSON for flsgen
 #'
@@ -58,14 +59,14 @@ flsgen_create_class_targets <- function(class_name, NP=NULL, AREA=NULL, AREA_MN=
                                         CA=NULL, PLAND=NULL, PD=NULL, SPI=NULL,
                                         LPI=NULL, MESH=NULL, SPLI=NULL, NPRO=NULL,
                                         SDEN=NULL, COHE=NULL, DIVI=NULL, IS_SQUARE=FALSE,
-                                        patchesAllDifferent=FALSE) {
+                                        ALL_DIFFERENT=FALSE) {
   checkmate::assert_string(class_name)
   class_targets <- list(
     name=class_name
   )
   for (i in CLASS_LEVEL_TARGETS) {
     if (!is.null(get(i))) {
-      if (i %in% c("IS_SQUARE", "patchesAllDifferent")) {
+      if (i %in% c("IS_SQUARE", "ALL_DIFFERENT")) {
         checkmate::assert_flag(get(i))
       } else {
         checkmate::assert_vector(get(i), len = 2)

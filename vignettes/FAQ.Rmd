@@ -1,6 +1,6 @@
 ---
 title: "Frequently asked questions"
-output: html_document
+output: pdf_document
 vignette: >
   %\VignetteIndexEntry{Frequently asked questions}
   %\VignetteEngine{knitr::rmarkdown_notangle}

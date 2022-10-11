@@ -12,7 +12,7 @@ converted into JSON for flsgen."><meta property="og:image" content="/logo.png"><
     
     <a class="navbar-brand me-2" href="../index.html">rflsgen</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -95,7 +95,9 @@ converted into JSON for flsgen.</p>
   NPRO <span class="op">=</span> <span class="cn">NULL</span>,
   SDEN <span class="op">=</span> <span class="cn">NULL</span>,
   COHE <span class="op">=</span> <span class="cn">NULL</span>,
-  DIVI <span class="op">=</span> <span class="cn">NULL</span>
+  DIVI <span class="op">=</span> <span class="cn">NULL</span>,
+  IS_SQUARE <span class="op">=</span> <span class="cn">FALSE</span>,
+  ALL_DIFFERENT <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span></code></pre></div>
     </div>
 
@@ -131,6 +133,10 @@ converted into JSON for flsgen.</p>
 <dd><p>degree of coherence target (must be a vector of length 2)</p></dd>
 <dt>DIVI</dt>
 <dd><p>degree of landscape division target (must be a vector of length 2)</p></dd>
+<dt>IS_SQUARE</dt>
+<dd><p>if TRUE, the class is required to only produce square patches</p></dd>
+<dt>ALL_DIFFERENT</dt>
+<dd><p>if TRUE, the class is required to have differently sized patches</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -147,7 +153,7 @@ AREA are not set elsewhere.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in">  <span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">    <span class="va">cls_1</span> <span class="op">&lt;-</span> <span class="fu">flsgen_create_class_targets</span><span class="op">(</span><span class="st">"class 1"</span>, NP<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">10</span><span class="op">)</span>, AREA<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1000</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in">    <span class="va">cls_1</span> <span class="op">&lt;-</span> <span class="fu">flsgen_create_class_targets</span><span class="op">(</span><span class="st">"class 1"</span>, NP<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">10</span><span class="op">)</span>, AREA<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1000</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in">  <span class="op">}</span></span>
 </code></pre></div>
     </div>

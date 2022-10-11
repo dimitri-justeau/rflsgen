@@ -23,6 +23,7 @@
 #' @description Fractal terrain generation with the diamond-square algorithm
 #'
 #' @import rJava
+#' @import terra
 #'
 #' @param width Width (in pixels) of output raster
 #' @param height Height (in pixels) of output raster
@@ -60,7 +61,6 @@ flsgen_terrain <- function(width, height, roughness=0.5, x=0, y=0, resolution=0.
                                 crs = epsg, nrows = height, ncols = width,
                                 nlyrs = 1)
   values(terrain_raster) <- raster_data
-  #.jcall(terrain, "V", "exportRaster", x, y, resolution, epsg, output)
   .jgc()
   return(terrain_raster)
 }

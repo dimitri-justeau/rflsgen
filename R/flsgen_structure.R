@@ -23,6 +23,8 @@
 #' @description Find landscape structures satisfying user targets
 #'
 #' @import rJava
+#' @import terra
+#' @import jsonlite
 #'
 #' @details The input user targets must be either specified as a JSON-formatted
 #'  string (targets_str parameter) or as a JSON file (target_file parameter).
@@ -67,6 +69,7 @@
 #' @export
 #'
 flsgen_structure <- function(targets_str, targets_file, nb_solutions=1, time_limit = 60, search_strategy="DEFAULT") {
+  mask_raster <- NULL
   # Check arguments
   if (missing(targets_str)) {
     if (missing(targets_file)) {
@@ -78,6 +81,10 @@ flsgen_structure <- function(targets_str, targets_file, nb_solutions=1, time_lim
       stop("Either targets_str or targets_file must be used in generate_landscape_structure function to specify user targets, not both")
     }
     if (inherits(targets_str, "FlsgenLandscapeTargets")) {
+      if (!is.null(targets_str$maskRaster)) {
+        mask_raster <- targets_str$maskRaster
+        targets_str$maskRaster <- NULL
+      }
       for (i in 1:length(targets_str$classes)) {
         targets_str$classes[[i]] <- unclass(targets_str$classes[[i]])
       }
@@ -88,9 +95,29 @@ flsgen_structure <- function(targets_str, targets_file, nb_solutions=1, time_lim
   checkmate::assert_int(time_limit, lower=0)
   checkmate::assert_choice(search_strategy, c("DEFAULT", "RANDOM", "DOM_OVER_W_DEG", "DOM_OVER_W_DEG_REF", "ACTIVITY_BASED", "CONFLICT_HISTORY", "MIN_DOM_LB", "MIN_DOM_UB"))
 
+  json_targets <- jsonlite::fromJSON(targets_str)
+
+  nb_rows <- 0
+  nb_cols <- 0
+  no_data_cells <- c()
+
+  if (!is.null(mask_raster)) {
+    nb_rows <- nrow(mask_raster)
+    nb_cols <- ncol(mask_raster)
+    no_data_cells <- which(is.na(mask_raster[,])) - 1
+  } else {
+    if (!is.null(json_targets$maskRasterPath)) {
+      mask_raster <- terra::rast(json_targets$maskRasterPath)
+      nb_rows <- nrow(mask_raster)
+      nb_cols <- ncol(mask_raster)
+      no_data_cells <- which(is.na(mask_raster[,])) - 1
+    }
+  }
+
   # Generate landscape structure using flsgen jar
-  reader <- .jnew("java.io.StringReader", targets_str)
-  solver <- J("org.flsgen.solver.LandscapeStructureSolver")$readFromJSON(reader)
+  solver <- J("org.flsgen.solver.LandscapeStructureSolver")$readFromJSON(
+    unclass(targets_str), as.integer(nb_rows), as.integer(nb_cols), .jarray(as.integer(no_data_cells))
+  )
   .jcall(solver, "V", "build")
   structs_json <- c()
   switch(search_strategy,

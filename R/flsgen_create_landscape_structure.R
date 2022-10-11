@@ -29,7 +29,9 @@
 #' @param nb_rows Number of rows
 #' @param nb_cols Number of columns
 #' @param classes list of class structures
-#' @param mask_raster mask raster (path or raster object)
+#' @param mask_raster mask raster (path or terra::rast object)
+#'
+#' @import terra
 #'
 #' @details Either nb_rows and nb_cols, or mask_raster must be specified. The dimensions
 #' of the landscape are deduced from the mask raster if it is used.
@@ -62,16 +64,14 @@ flsgen_create_landscape_structure <- function(nb_rows, nb_cols, classes, mask_ra
     lstruct$nbRows <- nb_rows
     lstruct$nbCols <- nb_cols
   } else {
-    if (inherits(mask_raster, "Raster")) {
-      if (nchar(filename(mask_raster)) > 0) {
-        mask_raster <- filename(mask_raster)
-      } else {
-        file_name <- tempfile(fileext = ".tif")
-        writeRaster(mask_raster, file_name)
-        mask_raster <- file_name
+    if (inherits(mask_raster, "SpatRaster")) {
+      s <- terra::sources(mask_raster)[[1]]
+      on_disk <- all(nchar(s > 0) && all(file.exists(s)))
+      if (on_disk) {
+        lstruct$maskRasterPath <- s
       }
+      lstruct$maskRaster <- mask_raster
     }
-    lstruct$maskRasterPath <- mask_raster
   }
   return(structure(lstruct, class="FlsgenLandscapeStructure"))
 }

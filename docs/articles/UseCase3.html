@@ -34,7 +34,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">rflsgen</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -119,7 +119,8 @@ closed forest cover in the main island of New Caledonia:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/raster" class="external-link">raster</a></span><span class="op">)</span>
 
-<span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"copernicus_nc_grande_terre_closed_and_open_forests.tif"</span>,
+<span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,
+                    <span class="st">"copernicus_nc_grande_terre_closed_and_open_forests_200m.tif"</span>,
                     package <span class="op">=</span> <span class="st">"rflsgen"</span><span class="op">)</span>
 <span class="va">existing_landscape</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/raster.html" class="external-link">raster</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">existing_landscape</span><span class="op">)</span></code></pre></div>
@@ -132,7 +133,8 @@ closed forest cover in the main island of New Caledonia:</p>
 <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>java.parameters <span class="op">=</span> <span class="st">"-Xmx4g"</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dimitri-justeau.github.io/rflsgen/" class="external-link">rflsgen</a></span><span class="op">)</span>
 
-<span class="va">struct</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flsgen_extract_structure_from_raster.html">flsgen_extract_structure_from_raster</a></span><span class="op">(</span><span class="va">path</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, connectivity <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></code></pre></div>
+<span class="va">struct</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flsgen_extract_structure_from_raster.html">flsgen_extract_structure_from_raster</a></span><span class="op">(</span><span class="va">path</span>, <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>,
+                                               connectivity <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></code></pre></div>
 <p>The second argument corresponds to the focal classes raster values (0
 is open forest, and 1 is closed forest), and for this use case, we use
 the 8-connectivity rule.</p>
@@ -140,13 +142,15 @@ the 8-connectivity rule.</p>
 landscape from the extracted structure. We use the digital elevation
 model of New Caledonia as the continuous environmental gradient.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dem_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"dem_nc_grande_terre_100.tif"</span>, package <span class="op">=</span> <span class="st">"rflsgen"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">dem_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,
+                        <span class="st">"dem_nc_grande_terre_200m.tif"</span>,
+                        package <span class="op">=</span> <span class="st">"rflsgen"</span><span class="op">)</span>
 <span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flsgen_generate.html">flsgen_generate</a></span><span class="op">(</span><span class="va">struct</span>, terrain_file <span class="op">=</span> <span class="va">dem_path</span>, terrain_dependency <span class="op">=</span> <span class="fl">0.9</span>,
                      epsg <span class="op">=</span> <span class="st">"EPSG:3163"</span>, connectivity<span class="op">=</span><span class="fl">8</span>,
                      resolution_x <span class="op">=</span> <span class="fl">105.4308639672429422</span>,
                      resolution_y <span class="op">=</span> <span class="fl">105.4037645741556588</span>,
                      x <span class="op">=</span> <span class="fl">159615</span>, y <span class="op">=</span> <span class="fl">467655</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></code></pre></div>
 <p><img src="figures/use_case_3_neutral_landscape.png"> It is
 interesting to see that the generated landscape has an almost inverted
 spatial distribution compared to the real landscape. This is not
@@ -156,7 +160,7 @@ neutral forest landscape also positively correlated with the elevation,
 we just need to use and inverted digital elevation model</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dem</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/raster.html" class="external-link">raster</a></span><span class="op">(</span><span class="va">dem_path</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/raster/man/getValues.html" class="external-link">values</a></span><span class="op">(</span><span class="va">dem</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/getValues.html" class="external-link">values</a></span><span class="op">(</span><span class="va">dem</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/terra/man/values.html" class="external-link">values</a></span><span class="op">(</span><span class="va">dem</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/values.html" class="external-link">values</a></span><span class="op">(</span><span class="va">dem</span><span class="op">)</span>
 <span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flsgen_generate.html">flsgen_generate</a></span><span class="op">(</span><span class="va">struct</span>, terrain_file <span class="op">=</span> <span class="va">dem</span>, terrain_dependency <span class="op">=</span> <span class="fl">0.9</span>,
                      epsg <span class="op">=</span> <span class="st">"EPSG:3163"</span>, connectivity<span class="op">=</span><span class="fl">8</span>,
                      resolution_x <span class="op">=</span> <span class="fl">105.4308639672429422</span>,

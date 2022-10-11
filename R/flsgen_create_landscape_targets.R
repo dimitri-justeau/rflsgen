@@ -28,8 +28,10 @@
 #' @param nb_rows Number of rows
 #' @param nb_cols Number of columns
 #' @param classes list of class targets
-#' @param mask_raster mask raster (path or raster object)
+#' @param mask_raster mask raster (path or terra::rast object)
 #' @param NON_FOCAL_PLAND PLAND (proportion of landscape) target on the non-focal land-use class
+#'
+#' @import terra
 #'
 #' @details Either nb_rows and nb_cols, or mask_raster must be specified. The dimensions
 #' of the landscape are deduced from the mask raster if it is used.
@@ -61,16 +63,14 @@ flsgen_create_landscape_targets <- function(nb_rows, nb_cols, classes, mask_rast
     base_targets$nbRows <- nb_rows
     base_targets$nbCols <- nb_cols
   } else {
-    if (inherits(mask_raster, "Raster")) {
-      if (nchar(filename(mask_raster)) > 0) {
-        mask_raster <- filename(mask_raster)
-      } else {
-        file_name <- tempfile(fileext = ".tif")
-        writeRaster(mask_raster, file_name)
-        mask_raster <- file_name
+    if (inherits(mask_raster, "SpatRaster")) {
+      s <- terra::sources(mask_raster)[[1]]
+      on_disk <- all(nchar(s > 0) && all(file.exists(s)))
+      if (on_disk) {
+        base_targets$maskRasterPath <- s
       }
+      base_targets$maskRaster <- mask_raster
     }
-    base_targets$maskRasterPath <- mask_raster
   }
   if (!is.null(NON_FOCAL_PLAND)) {
     base_targets$NON_FOCAL_PLAND <- NON_FOCAL_PLAND

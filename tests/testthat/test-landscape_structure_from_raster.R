@@ -2,6 +2,7 @@ test_that("landscape_structure_from_raster", {
   gc()
   path <- system.file("extdata", "mask_raster.tif", package = "rflsgen")
   struct <- flsgen_extract_structure_from_raster(path, c(1))
+  a <- flsgen_generate(struct)
   jstruct <- jsonlite::fromJSON(struct)
   testthat::expect_equal(jstruct$nbCols, 784)
   testthat::expect_equal(jstruct$nbRows, 605)

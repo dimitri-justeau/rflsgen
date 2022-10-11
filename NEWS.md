@@ -1,3 +1,16 @@
+# rflsgen 1.2.0
+
+* Rely on flsgen-1.2.0, which is now divided into modules. The R package only relies on the flsgen-core-1.2.0, which 
+allowed to remove dependencies to Geotools, resulting in a much lighter JAR that can now be directly package
+into rflsgen (no need to download anymore). This also reduces the time that was need for read and write operation
+for exchanging rasters between R and Java, now only data is exchanged.
+
+* Add IS_SQUARE target, which allows to produce only square patches.
+
+* Add ALL_DIFFERENT target, which allows to produce patches having all different areas.
+
+* Remove dependency to the raster package, and now switch to terra.
+
 # rflsgen 1.0.0
 
 * Rely on flsgen-1.1.0, which fixes several bug, improve performances, provide two new indices (AREA_MN, mean patch area and NON_FOCAL_PLAND, which is PLAND applied to the non-focal class), implement variable neighborhood for more flexible distance between patches in landscape generation, masking, landscape extraction from existing rasters, and more fine tuning.

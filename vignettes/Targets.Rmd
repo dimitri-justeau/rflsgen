@@ -1,27 +1,29 @@
 ---
 title: "Available landscape targets"
-output: html_document
+output: pdf_document
 vignette: >
   %\VignetteIndexEntry{Available landscape targets}
   %\VignetteEngine{knitr::rmarkdown_notangle}
 ---
 
-| Name                                  | Abbreviation             | Level   | Unit                     |
-| --------------------------------------|--------------------------| --------|--------------------------|
-| [Patch area](#AREA)                   | AREA                     | class   | cell surfaces            |
-| [Mean patch area](#AREA_MN)           | AREA_MN                  | class   | cell surfaces            |
-| [Total class area](#CA)               | CA                       | class   | cell surfaces            |
-| [Proportion of landscape](#PLAND)     | PLAND / NON_FOCAL_PLAND  | class   | percentage               |
-| [Number of patches](#NP)              | NP                       | class   | unitless                 |
-| [Patch density](#PD)                  | PD                       | class   | patches per cell surface |
-| [Smallest patch index](#SPI)          | SPI                      | class   | cell surfaces            |
-| [Largest patch index](#LPI)           | LPI                      | class   | cell surfaces            |
-| [Effective mesh size](#MESH)          | MESH                     | class   | cell surfaces            |
-| [Splitting index](#SPLI)              | SPLI                     | class   | unitless                 |
-| [Net product](#NPRO)                  | NPRO                     | class   | (cell surfaces)^2        |
-| [Splitting density](#SDEN)            | SDEN                     | class   | (cell surfaces)^-1       |
-| [Degree of coherence](#COHE)          | COHE                     | class   | probability (in [0, 1])  |
-| [Degree of landscape division](#DIVI) | DIVI                     | class   | probability (in [0, 1])  |
+| Name                                    | Abbreviation             | Level   | Unit                     |
+| ----------------------------------------|--------------------------| --------|--------------------------|
+| [Patch area](#AREA)                     | AREA                     | class   | cell surfaces            |
+| [Mean patch area](#AREA_MN)             | AREA_MN                  | class   | cell surfaces            |
+| [Total class area](#CA)                 | CA                       | class   | cell surfaces            |
+| [Proportion of landscape](#PLAND)       | PLAND / NON_FOCAL_PLAND  | class   | percentage               |
+| [Number of patches](#NP)                | NP                       | class   | unitless                 |
+| [Patch density](#PD)                    | PD                       | class   | patches per cell surface |
+| [Smallest patch index](#SPI)            | SPI                      | class   | cell surfaces            |
+| [Largest patch index](#LPI)             | LPI                      | class   | cell surfaces            |
+| [Effective mesh size](#MESH)            | MESH                     | class   | cell surfaces            |
+| [Splitting index](#SPLI)                | SPLI                     | class   | unitless                 |
+| [Net product](#NPRO)                    | NPRO                     | class   | (cell surfaces)^2        |
+| [Splitting density](#SDEN)              | SDEN                     | class   | (cell surfaces)^-1       |
+| [Degree of coherence](#COHE)            | COHE                     | class   | probability (in [0, 1])  |
+| [Degree of landscape division](#DIVI)   | DIVI                     | class   | probability (in [0, 1])  |
+| [Force square patches](#IS_SQUARE)      | IS_SQUARE                | class   | true of false            |
+| [Force different areas](#ALL_DIFFERENT) | ALL_DIFFERENT            | class   | true of false            |
 
 - **`AREA` : Patch area  <a name="AREA"></a>**
 
@@ -114,6 +116,17 @@ DIVI = 1 - \sum_{i=1}^{NP}(\frac{A_i}{L})^2
 $$
 
 With L the total landscape area, NP the number of patches, and $A_i$ the area of patch i.
+
+- **`IS_SQUARE` : Force all patches to be square  <a name="IS_SQUARE"></a>**
+
+This target forces rflsgen to produce only patches that areperfect squares. Note that this restricts the
+range of possible areas, as patches areas must be in the form $A_i = w * w$, where $w$ is the width of
+a perfect square.
+
+- **`ALL_DIFFERENT` : Force patches to have different areas <a name="ALL_DIFFERENT"></a>**
+
+This target forces rflsgen to produce patches that all have a different area.
+
 
 #### References  <a name="ref"></a>
 

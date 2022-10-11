@@ -1,7 +1,7 @@
 Package: rflsgen
 Type: Package
 Title: Neutral Landscape Generator with Targets on Landscape Indices
-Version: 1.0.0
+Version: 1.2.0
 Author: Dimitri Justeau-Allaire, Grégoire Blanchard, Thomas Ibanez, Xavier Lorca, Ghislain Vieilledent, Philippe Birnbaum
 Maintainer: Dimitri Justeau-Allaire <dimitri.justeau@gmail.com>
 Description: Interface to the 'flsgen' neutral landscape generator <https://github.com/dimitri-justeau/flsgen>. It allows to
@@ -13,9 +13,9 @@ Encoding: UTF-8
 LazyData: true
 Depends: 
   rJava,
-  raster,
-  terra (>= 1.5-12)
-Imports: rgdal, checkmate, utils, jsonlite
+  terra (>= 1.5-12),
+  jsonlite
+Imports: rgdal, checkmate, utils
 SystemRequirements: Java (>= 8)
 RoxygenNote: 7.2.0
 Suggests: testthat (>= 3.0.0), knitr, rmarkdown, landscapemetrics

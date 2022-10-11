@@ -1,3 +1,11 @@
+## rflsgen 1.2.0
+
+CRAN team complained about the size of the tarball, exceeding 5MB. To fix this:
+
+* We reduced the spatial resolution of example data to fix this issue;
+
+* We used pdf instead of html for documentation.
+
 ## rflsgen 0.1.2
 
 Configure Geotools to store its temporary EPSG database in R session's temporary directory.

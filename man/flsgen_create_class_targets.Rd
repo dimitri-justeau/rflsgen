@@ -21,7 +21,7 @@ flsgen_create_class_targets(
   COHE = NULL,
   DIVI = NULL,
   IS_SQUARE = FALSE,
-  patchesAllDifferent = FALSE
+  ALL_DIFFERENT = FALSE
 )
 }
 \arguments{
@@ -56,6 +56,8 @@ flsgen_create_class_targets(
 \item{DIVI}{degree of landscape division target (must be a vector of length 2)}
 
 \item{IS_SQUARE}{if TRUE, the class is required to only produce square patches}
+
+\item{ALL_DIFFERENT}{if TRUE, the class is required to have differently sized patches}
 }
 \value{
 A class targets object which can be converted to JSON for flsgen

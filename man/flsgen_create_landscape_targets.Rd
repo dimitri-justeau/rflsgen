@@ -19,7 +19,7 @@ flsgen_create_landscape_targets(
 
 \item{classes}{list of class targets}
 
-\item{mask_raster}{mask raster (path or raster object)}
+\item{mask_raster}{mask raster (path or terra::rast object)}
 
 \item{NON_FOCAL_PLAND}{PLAND (proportion of landscape) target on the non-focal land-use class}
 }

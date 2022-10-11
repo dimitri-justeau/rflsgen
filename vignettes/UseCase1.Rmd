@@ -1,6 +1,6 @@
 ---
 title: "Use Case 1: Generating landscape series with fixed structure and varying spatial configurations"
-output: html_document
+output: pdf_document
 vignette: >
   %\VignetteIndexEntry{Use Case 1: Generating landscape series with fixed structure and varying spatial configurations}
   %\VignetteEngine{knitr::rmarkdown_notangle}
