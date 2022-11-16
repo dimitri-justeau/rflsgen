@@ -17,8 +17,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
 <meta property="og:title" content="Neutral Landscape Generator with Targets on Landscape Indices">
@@ -40,7 +40,7 @@
     
     <a class="navbar-brand me-2" href="index.html">rflsgen</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -135,12 +135,12 @@ Logo by Camille Salmon
 </h2>
 <p>Java 8+ must be installed in your system to run rflsgen. Download and installation instructions for Java are available here: <a href="https://www.oracle.com/java/technologies/javase-downloads.html" class="external-link uri">https://www.oracle.com/java/technologies/javase-downloads.html</a>, or here: <a href="https://openjdk.java.net/install/" class="external-link uri">https://openjdk.java.net/install/</a>. To provide an R interface to flsgen, which is written in Java, rflsgen relies on rJava, which is a dependency of rflsgen and will be installed automatically. If you have any trouble during the installation of rflsgen due to rJava, please refer to rJava’s documentation: <a href="https://rforge.net/rJava/index.html" class="external-link uri">https://rforge.net/rJava/index.html</a>.</p>
 <p>rflsgen is available on CRAN, so you can install it from R using the following command:</p>
-<pre><code><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"rflsgen"</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dimitri-justeau.github.io/rflsgen/" class="external-link">rflsgen</a></span><span class="op">)</span></code></pre>
+<pre><code><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"rflsgen"</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dimitri-justeau.github.io/rflsgen/" class="external-link">rflsgen</a></span><span class="op">)</span></span></code></pre>
 <p>To install rflsgen from Github, you can use the devtools library (<a href="https://www.r-project.org/nosvn/pandoc/devtools.html" class="external-link uri">https://www.r-project.org/nosvn/pandoc/devtools.html</a>) and use the following commands in R:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"dimitri-justeau/rflsgen"</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dimitri-justeau.github.io/rflsgen/" class="external-link">rflsgen</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"dimitri-justeau/rflsgen"</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dimitri-justeau.github.io/rflsgen/" class="external-link">rflsgen</a></span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="quickstart-">Quickstart <a name="tuto"></a>
@@ -152,8 +152,8 @@ Logo by Camille Salmon
 </h3>
 <p>You can easily generate a fractal terrain raster using the <code>flsgen_terrain</code> function. For example, if you want to generate a 200x200 fractal terrain with default parameters, use the following command:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">terrain</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flsgen_terrain.html">flsgen_terrain</a></span><span class="op">(</span><span class="fl">200</span>, <span class="fl">200</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">terrain</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">terrain</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flsgen_terrain.html">flsgen_terrain</a></span><span class="op">(</span><span class="fl">200</span>, <span class="fl">200</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">terrain</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/terrain.png" alt="Terrain example" width="400"></p>
 </div>
 <div class="section level3">
@@ -224,35 +224,35 @@ Logo by Camille Salmon
 <span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
 <p>The second possibility is to use rflsgen helper functions:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">cls_a</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flsgen_create_class_targets.html">flsgen_create_class_targets</a></span><span class="op">(</span>
-    <span class="st">"Class A"</span>,
-    NP <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">10</span><span class="op">)</span>,
-    AREA <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">300</span>, <span class="fl">4000</span><span class="op">)</span>,
-    CA <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">5000</span><span class="op">)</span>,
-    MESH <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">225</span>, <span class="fl">225</span><span class="op">)</span>
-<span class="op">)</span>
-<span class="va">cls_b</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flsgen_create_class_targets.html">flsgen_create_class_targets</a></span><span class="op">(</span>
-    <span class="st">"Class B"</span>,
-    NP <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">8</span><span class="op">)</span>,
-    AREA <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">200</span>, <span class="fl">4000</span><span class="op">)</span>,
-    PLAND <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">40</span><span class="op">)</span>
-<span class="op">)</span>
-<span class="va">cls_c</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flsgen_create_class_targets.html">flsgen_create_class_targets</a></span><span class="op">(</span>
-    <span class="st">"Class C"</span>,
-    NP <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">7</span><span class="op">)</span>,
-    AREA <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">800</span>, <span class="fl">1200</span><span class="op">)</span>
-<span class="op">)</span>
-<span class="va">ls_targets</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flsgen_create_landscape_targets.html">flsgen_create_landscape_targets</a></span><span class="op">(</span>
-    nb_rows <span class="op">=</span> <span class="fl">200</span>, 
-    nb_cols <span class="op">=</span> <span class="fl">200</span>,
-    classes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">cls_a</span>, <span class="va">cls_b</span>, <span class="va">cls_c</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">cls_a</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flsgen_create_class_targets.html">flsgen_create_class_targets</a></span><span class="op">(</span></span>
+<span>    <span class="st">"Class A"</span>,</span>
+<span>    NP <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">10</span><span class="op">)</span>,</span>
+<span>    AREA <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">300</span>, <span class="fl">4000</span><span class="op">)</span>,</span>
+<span>    CA <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">5000</span><span class="op">)</span>,</span>
+<span>    MESH <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">225</span>, <span class="fl">225</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">cls_b</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flsgen_create_class_targets.html">flsgen_create_class_targets</a></span><span class="op">(</span></span>
+<span>    <span class="st">"Class B"</span>,</span>
+<span>    NP <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">8</span><span class="op">)</span>,</span>
+<span>    AREA <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">200</span>, <span class="fl">4000</span><span class="op">)</span>,</span>
+<span>    PLAND <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">40</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">cls_c</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flsgen_create_class_targets.html">flsgen_create_class_targets</a></span><span class="op">(</span></span>
+<span>    <span class="st">"Class C"</span>,</span>
+<span>    NP <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">7</span><span class="op">)</span>,</span>
+<span>    AREA <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">800</span>, <span class="fl">1200</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">ls_targets</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flsgen_create_landscape_targets.html">flsgen_create_landscape_targets</a></span><span class="op">(</span></span>
+<span>    nb_rows <span class="op">=</span> <span class="fl">200</span>, </span>
+<span>    nb_cols <span class="op">=</span> <span class="fl">200</span>,</span>
+<span>    classes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">cls_a</span>, <span class="va">cls_b</span>, <span class="va">cls_c</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>Using the <code>flsgen_structure</code> function, you can generate a non-spatially-explicit landscape structure:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">structure</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flsgen_structure.html">flsgen_structure</a></span><span class="op">(</span>targets_file <span class="op">=</span> <span class="st">"examples/targets.json"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">structure</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flsgen_structure.html">flsgen_structure</a></span><span class="op">(</span>targets_file <span class="op">=</span> <span class="st">"examples/targets.json"</span><span class="op">)</span></span></code></pre></div>
 <p>or</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">structure</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flsgen_structure.html">flsgen_structure</a></span><span class="op">(</span><span class="va">ls_targets</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">structure</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flsgen_structure.html">flsgen_structure</a></span><span class="op">(</span><span class="va">ls_targets</span><span class="op">)</span></span></code></pre></div>
 <p>The result is a JSON-formatted string that contains the generated structure. It can be easily converted into a data frame with a dedicated library such as <code>jsonlite</code>.</p>
 </div>
 <div class="section level3">
@@ -261,8 +261,8 @@ Logo by Camille Salmon
 </h3>
 <p>Now, let’s generate a landscape raster from the previously generated structure. To do so, we use the <code>flsgen_generate</code> function to generate a landscape raster from the previously generated landscape structure:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">landscape</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flsgen_generate.html">flsgen_generate</a></span><span class="op">(</span>structure_str <span class="op">=</span> <span class="va">structure</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">landscape</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">landscape</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flsgen_generate.html">flsgen_generate</a></span><span class="op">(</span>structure_str <span class="op">=</span> <span class="va">structure</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">landscape</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/landscape.png" alt="Landscape example" width="400"></p>
 </div>
 <div class="section level3">
@@ -283,16 +283,16 @@ Logo by Camille Salmon
 <span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
 <p>or:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">cls_a</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flsgen_create_class_targets.html">flsgen_create_class_targets</a></span><span class="op">(</span>
-    <span class="st">"Class A"</span>,
-    NP <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">30</span><span class="op">)</span>,
-    AREA <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">200</span>, <span class="fl">4000</span><span class="op">)</span>,
-    PLAND <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">40</span><span class="op">)</span>
-<span class="op">)</span>
-<span class="va">ls_targets</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flsgen_create_landscape_targets.html">flsgen_create_landscape_targets</a></span><span class="op">(</span>
-    mask_raster <span class="op">=</span> <span class="st">"mask.tif"</span>,
-    classes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">cls_a</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">cls_a</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flsgen_create_class_targets.html">flsgen_create_class_targets</a></span><span class="op">(</span></span>
+<span>    <span class="st">"Class A"</span>,</span>
+<span>    NP <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">30</span><span class="op">)</span>,</span>
+<span>    AREA <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">200</span>, <span class="fl">4000</span><span class="op">)</span>,</span>
+<span>    PLAND <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">40</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">ls_targets</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flsgen_create_landscape_targets.html">flsgen_create_landscape_targets</a></span><span class="op">(</span></span>
+<span>    mask_raster <span class="op">=</span> <span class="st">"mask.tif"</span>,</span>
+<span>    classes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">cls_a</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="extracting-structures-from-existing-landscapes-">Extracting structures from existing landscapes <a name="extract"></a>
@@ -300,7 +300,7 @@ Logo by Camille Salmon
 </h3>
 <p>Instead of generating landscape structure from targets, it is also possible to extract existing structures from real landscapes and use them to recreate real composition patterns. To do so, simply use the <code>flsgen_extract_structure_from_raster</code> function, indicating the raster values of focal classes:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">struct</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flsgen_extract_structure_from_raster.html">flsgen_extract_structure_from_raster</a></span><span class="op">(</span><span class="st">"existing_raster.tif"</span>, focal_classes<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">struct</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flsgen_extract_structure_from_raster.html">flsgen_extract_structure_from_raster</a></span><span class="op">(</span><span class="st">"existing_raster.tif"</span>, focal_classes<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -370,7 +370,7 @@ Logo by Camille Salmon
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
     </footer>

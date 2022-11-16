@@ -14,8 +14,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Use Case 2: Exploring correlations between landscape indices">
@@ -34,7 +34,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">rflsgen</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -98,7 +98,7 @@
 
 
 <div class="row">
-  <main id="main"><div class="page-header">
+  <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Use Case 2: Exploring correlations between landscape indices</h1>
             
       
@@ -134,77 +134,77 @@ ha.</p>
 <p>First, we prepare the output directories for the generated
 rasters:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dimitri-justeau.github.io/rflsgen/" class="external-link">rflsgen</a></span><span class="op">)</span>
-
-<span class="va">basepath</span> <span class="op">&lt;-</span> <span class="st">"&lt;the base path for all generated landscapes&gt;"</span>
-
-<span class="va">mesh_seq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">60000</span>, by<span class="op">=</span><span class="fl">250</span><span class="op">)</span>
-<span class="va">repeats</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">10</span>, by<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
-
-<span class="co"># Clear and create output directories for generated landscapes</span>
-<span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">mesh_seq</span>, <span class="kw">function</span><span class="op">(</span><span class="va">mesh</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">basepath</span>, <span class="va">mesh</span><span class="op">)</span>
-  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.exists</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="va">path</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-  <span class="op">}</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span>
-<span class="op">}</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dimitri-justeau.github.io/rflsgen/" class="external-link">rflsgen</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">basepath</span> <span class="op">&lt;-</span> <span class="st">"&lt;the base path for all generated landscapes&gt;"</span></span>
+<span></span>
+<span><span class="va">mesh_seq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">60000</span>, by<span class="op">=</span><span class="fl">250</span><span class="op">)</span></span>
+<span><span class="va">repeats</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">10</span>, by<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Clear and create output directories for generated landscapes</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">mesh_seq</span>, <span class="kw">function</span><span class="op">(</span><span class="va">mesh</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">basepath</span>, <span class="va">mesh</span><span class="op">)</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.exists</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="va">path</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
 <p>Then, we define a fuction which generates 10 landscape with varying
 structures for a given MESH target (see the comments in the code for
 details):</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">meta_generate</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">mesh</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">generate</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="op">{</span>
-    <span class="co"># First we create targets for our focal class</span>
-    <span class="va">rainforest</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flsgen_create_class_targets.html">flsgen_create_class_targets</a></span><span class="op">(</span>
-        <span class="st">"forest"</span>,
-        NP <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">200</span><span class="op">)</span>, <span class="co"># Number of patches target</span>
-        AREA <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">500</span><span class="op">*</span><span class="fl">500</span><span class="op">)</span>, <span class="co"># Patch area target</span>
-        MESH <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.99</span><span class="op">*</span><span class="va">mesh</span>, <span class="fl">1.01</span><span class="op">*</span><span class="va">mesh</span><span class="op">)</span> <span class="co"># Effective mesh size target</span>
-    <span class="op">)</span>
-    <span class="co"># Then we create landscape targets</span>
-    <span class="va">ls_targets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flsgen_create_landscape_targets.html">flsgen_create_landscape_targets</a></span><span class="op">(</span>
-        <span class="fl">500</span>, <span class="fl">500</span>, <span class="co"># Dimensions of the landscape</span>
-        <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">rainforest</span><span class="op">)</span>, <span class="co"># Class targets</span>
-    <span class="op">)</span>
-    <span class="co"># Because we let a high degree of freedom in the landscape structure, it</span>
-    <span class="co"># is possible to end up with structures that cannot be spatially embedded.</span>
-    <span class="co"># The generation algorithm, as being stochastic, can also fail to embed </span>
-    <span class="co"># structures where the focal class occupy almost all the landscape.</span>
-    <span class="co"># To prevent the program from stopping, we let flsgen 20 tries to generate</span>
-    <span class="co"># a landscape.</span>
-    <span class="va">i</span> <span class="op">&lt;-</span> <span class="fl">0</span>;
-    <span class="kw">repeat</span> <span class="op">{</span>
-      <span class="kw">if</span> <span class="op">(</span><span class="va">i</span> <span class="op">&gt;=</span> <span class="fl">20</span><span class="op">)</span> <span class="op">{</span>
-        <span class="kw"><a href="https://rdrr.io/r/base/stop.html" class="external-link">stop</a></span><span class="op">(</span><span class="st">"fail"</span><span class="op">)</span>
-      <span class="op">}</span>
-      <span class="va">i</span> <span class="op">&lt;-</span> <span class="va">i</span> <span class="op">+</span> <span class="fl">1</span>
-      <span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="op">{</span>
-        <span class="co"># We use flsgen_structure with a RANDOM search strategy to identify a</span>
-        <span class="co"># landscape structure satisfying the MESH target</span>
-        <span class="va">structure</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flsgen_structure.html">flsgen_structure</a></span><span class="op">(</span>
-            <span class="va">ls_targets</span>,
-            search_strategy <span class="op">=</span> <span class="st">"RANDOM"</span>,
-            time_limit <span class="op">=</span> <span class="fl">60</span>
-        <span class="op">)</span>
-        <span class="co"># We generate the landscape with flsgen_generate</span>
-        <span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flsgen_generate.html">flsgen_generate</a></span><span class="op">(</span>
-          structure_str <span class="op">=</span> <span class="va">structure</span>,
-          terrain_dependency <span class="op">=</span> <span class="fl">0.8</span>,
-          roughness <span class="op">=</span> <span class="fl">0.35</span>,
-          epsg <span class="op">=</span> <span class="st">"EPSG:3163"</span>,
-          resolution_x <span class="op">=</span> <span class="fl">30</span>,
-          output <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">basepath</span>, <span class="va">mesh</span>, <span class="st">"/mesh_"</span>, <span class="va">mesh</span>, <span class="st">"__"</span>, <span class="va">n</span>, <span class="st">".tif"</span><span class="op">)</span>,
-          max_try_patch <span class="op">=</span> <span class="fl">20</span>,
-          max_try <span class="op">=</span> <span class="fl">2</span>,
-          min_distance <span class="op">=</span> <span class="fl">4</span>
-        <span class="op">)</span>
-      <span class="op">}</span><span class="op">)</span>
-    <span class="op">}</span>
-  <span class="op">}</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">repeats</span>, <span class="va">generate</span><span class="op">)</span>
-<span class="op">}</span>
-<span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">mesh_seq</span>, <span class="va">meta_generate</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">meta_generate</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">mesh</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">generate</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="co"># First we create targets for our focal class</span></span>
+<span>    <span class="va">rainforest</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flsgen_create_class_targets.html">flsgen_create_class_targets</a></span><span class="op">(</span></span>
+<span>        <span class="st">"forest"</span>,</span>
+<span>        NP <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">200</span><span class="op">)</span>, <span class="co"># Number of patches target</span></span>
+<span>        AREA <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">500</span><span class="op">*</span><span class="fl">500</span><span class="op">)</span>, <span class="co"># Patch area target</span></span>
+<span>        MESH <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.99</span><span class="op">*</span><span class="va">mesh</span>, <span class="fl">1.01</span><span class="op">*</span><span class="va">mesh</span><span class="op">)</span> <span class="co"># Effective mesh size target</span></span>
+<span>    <span class="op">)</span></span>
+<span>    <span class="co"># Then we create landscape targets</span></span>
+<span>    <span class="va">ls_targets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flsgen_create_landscape_targets.html">flsgen_create_landscape_targets</a></span><span class="op">(</span></span>
+<span>        <span class="fl">500</span>, <span class="fl">500</span>, <span class="co"># Dimensions of the landscape</span></span>
+<span>        <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">rainforest</span><span class="op">)</span>, <span class="co"># Class targets</span></span>
+<span>    <span class="op">)</span></span>
+<span>    <span class="co"># Because we let a high degree of freedom in the landscape structure, it</span></span>
+<span>    <span class="co"># is possible to end up with structures that cannot be spatially embedded.</span></span>
+<span>    <span class="co"># The generation algorithm, as being stochastic, can also fail to embed </span></span>
+<span>    <span class="co"># structures where the focal class occupy almost all the landscape.</span></span>
+<span>    <span class="co"># To prevent the program from stopping, we let flsgen 20 tries to generate</span></span>
+<span>    <span class="co"># a landscape.</span></span>
+<span>    <span class="va">i</span> <span class="op">&lt;-</span> <span class="fl">0</span>;</span>
+<span>    <span class="kw">repeat</span> <span class="op">{</span></span>
+<span>      <span class="kw">if</span> <span class="op">(</span><span class="va">i</span> <span class="op">&gt;=</span> <span class="fl">20</span><span class="op">)</span> <span class="op">{</span></span>
+<span>        <span class="kw"><a href="https://rdrr.io/r/base/stop.html" class="external-link">stop</a></span><span class="op">(</span><span class="st">"fail"</span><span class="op">)</span></span>
+<span>      <span class="op">}</span></span>
+<span>      <span class="va">i</span> <span class="op">&lt;-</span> <span class="va">i</span> <span class="op">+</span> <span class="fl">1</span></span>
+<span>      <span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="op">{</span></span>
+<span>        <span class="co"># We use flsgen_structure with a RANDOM search strategy to identify a</span></span>
+<span>        <span class="co"># landscape structure satisfying the MESH target</span></span>
+<span>        <span class="va">structure</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flsgen_structure.html">flsgen_structure</a></span><span class="op">(</span></span>
+<span>            <span class="va">ls_targets</span>,</span>
+<span>            search_strategy <span class="op">=</span> <span class="st">"RANDOM"</span>,</span>
+<span>            time_limit <span class="op">=</span> <span class="fl">60</span></span>
+<span>        <span class="op">)</span></span>
+<span>        <span class="co"># We generate the landscape with flsgen_generate</span></span>
+<span>        <span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flsgen_generate.html">flsgen_generate</a></span><span class="op">(</span></span>
+<span>          structure_str <span class="op">=</span> <span class="va">structure</span>,</span>
+<span>          terrain_dependency <span class="op">=</span> <span class="fl">0.8</span>,</span>
+<span>          roughness <span class="op">=</span> <span class="fl">0.35</span>,</span>
+<span>          epsg <span class="op">=</span> <span class="st">"EPSG:3163"</span>,</span>
+<span>          resolution_x <span class="op">=</span> <span class="fl">30</span>,</span>
+<span>          output <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">basepath</span>, <span class="va">mesh</span>, <span class="st">"/mesh_"</span>, <span class="va">mesh</span>, <span class="st">"__"</span>, <span class="va">n</span>, <span class="st">".tif"</span><span class="op">)</span>,</span>
+<span>          max_try_patch <span class="op">=</span> <span class="fl">20</span>,</span>
+<span>          max_try <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>          min_distance <span class="op">=</span> <span class="fl">4</span></span>
+<span>        <span class="op">)</span></span>
+<span>      <span class="op">}</span><span class="op">)</span></span>
+<span>    <span class="op">}</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">repeats</span>, <span class="va">generate</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">mesh_seq</span>, <span class="va">meta_generate</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Note:</strong> In <code>flsgen_structure</code>, we set the
 <code>search_strategy</code> parameter to <code>"RANDOM"</code>. This
 parameter configures <a href="https://choco-solver.org/" class="external-link">Choco-solver</a> to randomly construct
@@ -232,23 +232,23 @@ as QGIS, using GDAL, etc). We suggest a rather efficient way to do it
 with R, relying on the <a href="https://r-spatial.github.io/sf/" class="external-link">sf</a>
 and <a href="https://r-spatial.github.io/stars/" class="external-link">stars</a> packages.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/stars/" class="external-link">stars</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">mesh_seq</span>, <span class="kw">function</span><span class="op">(</span><span class="va">mesh</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">basepath</span>, <span class="va">mesh</span><span class="op">)</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">repeats</span>, <span class="kw">function</span><span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="op">{</span>
-    <span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">basepath</span>, <span class="va">mesh</span>, <span class="st">"/mesh_"</span>, <span class="va">mesh</span>, <span class="st">"__"</span>, <span class="va">n</span>, <span class="st">".tif"</span><span class="op">)</span>
-    <span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">basepath</span>, <span class="va">mesh</span>, <span class="st">"/shape_mesh_"</span>, <span class="va">mesh</span>, <span class="st">"__"</span>, <span class="va">n</span>, <span class="st">".shp"</span><span class="op">)</span>
-    <span class="co"># Read the raster using stars</span>
-    <span class="va">s</span> <span class="op">&lt;-</span> <span class="fu">read_stars</span><span class="op">(</span><span class="va">input</span><span class="op">)</span>
-    <span class="co"># Set every non-focal cell to NA</span>
-    <span class="va">s</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="va">s</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">!=</span> <span class="fl">0</span><span class="op">]</span> <span class="op">=</span> <span class="cn">NA</span>
-    <span class="co"># Convert the raster to vector with sf</span>
-    <span class="va">v</span> <span class="op">&lt;-</span> <span class="fu">st_as_sf</span><span class="op">(</span><span class="va">s</span><span class="op">)</span>
-    <span class="fu">st_write</span><span class="op">(</span><span class="va">v</span>, <span class="va">output</span><span class="op">)</span>
-  <span class="op">}</span><span class="op">)</span>
-<span class="op">}</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/stars/" class="external-link">stars</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">mesh_seq</span>, <span class="kw">function</span><span class="op">(</span><span class="va">mesh</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">basepath</span>, <span class="va">mesh</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">repeats</span>, <span class="kw">function</span><span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">basepath</span>, <span class="va">mesh</span>, <span class="st">"/mesh_"</span>, <span class="va">mesh</span>, <span class="st">"__"</span>, <span class="va">n</span>, <span class="st">".tif"</span><span class="op">)</span></span>
+<span>    <span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">basepath</span>, <span class="va">mesh</span>, <span class="st">"/shape_mesh_"</span>, <span class="va">mesh</span>, <span class="st">"__"</span>, <span class="va">n</span>, <span class="st">".shp"</span><span class="op">)</span></span>
+<span>    <span class="co"># Read the raster using stars</span></span>
+<span>    <span class="va">s</span> <span class="op">&lt;-</span> <span class="fu">read_stars</span><span class="op">(</span><span class="va">input</span><span class="op">)</span></span>
+<span>    <span class="co"># Set every non-focal cell to NA</span></span>
+<span>    <span class="va">s</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="va">s</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">!=</span> <span class="fl">0</span><span class="op">]</span> <span class="op">=</span> <span class="cn">NA</span></span>
+<span>    <span class="co"># Convert the raster to vector with sf</span></span>
+<span>    <span class="va">v</span> <span class="op">&lt;-</span> <span class="fu">st_as_sf</span><span class="op">(</span><span class="va">s</span><span class="op">)</span></span>
+<span>    <span class="fu">st_write</span><span class="op">(</span><span class="va">v</span>, <span class="va">output</span><span class="op">)</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="computing-the-probability-of-connectivity-pc">Computing the probability of connectivity (PC)<a class="anchor" aria-label="anchor" href="#computing-the-probability-of-connectivity-pc"></a>
@@ -263,60 +263,60 @@ documentation for more detail), we also use <a href="https://r-spatialecology.gi
 to compute the exact MESH value (as we allowed a maximum deviation of
 1%).</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatialecology.github.io/landscapemetrics/" class="external-link">landscapemetrics</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">Makurhini</span><span class="op">)</span>
-
-<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html" class="external-link">expand.grid</a></span><span class="op">(</span><span class="st">"mesh_target"</span> <span class="op">=</span> <span class="va">mesh_seq</span>, <span class="st">"n"</span> <span class="op">=</span> <span class="va">repeats</span><span class="op">)</span>
-<span class="va">df</span><span class="op">$</span><span class="va">file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">basepath</span>, <span class="va">df</span><span class="op">$</span><span class="va">mesh_target</span>, <span class="st">"/shape_mesh_"</span>, <span class="va">df</span><span class="op">$</span><span class="va">mesh_target</span>, <span class="st">"__"</span>,
-                  <span class="va">df</span><span class="op">$</span><span class="va">n</span>, <span class="st">".shp"</span><span class="op">)</span>
-<span class="va">df</span><span class="op">$</span><span class="va">mesh</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/pkg/terra/man/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>, by<span class="op">=</span><span class="fl">1</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"compute MESH for"</span>, <span class="va">i</span>, <span class="st">"\n"</span><span class="op">)</span><span class="op">)</span>
-  <span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">basepath</span>, <span class="va">df</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">mesh_target</span>, <span class="st">"/mesh_"</span>, <span class="va">df</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">mesh_target</span>, <span class="st">"__"</span>,
-                 <span class="va">df</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">n</span>, <span class="st">".tif"</span><span class="op">)</span>
-  <span class="fu"><a href="https://r-spatialecology.github.io/landscapemetrics/reference/lsm_c_mesh.html" class="external-link">lsm_c_mesh</a></span><span class="op">(</span><span class="fu">raster</span><span class="op">(</span><span class="va">path</span><span class="op">)</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span>,<span class="op">]</span><span class="op">$</span><span class="va">value</span>
-<span class="op">}</span><span class="op">)</span>
-
-<span class="va">df</span><span class="op">$</span><span class="va">PC</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/pkg/terra/man/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>, by<span class="op">=</span><span class="fl">1</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">shape</span> <span class="op">&lt;-</span> <span class="fu">st_read</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="va">i</span>, <span class="op">]</span><span class="op">$</span><span class="va">file</span><span class="op">)</span>
-  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">shape</span><span class="op">)</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span> <span class="op">{</span>
-    <span class="va">df</span><span class="op">[</span><span class="va">i</span>, <span class="op">]</span><span class="op">$</span><span class="va">mesh</span> <span class="op">/</span> <span class="op">(</span><span class="fl">500</span><span class="op">*</span><span class="fl">500</span><span class="op">*</span><span class="fl">30</span><span class="op">*</span><span class="fl">30</span><span class="op">/</span><span class="fl">10000</span><span class="op">)</span>
-  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
-    <span class="va">PC</span> <span class="op">&lt;-</span> <span class="fu">MK_dPCIIC</span><span class="op">(</span>
-      nodes <span class="op">=</span> <span class="va">shape</span>,
-      distance <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"centroid"</span><span class="op">)</span>, 
-      metric <span class="op">=</span> <span class="st">"PC"</span>, 
-      onlyoverall <span class="op">=</span> <span class="cn">TRUE</span>, 
-      LA <span class="op">=</span><span class="fl">500</span><span class="op">*</span><span class="fl">500</span><span class="op">*</span><span class="fl">30</span><span class="op">*</span><span class="fl">30</span><span class="op">/</span><span class="fl">10000</span>, 
-      area_unit <span class="op">=</span> <span class="st">"ha"</span>
-    <span class="op">)</span>
-    <span class="va">PC</span><span class="op">[</span><span class="fl">3</span>,<span class="op">]</span><span class="op">$</span><span class="va">Value</span>
-  <span class="op">}</span>
-<span class="op">}</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatialecology.github.io/landscapemetrics/" class="external-link">landscapemetrics</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">Makurhini</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html" class="external-link">expand.grid</a></span><span class="op">(</span><span class="st">"mesh_target"</span> <span class="op">=</span> <span class="va">mesh_seq</span>, <span class="st">"n"</span> <span class="op">=</span> <span class="va">repeats</span><span class="op">)</span></span>
+<span><span class="va">df</span><span class="op">$</span><span class="va">file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">basepath</span>, <span class="va">df</span><span class="op">$</span><span class="va">mesh_target</span>, <span class="st">"/shape_mesh_"</span>, <span class="va">df</span><span class="op">$</span><span class="va">mesh_target</span>, <span class="st">"__"</span>,</span>
+<span>                  <span class="va">df</span><span class="op">$</span><span class="va">n</span>, <span class="st">".shp"</span><span class="op">)</span></span>
+<span><span class="va">df</span><span class="op">$</span><span class="va">mesh</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/pkg/terra/man/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>, by<span class="op">=</span><span class="fl">1</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"compute MESH for"</span>, <span class="va">i</span>, <span class="st">"\n"</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">basepath</span>, <span class="va">df</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">mesh_target</span>, <span class="st">"/mesh_"</span>, <span class="va">df</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">mesh_target</span>, <span class="st">"__"</span>,</span>
+<span>                 <span class="va">df</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">n</span>, <span class="st">".tif"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://r-spatialecology.github.io/landscapemetrics/reference/lsm_c_mesh.html" class="external-link">lsm_c_mesh</a></span><span class="op">(</span><span class="fu">raster</span><span class="op">(</span><span class="va">path</span><span class="op">)</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span>,<span class="op">]</span><span class="op">$</span><span class="va">value</span></span>
+<span><span class="op">}</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">df</span><span class="op">$</span><span class="va">PC</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/pkg/terra/man/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>, by<span class="op">=</span><span class="fl">1</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">shape</span> <span class="op">&lt;-</span> <span class="fu">st_read</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="va">i</span>, <span class="op">]</span><span class="op">$</span><span class="va">file</span><span class="op">)</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/dimensions.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">shape</span><span class="op">)</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">df</span><span class="op">[</span><span class="va">i</span>, <span class="op">]</span><span class="op">$</span><span class="va">mesh</span> <span class="op">/</span> <span class="op">(</span><span class="fl">500</span><span class="op">*</span><span class="fl">500</span><span class="op">*</span><span class="fl">30</span><span class="op">*</span><span class="fl">30</span><span class="op">/</span><span class="fl">10000</span><span class="op">)</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>    <span class="va">PC</span> <span class="op">&lt;-</span> <span class="fu">MK_dPCIIC</span><span class="op">(</span></span>
+<span>      nodes <span class="op">=</span> <span class="va">shape</span>,</span>
+<span>      distance <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"centroid"</span><span class="op">)</span>, </span>
+<span>      metric <span class="op">=</span> <span class="st">"PC"</span>, </span>
+<span>      onlyoverall <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>      LA <span class="op">=</span><span class="fl">500</span><span class="op">*</span><span class="fl">500</span><span class="op">*</span><span class="fl">30</span><span class="op">*</span><span class="fl">30</span><span class="op">/</span><span class="fl">10000</span>, </span>
+<span>      area_unit <span class="op">=</span> <span class="st">"ha"</span></span>
+<span>    <span class="op">)</span></span>
+<span>    <span class="va">PC</span><span class="op">[</span><span class="fl">3</span>,<span class="op">]</span><span class="op">$</span><span class="va">Value</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="plotting-the-result-and-evaluating-the-correlation">Plotting the result and evaluating the correlation<a class="anchor" aria-label="anchor" href="#plotting-the-result-and-evaluating-the-correlation"></a>
 </h2>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span>
-
-<span class="va">make_fig</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">point_size</span> <span class="op">&lt;-</span> <span class="fl">1.5</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df</span><span class="op">[</span><span class="va">df</span><span class="op">$</span><span class="va">mesh_target</span> <span class="op">&lt;=</span> <span class="fl">60000</span>,<span class="op">]</span><span class="op">)</span> <span class="op">+</span>
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.5</span>, size<span class="op">=</span><span class="va">point_size</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">mesh</span>, y<span class="op">=</span><span class="va">PC</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html" class="external-link">stat_smooth</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">mesh</span>, y<span class="op">=</span><span class="va">PC</span><span class="op">)</span>, se<span class="op">=</span><span class="cn">TRUE</span>, color<span class="op">=</span><span class="st">"deepskyblue3"</span>, alpha<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span> <span class="op">+</span>
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>
-      x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="st">"Effective mesh size (ha)"</span><span class="op">)</span>,
-      y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="st">"Probability of connectivity"</span><span class="op">)</span>
-    <span class="op">)</span> <span class="op">+</span>
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>axis.title.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">13</span>, family <span class="op">=</span> <span class="st">"Helvetica"</span><span class="op">)</span>,
-          axis.title.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">13</span>, family <span class="op">=</span> <span class="st">"Helvetica"</span><span class="op">)</span>,
-          legend.position<span class="op">=</span><span class="st">"none"</span><span class="op">)</span>
-<span class="op">}</span>
-
-<span class="fu">make_fig</span><span class="op">(</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html" class="external-link">cor.test</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">mesh</span>, <span class="va">df</span><span class="op">$</span><span class="va">PC</span>, method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"pearson"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">make_fig</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">point_size</span> <span class="op">&lt;-</span> <span class="fl">1.5</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df</span><span class="op">[</span><span class="va">df</span><span class="op">$</span><span class="va">mesh_target</span> <span class="op">&lt;=</span> <span class="fl">60000</span>,<span class="op">]</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.5</span>, size<span class="op">=</span><span class="va">point_size</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">mesh</span>, y<span class="op">=</span><span class="va">PC</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html" class="external-link">stat_smooth</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">mesh</span>, y<span class="op">=</span><span class="va">PC</span><span class="op">)</span>, se<span class="op">=</span><span class="cn">TRUE</span>, color<span class="op">=</span><span class="st">"deepskyblue3"</span>, alpha<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
+<span>      x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="st">"Effective mesh size (ha)"</span><span class="op">)</span>,</span>
+<span>      y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="st">"Probability of connectivity"</span><span class="op">)</span></span>
+<span>    <span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>axis.title.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">13</span>, family <span class="op">=</span> <span class="st">"Helvetica"</span><span class="op">)</span>,</span>
+<span>          axis.title.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">13</span>, family <span class="op">=</span> <span class="st">"Helvetica"</span><span class="op">)</span>,</span>
+<span>          legend.position<span class="op">=</span><span class="st">"none"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="fu">make_fig</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html" class="external-link">cor.test</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">mesh</span>, <span class="va">df</span><span class="op">$</span><span class="va">PC</span>, method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"pearson"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="figures/use_case_2_graph.png"></p>
 <pre><code>    Pearson's product-moment correlation
 
@@ -353,7 +353,7 @@ study. Landscape and Urban Planning, 83(2), 91-103. <a href="https://doi.org/10.
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
     </footer>
