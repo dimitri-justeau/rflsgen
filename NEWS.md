@@ -1,3 +1,9 @@
+# rflsgen 1.2.1
+
+* Fix bug due to "java.parameters" initialization in zzz.R, which did not allow to set custom memory limits
+for the JVM. rflsgen now does not assume nor do anything about this. Either the user set java.parameters before
+loading the package, either rJava default option is used.
+
 # rflsgen 1.2.0
 
 * Rely on flsgen-1.2.0, which is now divided into modules. The R package only relies on the flsgen-core-1.2.0, which 
