@@ -132,7 +132,7 @@ df$mesh <- sapply(seq(1, nrow(df), by=1), function(i) {
   cat(paste("compute MESH for", i, "\n"))
   path <- paste0(basepath, df[i,]$mesh_target, "/mesh_", df[i,]$mesh_target, "__",
                  df[i,]$n, ".tif")
-  lsm_c_mesh(raster(path))[2,]$value
+  lsm_c_mesh(terra::rast(path))[2,]$value
 })
 
 df$PC <- sapply(seq(1, nrow(df), by=1), function(i) {

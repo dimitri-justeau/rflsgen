@@ -164,7 +164,7 @@ flsgen_generate <- function(structure_str, structure_file, terrain_file=NULL,
       terrain_raster <- terra::rast(terrain_file)
     }
     terrain_data <- values(terrain_raster)
-    .jcall(terrain, "V", "loadFromData", terrain_data, nb_rows, nb_cols)
+    .jcall(terrain, "V", "loadFromData", .jarray(as.double(as.vector(terrain_data))))
   }
   if (is.null(min_max_distance)) {
     generator <- .jnew("org.flsgen.solver.LandscapeGenerator", struct, as.integer(connectivity), as.integer(min_distance), terrain)

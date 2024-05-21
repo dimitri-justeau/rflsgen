@@ -17,5 +17,5 @@ test_that("landscape_with_square_patches_2", {
   struct <- flsgen_structure(ls_target)
   json_struct <- jsonlite::fromJSON(struct)
   testthat::expect_true(json_struct$classes[1,]$IS_SQUARE)
-  ls <- flsgen_generate(struct)
+  ls <- flsgen_generate(struct, max_try_patch = 20, max_try = 10)
 })

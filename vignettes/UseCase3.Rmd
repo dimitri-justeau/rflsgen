@@ -11,12 +11,12 @@ In this use case, we show how rflsgen can be used to extract landscape structure
 We focus on the forest cover of the main island of New Caledonia, a tropical archipelago located in the South Pacific. Using open data from the Copernicus Global Land Service database (see [References](#ref)), we produced a 105x105 m map with open and closed forest cover in the main island of New Caledonia:
 
 ```{r, warning=FALSE, message=FALSE,eval=FALSE}
-library(raster)
+library(terra)
 
 path <- system.file("extdata",
                     "copernicus_nc_grande_terre_closed_and_open_forests_200m.tif",
                     package = "rflsgen")
-existing_landscape <- raster(path)
+existing_landscape <- rast(path)
 plot(existing_landscape)
 ```
 
@@ -54,13 +54,14 @@ plot(r)
 It is interesting to see that the generated landscape has an almost inverted spatial distribution compared to the real landscape. This is not surprising as the forest cover in New Caledonia is known to be positively correlated with the elevation. If we want to generate a neutral forest landscape also positively correlated with the elevation, we just need to use and inverted digital elevation model 
 
 ```{r, warning=FALSE, message=FALSE, eval=FALSE}
-dem <- raster(dem_path)
+dem <- rast(dem_path)
 values(dem) <- -values(dem)
 r <- flsgen_generate(struct, terrain_file = dem, terrain_dependency = 0.9,
                      epsg = "EPSG:3163", connectivity=8,
                      resolution_x = 105.4308639672429422,
                      resolution_y = 105.4037645741556588,
                      x = 159615, y = 467655)
+plot(r)
 ```
 
 ![](figures/use_case_3_neutral_landscape_inv.png)

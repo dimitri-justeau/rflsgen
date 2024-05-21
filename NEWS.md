@@ -1,3 +1,9 @@
+# rflsgen 1.2.2
+
+* Fix bug described in https://github.com/dimitri-justeau/rflsgen/issues/3
+
+* Fix vignette 3 (there was still references to the raster package)
+
 # rflsgen 1.2.1
 
 * Fix bug due to "java.parameters" initialization in zzz.R, which did not allow to set custom memory limits
