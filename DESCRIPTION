@@ -17,7 +17,7 @@ Depends:
   jsonlite
 Imports: checkmate, utils
 SystemRequirements: Java (>= 8)
-RoxygenNote: 7.2.2
+RoxygenNote: 7.2.3
 Suggests: testthat (>= 3.0.0), knitr, rmarkdown, landscapemetrics
 VignetteBuilder: knitr
 URL: https://dimitri-justeau.github.io/rflsgen/, https://dimitri-justeau.github.io/rflsgen/
