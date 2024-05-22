@@ -163,6 +163,10 @@ flsgen_generate <- function(structure_str, structure_file, terrain_file=NULL,
     if (!inherits(terrain_file, "SpatRaster")) {
       terrain_raster <- terra::rast(terrain_file)
     }
+    if (ncol(terrain_raster) != nb_cols || nrow(terrain_raster) != nb_rows) {
+      cat(paste(ncol(terrain_raster), nb_cols, " // ", nrow(terrain_raster), nb_rows), "\n")
+      stop("The dimensions of the terrain raster must match with the dimensions of the landscape to generate")
+    }
     terrain_data <- values(terrain_raster)
     .jcall(terrain, "V", "loadFromData", .jarray(as.double(as.vector(terrain_data))))
   }
