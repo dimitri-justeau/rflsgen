@@ -47,7 +47,8 @@ jobs:
         with:
           java-version: ${{ matrix.config.java }}
 
-      #- uses: r-lib/actions/setup-pandoc@v1
+      - uses: r-lib/actions/setup-tinytex@v2
+      - uses: r-lib/actions/setup-pandoc@v2
 
       - name: Query dependencies
         run: |
@@ -103,7 +104,7 @@ jobs:
 
       - name: Check
         run: |
-          rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran", "--no-build-vignettes", "--no-multiarch"), error_on = "warning", check_dir = "check")
+          rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran", "--no-build-vignettes", "--compact-vignettes=no", "--no-multiarch"), error_on = "error", check_dir = "check")
         shell: Rscript {0}
 
       - name: Upload check results
