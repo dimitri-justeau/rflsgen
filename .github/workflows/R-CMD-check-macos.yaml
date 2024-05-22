@@ -45,7 +45,7 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
-          java-version: ${{ matrix.java }}
+          java-version: ${{ matrix.config.java }}
 
       - name: Setup R Java support
         run: |
